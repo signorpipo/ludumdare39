@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour {
 
     [SerializeField]
-    private int m_EnemyItemPerSeconds = 1;
+    private float m_SpawnRateInSeconds = 1.0f;
 
 
     private float m_CameraWidthSize = 0.0f;
@@ -28,12 +28,10 @@ public class SpawnManager : MonoBehaviour {
 	void Update () {
         m_ElapsedTime += Time.deltaTime;
 
-        if(m_ElapsedTime >= 1.0f)
+        if(m_ElapsedTime >= m_SpawnRateInSeconds)
         {
-            for(int i=0; i < m_EnemyItemPerSeconds; i++)
-            {
-                Instantiate(m_EnemyItemPrefab, new Vector3(Random.Range(-m_CameraWidthSize, m_CameraWidthSize), Camera.main.orthographicSize, 0), Quaternion.identity);
-            }
+            Instantiate(m_EnemyItemPrefab, new Vector3(Random.Range(-m_CameraWidthSize, m_CameraWidthSize), Camera.main.orthographicSize, 0), Quaternion.identity);
+
             m_ElapsedTime = 0.0f;
         }
 

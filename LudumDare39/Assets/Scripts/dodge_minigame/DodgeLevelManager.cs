@@ -6,9 +6,7 @@ public class DodgeLevelManager : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(collision.gameObject);
-        Debug.Log("Entered");
-      
+        Destroy(collision.gameObject);      
     }
 
 }

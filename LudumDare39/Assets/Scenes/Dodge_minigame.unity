@@ -374,7 +374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0d95764bdda6864ea0cff62b3e67049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EnemyItemPerSeconds: 1
+  m_SpawnRateInSeconds: 0.5
   m_EnemyItemPrefab: {fileID: 1644245938986380, guid: d6e592e4c9a3ced4789667f7dceacc16,
     type: 2}
 --- !u!1001 &1434558135
