@@ -21,13 +21,13 @@ public class F_Test : MonoBehaviour {
         }
 
         matrix.debugDisplay("Plain");
-        F_Matrix rotated = matrix.GetRotated(Direction.UP);
+        F_Matrix rotated = matrix.GetRotated(F_Direction.UP);
         rotated.debugDisplay("UP");
-        rotated = matrix.GetRotated(Direction.RIGHT);
+        rotated = matrix.GetRotated(F_Direction.RIGHT);
         rotated.debugDisplay("RIGHT");
-        rotated = matrix.GetRotated(Direction.DOWN);
+        rotated = matrix.GetRotated(F_Direction.DOWN);
         rotated.debugDisplay("DOWN");
-        rotated = matrix.GetRotated(Direction.LEFT);
+        rotated = matrix.GetRotated(F_Direction.LEFT);
         rotated.debugDisplay("LEFT");
     }
 }

@@ -21,7 +21,17 @@ public struct F_Matrix {
         return m_Matrix[i_Row, i_Column];
     }
 
-    public F_Matrix GetRotated(Direction i_Direction)
+    public int Rows()
+    {
+        return m_Matrix.GetLength(0);
+    }
+
+    public int Columns()
+    {
+        return m_Matrix.GetLength(1);
+    }
+
+    public F_Matrix GetRotated(F_Direction i_Direction)
     {
         F_Matrix rotatedMatrix;
 
@@ -30,7 +40,7 @@ public struct F_Matrix {
 
         switch (i_Direction)
         {
-            case Direction.DOWN:
+            case F_Direction.DOWN:
                 rotatedMatrix = new F_Matrix(rows, columns);
                 for(int row = 0; row < rows; ++row)
                 {
@@ -42,7 +52,7 @@ public struct F_Matrix {
                 }
                 break;
 
-            case Direction.RIGHT:
+            case F_Direction.RIGHT:
                 rotatedMatrix = new F_Matrix(columns, rows);
                 for (int row = 0; row < columns; ++row)
                 {
@@ -54,7 +64,7 @@ public struct F_Matrix {
                 }
                 break;
 
-            case Direction.LEFT:
+            case F_Direction.LEFT:
                 rotatedMatrix = new F_Matrix(columns, rows);
                 for (int row = 0; row < columns; ++row)
                 {
