@@ -2,12 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public delegate void ClickEvent(F_Pluggable i_Clicked);
+
 public class F_Pluggable : MonoBehaviour {
 
-    private Vector2 m_InitialPosition;
+    public ClickEvent OnClickEvent;
+
+    private Vector3 m_InitialPosition;
     private F_Matrix m_Grid;
     private int m_CellSize;
     private F_Direction m_Direction;
+
+    public void Start()
+    {
+        m_InitialPosition = gameObject.transform.position;
+    }
 
     public void Turn(F_Direction i_Direction)
     {
@@ -51,6 +60,14 @@ public class F_Pluggable : MonoBehaviour {
         gameObject.transform.position = newPosition;
     }
 
+    public void GoToInitial()
+    {
+        gameObject.transform.position = m_InitialPosition;
+        gameObject.transform.rotation = Quaternion.identity;
+        m_Direction = F_Direction.UP;
+
+    }
+
     public Vector2 GetTopLeft()
     {
         Vector2 position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
@@ -77,7 +94,7 @@ public class F_Pluggable : MonoBehaviour {
         return m_Grid.GetRotated(m_Direction);
     }
 
-    public void initialize(Vector2 i_Position, F_Matrix i_Grid, int i_CellSize, Sprite i_Sprite)
+    public void initialize(Vector3 i_Position, F_Matrix i_Grid, int i_CellSize, Sprite i_Sprite)
     {
         m_InitialPosition = i_Position;
         m_Grid = i_Grid;
@@ -87,4 +104,13 @@ public class F_Pluggable : MonoBehaviour {
         SpriteRenderer renderer = gameObject.AddComponent<SpriteRenderer>();
         renderer.sprite = i_Sprite;
     }
+
+    private void OnMouseDown()
+    {
+        if(OnClickEvent != null)
+        {
+            OnClickEvent(this);
+        }
+    }
+
 }
