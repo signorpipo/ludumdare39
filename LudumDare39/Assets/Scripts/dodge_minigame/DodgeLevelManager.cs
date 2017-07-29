@@ -39,7 +39,7 @@ public class DodgeLevelManager : MonoBehaviour {
     {
         m_TimeLeftUI.text = "Time left: " + m_TimeLeft;
 
-        m_CentralText.text = "Save you Ice Cream!";
+        m_CentralText.text = "Save Your Ice Cream";
 
         m_Player.GetComponent<PlayerController>().OnPlayerFailure += OnPlayerFailure;
         m_SpawnManager.SetActive(false);
