@@ -4,18 +4,36 @@ using UnityEngine;
 
 public delegate void ClickEvent(F_Pluggable i_Clicked);
 
+[System.Serializable]
+public struct IntArray
+{
+    public int[] m_Array;
+}
+
 public class F_Pluggable : MonoBehaviour {
 
     public ClickEvent OnClickEvent;
 
-    private Vector3 m_InitialPosition;
-    private F_Matrix m_Grid;
-    private int m_CellSize;
-    private F_Direction m_Direction;
+    public IntArray[] m_MatrixGrid;
+    public int m_CellSize;
 
-    public void Start()
+    private F_Direction m_Direction;
+    private F_Matrix m_Grid;
+    private Vector3 m_InitialPosition;
+
+    public void Awake()
     {
+        m_Direction = F_Direction.UP;
         m_InitialPosition = gameObject.transform.position;
+        m_Grid = new F_Matrix(m_MatrixGrid.GetLength(0), m_MatrixGrid[0].m_Array.GetLength(0));
+        for (int row = 0; row < m_Grid.Rows(); ++row)
+        {
+            for (int column = 0; column < m_Grid.Columns(); ++column)
+            {
+                m_Grid.Set(row, column, (m_MatrixGrid[row].m_Array[column] >= 1) ? 1 : 0);
+            }
+
+        }
     }
 
     public void Turn(F_Direction i_Direction)
@@ -92,17 +110,6 @@ public class F_Pluggable : MonoBehaviour {
     public F_Matrix GetGrid()
     {
         return m_Grid.GetRotated(m_Direction);
-    }
-
-    public void initialize(Vector3 i_Position, F_Matrix i_Grid, int i_CellSize, Sprite i_Sprite)
-    {
-        m_InitialPosition = i_Position;
-        m_Grid = i_Grid;
-        m_CellSize = i_CellSize;
-        m_Direction = F_Direction.UP;
-
-        SpriteRenderer renderer = gameObject.AddComponent<SpriteRenderer>();
-        renderer.sprite = i_Sprite;
     }
 
     private void OnMouseDown()
