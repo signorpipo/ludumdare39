@@ -15,12 +15,13 @@ public class InputManager : MonoBehaviour {
     public float KeyTimer = .08f;
 
     private float mKeyTimer;
+    private float mGameTime = 0;
     private int mCurrState = 0;
 
 	// Use this for initialization
 	void Start () {
         successBarSlider.value = 0;
-        gameTimeBarSlider.value = GameTotalTime;
+        mGameTime = GameTotalTime;
         mKeyTimer = 0;
     }
 	
@@ -70,8 +71,9 @@ public class InputManager : MonoBehaviour {
             }
         }
 
-        gameTimeBarSlider.value -= Time.deltaTime;
-        if(gameTimeBarSlider.value <= 0.0f)
+        mGameTime -= Time.deltaTime;
+        gameTimeBarSlider.value = mGameTime / GameTotalTime;
+        if (gameTimeBarSlider.value <= 0.0f)
         {
 
         }
