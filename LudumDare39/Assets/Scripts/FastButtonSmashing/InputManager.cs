@@ -4,10 +4,15 @@ using UnityEngine.UI;
 public class InputManager : MonoBehaviour {
 
     public Slider successBarSlider;
+    public Slider gameTimeBarSlider;
 
+    public KeyCode LeftKey = KeyCode.LeftArrow;
+    public KeyCode RightKey = KeyCode.RightArrow;
+
+    public float GameTotalTime = 5.0f;
     public float PositiveMult = 0.3f;
     public float NegativeMult = 0.1f;
-    public float KeyTimer = .15f;
+    public float KeyTimer = .08f;
 
     private float mKeyTimer;
     private int mCurrState = 0;
@@ -15,14 +20,15 @@ public class InputManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         successBarSlider.value = 0;
+        gameTimeBarSlider.value = GameTotalTime;
         mKeyTimer = 0;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        bool keyLeft = Input.GetKey(KeyCode.RightArrow);
-        bool keyRight = Input.GetKey(KeyCode.LeftArrow);
+        bool keyLeft = Input.GetKey(LeftKey);
+        bool keyRight = Input.GetKey(RightKey);
 
         if (mCurrState == -3)
         {
@@ -62,6 +68,12 @@ public class InputManager : MonoBehaviour {
             {
                 mCurrState = -3;
             }
+        }
+
+        gameTimeBarSlider.value -= Time.deltaTime;
+        if(gameTimeBarSlider.value <= 0.0f)
+        {
+
         }
     }
 }
