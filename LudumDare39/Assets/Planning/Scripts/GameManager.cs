@@ -2,13 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public struct Scene
-{
-    [SerializeField]
-    private string m_name;
-}
-
 public class GameManager : MonoBehaviour
 {
     Singleton<GameManager> m_gameManager;
@@ -17,7 +10,7 @@ public class GameManager : MonoBehaviour
     private GameObject m_sceneLoader = null;
 
     [SerializeField]
-    private List<Scene> m_scenesNames = null;
+    private List<string> m_scenesNames = null;
 
     public float m_currentPsychophysicsValue = 0.0f;
 
@@ -30,17 +23,16 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         m_sceneLoaderManager = m_sceneLoader.GetComponent<SceneLoaderManager>();
-        m_sceneLoaderManager.LoadScenes();
+        m_sceneLoaderManager.SetAllScenesNames(m_scenesNames);
+        m_sceneLoaderManager.LoadAllScenes();
     }
 
-    void Update()
-    {
-
-    }
-
+    /// <summary>
+    /// Load next scene from scene load manager class
+    /// </summary>
     public void LoadNextScene()
     {
-
+        m_sceneLoaderManager.LoadNextScene();
     }
 }
 
