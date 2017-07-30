@@ -38,6 +38,7 @@ public class MenuManager : MonoBehaviour
         for (int index = 0; index < m_minigames.Count; ++index)
         {
             MinigameInfo tileInfo = Instantiate(m_minigameGUITilePrefab, m_verticalLayoutMinigames);
+            tileInfo.transform.localScale = new Vector3(1, 1, 1);
             MinigameInterface temp = m_minigames[index];
             tileInfo.TileSetup(temp.GetName(), temp.GetPsychophysicsOutputValue(), temp.GetMoneyOutputValue(), temp.GetSocialOutputvalue(), index);
         }
