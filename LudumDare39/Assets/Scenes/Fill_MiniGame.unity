@@ -487,14 +487,41 @@ MonoBehaviour:
   - m_Name: F_ZPiece
     m_Pluggable: {fileID: 114406544642811986, guid: 2c7b3a1cbbadfd34baccbd3e2a143dbc,
       type: 2}
-  - m_Name: F_PPiece
+  - m_Name: F_TPiece
     m_Pluggable: {fileID: 114959081729453384, guid: a7075db3588aca3408cbdeb9003f8b51,
       type: 2}
   - m_Name: F_OPiece
-    m_Pluggable: {fileID: 114499581284162026, guid: 8c90cfbc91ad0b447b457cf372a60555,
+    m_Pluggable: {fileID: 114312155391204040, guid: 9396f57c50d97744fb1a5dbc70ef3b87,
       type: 2}
-  m_PrefabMoneyPluggables: []
-  m_PrefabSocialPluggables: []
+  - m_Name: F_LPiece
+    m_Pluggable: {fileID: 114336391544672040, guid: 0f6311bf335019940968283ee60aa61a,
+      type: 2}
+  m_PrefabMoneyPluggables:
+  - m_Name: F_ZPiece
+    m_Pluggable: {fileID: 114653212911295174, guid: 60f340f9576becf42928a695ef8b770c,
+      type: 2}
+  - m_Name: F_TPiece
+    m_Pluggable: {fileID: 114453566693801090, guid: b4bb9e274726eb147bddfe89453bd638,
+      type: 2}
+  - m_Name: F_OPiece
+    m_Pluggable: {fileID: 114071823464066784, guid: 7101dccafc212cf4ca48f5501a541257,
+      type: 2}
+  - m_Name: F_LPiece
+    m_Pluggable: {fileID: 114493804562824794, guid: da1c5f72f38de7a4c92730d8073f4b38,
+      type: 2}
+  m_PrefabSocialPluggables:
+  - m_Name: F_ZPiece
+    m_Pluggable: {fileID: 114640285384498262, guid: 90c837e3a5661c0419d78995c981c7f7,
+      type: 2}
+  - m_Name: F_TPiece
+    m_Pluggable: {fileID: 114246066848449210, guid: 2d2ee19c781558f4cbb010f562cf419b,
+      type: 2}
+  - m_Name: F_OPiece
+    m_Pluggable: {fileID: 114179525295962808, guid: 7299c15f784b4894fa38030679d4ba93,
+      type: 2}
+  - m_Name: F_LPiece
+    m_Pluggable: {fileID: 114126023990757118, guid: 3aab7babac344c24a8b73b8faa4b1e9d,
+      type: 2}
   m_Backgrounds:
   - {fileID: 21300000, guid: 462d931f08866ee4289d51a49573c3a9, type: 3}
   - {fileID: 21300000, guid: 1d32031c0552c794cb349b818479c988, type: 3}
