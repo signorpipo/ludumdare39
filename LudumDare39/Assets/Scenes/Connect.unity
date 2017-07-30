@@ -1025,6 +1025,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5948b14e11a9e30488e0bed693fe56d4, type: 3}
   - {fileID: 21300000, guid: aff64799b3c484d41ac8fbcf2066e5da, type: 3}
   - {fileID: 21300000, guid: de4272757cbd1af4a9739fa261f2a90a, type: 3}
-  NumGameItems: 5
+  NumGameItems: 8
   ItemPrefab: {fileID: 114856956623246744, guid: 26e3d6beb3e877f4298e66c70c22f873,
     type: 2}

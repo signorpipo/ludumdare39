@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,16 +20,16 @@ public class ConnectGameManager : MinigameManager
         float deltaHeight = LeftPanel.rect.height / NumGameItems;
         for (int i =0; i<NumGameItems; ++i)
         {
-            int spriteIdx = (int)(Random.value * GameItems.Count) % GameItems.Count;
-            float spriteScale = LeftPanel.rect.width / GameItems[0].rect.width;
+            int spriteIdx = (int)(UnityEngine.Random.value * GameItems.Count) % GameItems.Count;
+            float spriteScale = Math.Min(LeftPanel.rect.width / GameItems[0].rect.width, LeftPanel.rect.height / NumGameItems / GameItems[0].rect.height);
             MonoBehaviour lItm = Instantiate(ItemPrefab, LeftPanel);
             lItm.GetComponent<Image>().sprite = GameItems[spriteIdx];
-            lItm.transform.localPosition = Vector3.up * (deltaHeight * i - LeftPanel.rect.height * 0.5f);
+            lItm.transform.localPosition = Vector3.up * (deltaHeight * i - (LeftPanel.rect.height - GameItems[0].rect.height * spriteScale) * 0.5f);
             lItm.transform.localScale = Vector3.one * spriteScale;
 
             MonoBehaviour rItm = Instantiate(ItemPrefab, RightPanel);
             rItm.GetComponent<Image>().sprite = GameItems[spriteIdx];
-            rItm.transform.localPosition = Vector3.up * (deltaHeight * i - LeftPanel.rect.height * 0.5f);
+            rItm.transform.localPosition = Vector3.up * (deltaHeight * i - (LeftPanel.rect.height - GameItems[0].rect.height * spriteScale) * 0.5f);
             rItm.transform.localScale = Vector3.one * spriteScale;
         }
 
