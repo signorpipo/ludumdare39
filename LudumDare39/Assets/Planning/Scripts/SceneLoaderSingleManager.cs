@@ -6,22 +6,26 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Carica le scene una alla volta. Compreso la main
 /// </summary>
-public class SceneLoaderSingleManager : MonoBehaviour {
+public class SceneLoaderSingleManager : MonoBehaviour
+{
 
     //Scena principale
     public string main_scene;
     private static SceneLoaderSingleManager instance = null;
     private List<string> list_select_minigame_scene;
-    
+
     private string run_scene;
     private int index = 0;
 
     /// <summary>
     /// Imposta la scena come in esecuzione.
     /// </summary>
-    void Start() {
+    void Start()
+    {
+        DontDestroyOnLoad(transform.gameObject);
         run_scene = main_scene;
     }
+
 
     /// <summary>
     /// Cambia la scena con la prossima della lista, finita la lista torna alla principale
@@ -30,16 +34,12 @@ public class SceneLoaderSingleManager : MonoBehaviour {
     {
         if (index < list_select_minigame_scene.Count)
         {
-            SceneManager.LoadScene(list_select_minigame_scene[index], LoadSceneMode.Additive);
-
-            if (run_scene != main_scene) {
-                SceneManager.UnloadScene(SceneManager.GetSceneByName(run_scene));
-            }
+            SceneManager.LoadScene(list_select_minigame_scene[index], LoadSceneMode.Single);
 
             run_scene = list_select_minigame_scene[index];
             Debug.Log("Caricate le scene in unity");
             index++;
-            Debug.Log("Attivata scena numero " + index + " nome: " +  run_scene);
+            Debug.Log("Attivata scena numero " + index + " nome: " + run_scene);
         }
         else
         {
@@ -63,7 +63,8 @@ public class SceneLoaderSingleManager : MonoBehaviour {
     /// Ritorna il nome della scena attualmente in corso.
     /// </summary>
     /// <returns>nome della scena attualmente in corso</returns>
-    public string ActualScene(){
+    public string ActualScene()
+    {
         return run_scene;
     }
 }
