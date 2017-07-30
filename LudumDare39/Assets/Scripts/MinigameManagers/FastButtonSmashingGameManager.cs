@@ -1,35 +1,29 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class InputManager : MonoBehaviour {
-
+public class FastButtonSmashingGameManager : MinigameManager
+{
     public Slider successBarSlider;
-    public Slider gameTimeBarSlider;
-
-    public MessageManager MessageMgr;
 
     public KeyCode LeftKey = KeyCode.LeftArrow;
     public KeyCode RightKey = KeyCode.RightArrow;
 
-    public float GameTotalTime = 5.0f;
     public float PositiveMult = 0.3f;
     public float NegativeMult = 0.1f;
     public float KeyTimer = .08f;
 
     private float mKeyTimer;
-    private float mGameTime = 0;
-    private int mCurrState = 0;
-
 
 	// Use this for initialization
-	void Start () {
+	public override void Start ()
+    {
         successBarSlider.value = 0;
-        mGameTime = GameTotalTime;
         mKeyTimer = 0;
+        base.Start();
     }
 	
 	// Update is called once per frame
-	void Update ()
+	public override void Update ()
     {
         bool keyLeft = Input.GetKey(LeftKey);
         bool keyRight = Input.GetKey(RightKey);
@@ -74,15 +68,6 @@ public class InputManager : MonoBehaviour {
             }
         }
 
-        mGameTime -= Time.deltaTime;
-        if (mCurrState != -5 && mGameTime <= 0.0f)
-        {
-            MessageMgr.GameOver();
-            mCurrState = -5;
-        }
-        else
-        {
-            gameTimeBarSlider.value = mGameTime / GameTotalTime;
-        }
+        base.Update();
     }
 }
