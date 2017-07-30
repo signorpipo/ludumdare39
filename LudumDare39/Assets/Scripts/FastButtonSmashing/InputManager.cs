@@ -26,8 +26,6 @@ public class InputManager : MonoBehaviour {
         successBarSlider.value = 0;
         mGameTime = GameTotalTime;
         mKeyTimer = 0;
-
-       
     }
 	
 	// Update is called once per frame

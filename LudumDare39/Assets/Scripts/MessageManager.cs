@@ -19,6 +19,7 @@ public class MessageManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        ((RectTransform)transform).localScale = Vector3.zero;
+
+    }
 }
