@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour {
         Destroy(collision.gameObject);
         m_ShitOnIce.SetActive(true); // and game failure emitter
 
-        OnPlayerFailure();
+        if(OnPlayerFailure != null)
+            OnPlayerFailure();
     }
 }
