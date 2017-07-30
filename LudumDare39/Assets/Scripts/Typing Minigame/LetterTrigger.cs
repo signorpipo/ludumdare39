@@ -36,13 +36,13 @@ public class LetterTrigger : MonoBehaviour
         if (Input.GetKeyDown(myKey))
         {
             GetComponent<Animator>().SetTrigger("goToResize");
-            if (inside && onLetterHit != null)
+            if (!inside && onLetterMiss != null)
+            {
+                onLetterMiss();              
+            }
+            else if (inside && onLetterHit != null)
             {
                 onLetterHit(objectTriggered);
-            }
-            else if (onLetterMiss!=null)
-            {
-                onLetterMiss();
             }
         }
     }
