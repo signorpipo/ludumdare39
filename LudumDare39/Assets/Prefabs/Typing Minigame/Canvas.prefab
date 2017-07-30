@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 223135163374442298}
   - component: {fileID: 114416957105678890}
   - component: {fileID: 114981609378362230}
-  - component: {fileID: 114962613830044382}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -51,19 +50,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &114962613830044382
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1658576919851118}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf6173eba4b18064fa6554404b8ffc26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  point: {fileID: 1479294205649178, guid: a5a3b79fc4b2a93468decee8bcf2e27b, type: 2}
-  numLet: 5
 --- !u!114 &114981609378362230
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -87,7 +73,7 @@ Canvas:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1658576919851118}
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
@@ -96,6 +82,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
