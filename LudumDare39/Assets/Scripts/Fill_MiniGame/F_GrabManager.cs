@@ -23,7 +23,6 @@ public class F_GrabManager : MonoBehaviour {
         {
             grabbable.OnClickEvent += GrabObject;
         }
-        m_Enabled = true;
     }
 
     private void Update()
@@ -66,6 +65,11 @@ public class F_GrabManager : MonoBehaviour {
         m_Enabled = false;
     }
 
+    public void EnableInput()
+    {
+        m_Enabled = true;
+    }
+
     public void ReleaseGrabbed(bool i_ToInitial)
     {
         if (i_ToInitial)
@@ -78,7 +82,7 @@ public class F_GrabManager : MonoBehaviour {
 
     public void GrabObject(F_Pluggable i_ToGrab)
     {
-        if(!IsGrabbing())
+        if(!IsGrabbing() && m_Enabled)
         {
             m_Grabbed = i_ToGrab;
             m_SkipFirst = true;

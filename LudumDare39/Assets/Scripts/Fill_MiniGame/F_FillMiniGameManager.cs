@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class F_FillMiniGameManager : MonoBehaviour {
 
@@ -12,18 +13,31 @@ public class F_FillMiniGameManager : MonoBehaviour {
         public F_Pluggable m_Pluggable;
     }
 
-    public NamedPluggable[] m_PrefabPluggables;
+    [SerializeField]
+    private NamedPluggable[] m_PrefabPluggables;
 
-    public Canvas m_WinCanvas;
+    [SerializeField]
+    private Canvas m_WinCanvas;
 
-    public LineRenderer m_PrefabGridLine;
-    public SpriteRenderer m_PrefabCellBackground;
+    [SerializeField]
+    private LineRenderer m_PrefabGridLine;
+    [SerializeField]
+    private SpriteRenderer m_PrefabCellBackground;
 
     private F_GridManager m_GridManager;
     private F_GrabManager m_GrabManager;
     private Dictionary<string, F_Pluggable> m_PrefabPluggablesDictionary;
     private int m_ToDock;
-    
+
+    [SerializeField]
+    private CM_Timer m_PrefabTimer;
+    [SerializeField]
+    private GameObject m_LevelTimer;
+    [SerializeField]
+    private GameObject m_MiddleMessage;
+    private CM_Timer m_StartTimer;
+    private CM_Timer m_RunningTimer;
+
     public void Awake () {
 
         m_PrefabPluggablesDictionary = new Dictionary<string, F_Pluggable>();
@@ -40,9 +54,24 @@ public class F_FillMiniGameManager : MonoBehaviour {
         grabbables.transform.parent = this.transform;
         m_GrabManager = grabbables.AddComponent<F_GrabManager>();
         m_GrabManager.OnTryDockEvent += TryDock;
+        m_GrabManager.DisableInput();
 
         ChooseLevel();
 
+        if (m_PrefabTimer != null)
+        {
+            m_StartTimer = Instantiate(m_PrefabTimer).GetComponent<CM_Timer>();
+            m_RunningTimer = Instantiate(m_PrefabTimer).GetComponent<CM_Timer>();
+        }
+
+    }
+
+    private void Start()
+    {
+        m_MiddleMessage.SetActive(true);
+        m_MiddleMessage.GetComponentInChildren<Text>().text = "Fill the bag!";
+        m_StartTimer.OnTimesUp += OnStartTimerEnd;
+        m_StartTimer.StartTimer(2, "Fill the bag!", "", null);
     }
 
     private void TryDock(F_Pluggable i_ToDock)
@@ -54,7 +83,7 @@ public class F_FillMiniGameManager : MonoBehaviour {
             {
                 m_GrabManager.DisableInput();
                 m_WinCanvas.gameObject.SetActive(true);
-                StartCoroutine(LoadNextScene());
+                EngGame(true);
             }
         }
     }
@@ -137,5 +166,37 @@ public class F_FillMiniGameManager : MonoBehaviour {
 
         m_WinCanvas.gameObject.SetActive(false);
     }
+
+    private void OnStartTimerEnd()
+    {
+        m_MiddleMessage.SetActive(false);
+        m_LevelTimer.SetActive(true);
+        m_RunningTimer.OnTimesUp += OnFailure;
+        m_RunningTimer.StartTimer(10, "Time Left: ", "", m_LevelTimer.GetComponentInChildren<Text>());
+        m_GrabManager.EnableInput();
+    }
+
+    private void OnFailure()
+    {
+        m_MiddleMessage.GetComponentInChildren<Text>().text = "You Lose";
+        m_MiddleMessage.SetActive(true);
+        EngGame(false);
+    }
+
+    private void EngGame(bool i_Success)
+    {
+        m_GrabManager.DisableInput();
+        m_RunningTimer.StopTimer();
+        if (i_Success)
+        {
+
+        }
+        else
+        {
+
+        }
+        StartCoroutine(LoadNextScene());
+    }
+
 
 }

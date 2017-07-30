@@ -15,8 +15,10 @@ public class F_Pluggable : MonoBehaviour
 
     public ClickEvent OnClickEvent;
 
-    public IntArray[] m_MatrixGrid;
-    public int m_CellSize;
+    [SerializeField]
+    private IntArray[] m_MatrixGrid;
+    [SerializeField]
+    private int m_CellSize;
 
     private F_Direction m_Direction;
     private F_Matrix m_Grid;
