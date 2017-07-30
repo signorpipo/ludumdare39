@@ -17,7 +17,7 @@ public class GameManager : Singleton<GameManager>
 
     private int m_selectedGamesCounter = 0;
 
-    private int m_weekDaysCounter = 0;
+    public int m_weekDaysCounter = 0;
 
     // Initialized/updated when start button has been pressed, cleared when 3 minigames have been played
     private List<MinigameInterface> m_selectedMinigames = new List<MinigameInterface>();
