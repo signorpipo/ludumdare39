@@ -43,11 +43,11 @@ public class F_FillMiniGameManager : MonoBehaviour {
         }
 
         GameObject grid = new GameObject("Grid");
-        grid.transform.parent = this.transform;
+        grid.transform.SetParent(this.transform);
         m_GridManager = grid.AddComponent<F_GridManager>();
 
         GameObject grabbables = new GameObject("Grabbables");
-        grabbables.transform.parent = this.transform;
+        grabbables.transform.SetParent(this.transform);
         m_GrabManager = grabbables.AddComponent<F_GrabManager>();
         m_GrabManager.OnTryDockEvent += TryDock;
         m_GrabManager.DisableInput();
@@ -57,7 +57,7 @@ public class F_FillMiniGameManager : MonoBehaviour {
         if (m_PrefabTimer != null)
         {
             m_Timer = Instantiate(m_PrefabTimer).GetComponent<F_Timer>();
-            m_Timer.transform.parent = this.transform;
+            m_Timer.transform.SetParent(this.transform);
         }
 
     }
