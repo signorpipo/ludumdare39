@@ -8,13 +8,16 @@ public class F_GrabManager : MonoBehaviour {
     
     public TryDockEvent OnTryDockEvent;
 
-    public F_Pluggable[] m_Grabbables;
+    private F_Pluggable[] m_Grabbables;
 
     private F_Pluggable m_Grabbed;
 
-    public void Start()
+    private bool m_SkipFirst;
+
+    public void Initialize(F_Pluggable[] i_Grabbables)
     {
-        foreach(F_Pluggable grabbable in m_Grabbables)
+        m_Grabbables = i_Grabbables;
+        foreach (F_Pluggable grabbable in m_Grabbables)
         {
             grabbable.OnClickEvent += GrabObject;
         }
@@ -24,7 +27,11 @@ public class F_GrabManager : MonoBehaviour {
     {
         if(m_Grabbed != null)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (m_SkipFirst)
+            {
+                m_SkipFirst = false;
+            }
+            else if (Input.GetMouseButtonDown(0))
             {
                 if(OnTryDockEvent != null)
                 {
@@ -59,7 +66,11 @@ public class F_GrabManager : MonoBehaviour {
 
     public void GrabObject(F_Pluggable i_ToGrab)
     {
-        m_Grabbed = i_ToGrab;
+        if(m_Grabbed == null)
+        {
+            m_Grabbed = i_ToGrab;
+            m_SkipFirst = true;
+        }
     }
 
 }

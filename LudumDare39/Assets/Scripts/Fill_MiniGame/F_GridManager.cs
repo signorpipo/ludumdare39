@@ -5,39 +5,31 @@ using UnityEngine;
 
 public class F_GridManager : MonoBehaviour {
 
-    public LineRenderer m_PrefabGridLine;
-    public Vector2 m_TopLeft;
-    public float m_CellSize;
-
+    private LineRenderer m_PrefabGridLine;
+    private float m_CellSize;
+    private Vector2 m_TopLeft;
     private F_Matrix m_Grid;
 
-	void Start () {
+    private int m_Docked;
 
-        m_Grid = new F_Matrix(4, 4);
-        m_Grid.Set(0, 0, 1);
-        m_Grid.Set(1, 0, 0);
-        m_Grid.Set(2, 0, 1);
-        m_Grid.Set(3, 0, 1);
-        m_Grid.Set(0, 1, 1);
-        m_Grid.Set(1, 1, 1);
-        m_Grid.Set(2, 1, 1);
-        m_Grid.Set(3, 1, 0);
-        m_Grid.Set(0, 2, 0);
-        m_Grid.Set(1, 2, 1);
-        m_Grid.Set(2, 2, 1);
-        m_Grid.Set(3, 2, 0);
-        m_Grid.Set(0, 3, 0);
-        m_Grid.Set(1, 3, 1);
-        m_Grid.Set(2, 3, 1);
-        m_Grid.Set(3, 3, 1);
+    public bool TryDock(F_Pluggable i_ToDock)
+    {
+        //m_Docked++;
+        return false;
+    }
+
+    public void Initialize(F_Matrix i_Grid, float i_CellSize, LineRenderer i_PrefabGridLine)
+    {
+        m_Grid = i_Grid;
+        m_CellSize = i_CellSize;
+        m_PrefabGridLine = i_PrefabGridLine;
+        m_Docked = 0;
+
         CreateGrid();
-
-
     }
 
     private void CreateGrid()
     {
-
         CalculateTopLeft();
 
         for (int row = 0; row < m_Grid.Rows(); ++row)
@@ -78,7 +70,8 @@ public class F_GridManager : MonoBehaviour {
         lineRenderer.SetPosition(4, new Vector3(m_TopLeft.x + m_CellSize * column, m_TopLeft.y - m_CellSize * row + 0.035f, 2));
     }
 
-    void Update () {
-		
-	}
+    public int GetDocked()
+    {
+        return m_Docked;
+    }
 }

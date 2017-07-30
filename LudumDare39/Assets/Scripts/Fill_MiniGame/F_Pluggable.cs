@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public delegate void ClickEvent(F_Pluggable i_Clicked);
-
-[System.Serializable]
-public struct IntArray
+public class F_Pluggable : MonoBehaviour
 {
-    public int[] m_Array;
-}
 
-public class F_Pluggable : MonoBehaviour {
+    [System.Serializable]
+    public struct IntArray
+    {
+        public int[] m_Array;
+    }
+
 
     public ClickEvent OnClickEvent;
 
@@ -21,7 +22,7 @@ public class F_Pluggable : MonoBehaviour {
     private F_Matrix m_Grid;
     private Vector3 m_InitialPosition;
 
-    public void Awake()
+    public void Start()
     {
         m_Direction = F_Direction.UP;
         m_InitialPosition = gameObject.transform.position;
