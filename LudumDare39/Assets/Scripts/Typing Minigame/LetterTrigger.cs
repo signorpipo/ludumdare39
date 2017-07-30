@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public delegate void OnLetterHit(GameObject letterFall);
+public delegate void OnLetterMiss();
 
 public class LetterTrigger : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class LetterTrigger : MonoBehaviour
     }
 
     public OnLetterHit onLetterHit = null;
+    public OnLetterMiss onLetterMiss = null;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -31,9 +33,17 @@ public class LetterTrigger : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(inside && (Input.GetKeyDown(myKey)) && onLetterHit != null)
+        if (Input.GetKeyDown(myKey))
         {
-            onLetterHit(objectTriggered);
+            GetComponent<Animator>().SetTrigger("goToResize");
+            if (inside && onLetterHit != null)
+            {
+                onLetterHit(objectTriggered);
+            }
+            else if (onLetterMiss!=null)
+            {
+                onLetterMiss();
+            }
         }
     }
 }
