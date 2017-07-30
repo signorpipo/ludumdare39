@@ -1102,12 +1102,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51ec5f6d11a62864b8563e84bc27af7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  successBarSlider: {fileID: 904967684}
   gameTimeBarSlider: {fileID: 1917341308}
   MessageMgr: {fileID: 1619694464}
+  GameTotalTime: 5
+  successBarSlider: {fileID: 904967684}
   LeftKey: 97
   RightKey: 108
-  GameTotalTime: 5
   PositiveMult: 0.3
   NegativeMult: 0.1
   KeyTimer: 0.08
