@@ -24,7 +24,7 @@ public class TypingManager : MonoBehaviour
     private Canvas canvas;
     [SerializeField]
     private List<KeyCode> typeCode;
-
+    private Canvas newCanvas;
     [SerializeField]
     private Queue<GameObject> letterFallPool;
 
@@ -35,7 +35,7 @@ public class TypingManager : MonoBehaviour
     void Start()
     {
         Camera camera = FindObjectOfType<Camera>();
-        Canvas newCanvas = Instantiate(canvas);
+        newCanvas = Instantiate(canvas);
         newCanvas.worldCamera = camera;
 
         letterTriggerList = new List<GameObject>();
@@ -53,6 +53,7 @@ public class TypingManager : MonoBehaviour
             LetterTrigger letterListener = letterTrigger.GetComponent<LetterTrigger>();
             letterListener.MyKey = typeCode[index - 1];
             letterListener.onLetterHit += OnLetterHit;
+            letterListener.onLetterMiss += OnLetterMiss;
         }
         letterFallPool = new Queue<GameObject>();
         for(int i =0; i < 10; i++)
@@ -88,13 +89,19 @@ public class TypingManager : MonoBehaviour
         letterFall.SetActive(false);
         letterFallPool.Enqueue(letterFall);
         points++;
-
+        newCanvas.GetComponent<Animator>().SetTrigger("onResizeHit");
     }
 
     public void OnLetterPass(GameObject letterFall)
     {
         letterFall.SetActive(false);
         letterFallPool.Enqueue(letterFall);
+        newCanvas.GetComponent<Animator>().SetTrigger("onResizeMiss");
         points--;
+    }
+
+    public void OnLetterMiss()
+    {
+        newCanvas.GetComponent<Animator>().SetTrigger("onResizeMiss");
     }
 }
