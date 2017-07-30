@@ -3,26 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Arrow : MonoBehaviour {
-    public Vector3 unitRotation = new Vector3(0, 0, 1);
-    private bool invert = false;
+    [SerializeField]
+    private Vector3 m_baseUnitRotation = new Vector3(0, 0, 1);
+    [SerializeField]
+    private float adjustmentFactor = 2;
+
+    private Vector3 m_adjustedUnitRotation;
+
+    private bool m_invert = false;
+
+    public void Initialize(float i_difficultySpeed)
+    {
+        m_adjustedUnitRotation = new Vector3(0, 0, m_baseUnitRotation.z + (adjustmentFactor * i_difficultySpeed));
+    }
+
+    public void Reset()
+    {
+        m_invert = false;
+        transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+    }
+
     public void UpdateDirection()
     {
         if (transform.rotation.eulerAngles.z >= 90)
         {
-            invert = true;
+            m_invert = true;
         } else if (transform.rotation.eulerAngles.z <= 1)
         {
-            invert = false;
+            m_invert = false;
         }
 
-        if (invert)
+        if (m_invert)
         {
-            transform.Rotate(-unitRotation);
+            transform.Rotate(-m_adjustedUnitRotation);
         } else
         {
-            transform.Rotate(unitRotation);
+            transform.Rotate(m_adjustedUnitRotation);
         }
-        
     }
 
     public Vector2 GetCurrentDirection()

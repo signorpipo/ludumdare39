@@ -2,13 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public delegate void WinEvent();
+public delegate void ScoreEvent();
 
 public class Basket : MonoBehaviour {
     public GameObject m_colliderLeft;
     public GameObject m_colliderRight;
-    public WinEvent onWinEvent;
+    public ScoreEvent onScoreEvent;
+
     public void Initialize()
+    {
+        m_colliderLeft.GetComponent<EdgeCollider2D>().enabled = false;
+        m_colliderRight.GetComponent<EdgeCollider2D>().enabled = false;
+    }
+
+    public void Reset()
     {
         m_colliderLeft.GetComponent<EdgeCollider2D>().enabled = false;
         m_colliderRight.GetComponent<EdgeCollider2D>().enabled = false;
@@ -19,9 +26,9 @@ public class Basket : MonoBehaviour {
         m_colliderLeft.GetComponent<EdgeCollider2D>().enabled = true;
         m_colliderRight.GetComponent<EdgeCollider2D>().enabled = true;
 
-        if (onWinEvent != null)
+        if (onScoreEvent != null)
         {
-            onWinEvent();
+            onScoreEvent();
         }
 
     }

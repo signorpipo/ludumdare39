@@ -4,8 +4,20 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour {
 
+    private Vector3 m_initialPosition;
     private float m_potency;
     private Vector3 m_direction;
+
+    public void Initialize()
+    {
+        m_initialPosition = transform.position;
+    }
+
+    public void Reset()
+    {
+        GetComponent<Rigidbody2D>().velocity = new Vector3(0.0f, 0.0f, 0.0f);
+        transform.position = m_initialPosition;
+    }
 
     public void SetPotency(float i_potency)
     {

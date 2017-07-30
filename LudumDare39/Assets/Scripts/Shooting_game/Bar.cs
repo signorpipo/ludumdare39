@@ -3,45 +3,63 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Bar : MonoBehaviour {
-    public float MAX_VALUE = 15.0f;
-    public float MIN_VALUE = 5.0f;
-    private bool increment = true;
+    [SerializeField]
+    private float m_maxValue = 15.0f;
+    [SerializeField]
+    private float m_minValue = 5.0f;
+
+    [SerializeField]
+    private float m_baseIncrement = 0.1f;
+    private float m_adjustedIncrement;
+
     private float m_value;
-    public float m_increment = 0.4f;
+    private bool increment = true;
     private float m_offset;
     private float m_adjMaxValue;
+
+    private Vector3 m_fillerInitialPosition;
     public GameObject m_filler;
 
-    public void Initialize()
+    public void Initialize(float i_difficultySpeed)
     {
-        m_value = MIN_VALUE;
-        m_offset = MIN_VALUE;
-        m_adjMaxValue = MAX_VALUE - m_offset;
+        m_value = m_minValue;
+        m_offset = m_minValue;
+        m_adjMaxValue = m_maxValue - m_offset;
+        m_fillerInitialPosition = m_filler.transform.position;
+        m_adjustedIncrement = m_baseIncrement + i_difficultySpeed;
     }
+
+    public void Reset()
+    {
+        m_value = m_minValue;
+        m_filler.transform.localScale = new Vector3(0.5f, 0.0f, 1);
+        m_filler.transform.position = m_fillerInitialPosition;
+    }
+
     public void UpdateValue()
     {
 
 
         if (increment)
         {
-            m_value += m_increment;           
+            m_value += m_adjustedIncrement;           
             float yScale = ((m_value - m_offset)* 2.5f) / m_adjMaxValue;
             m_filler.transform.localScale = new Vector3(0.5f, yScale, 1);
-            m_filler.transform.Translate(new Vector3(0, 1.25f/ (m_adjMaxValue/ m_increment), 0));
+            m_filler.transform.Translate(new Vector3(0, 1.25f/ (m_adjMaxValue/ m_adjustedIncrement), 0));
         } else
         {
-            m_value -= m_increment;
+            m_value -= m_adjustedIncrement;
             float yScale = ((m_value - m_offset)* 2.5f) / m_adjMaxValue;
             m_filler.transform.localScale = new Vector3(0.5f, yScale, 1);
-            m_filler.transform.Translate(new Vector3(0, -1.25f / (m_adjMaxValue/ m_increment), 0));
+            m_filler.transform.Translate(new Vector3(0, -1.25f / (m_adjMaxValue/ m_adjustedIncrement), 0));
         }
 
-        if (m_value >= MAX_VALUE)
+        if (m_value >= m_maxValue)
         {
             increment = false;
         }
 
-        if (m_value <= MIN_VALUE)
+        if (m_value <= m_minValue)
         {
             increment = true;
         }

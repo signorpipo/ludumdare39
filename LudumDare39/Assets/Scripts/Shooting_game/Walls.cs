@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public delegate void LoseEvent();
+public delegate void MissEvent();
+
 public class Walls : MonoBehaviour {
-    public LoseEvent onLoseEvent;
+    public MissEvent onMissEvent;
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (onLoseEvent != null)
+        if (onMissEvent != null)
         {
-            onLoseEvent();
+            onMissEvent();
         }
     }
 }
