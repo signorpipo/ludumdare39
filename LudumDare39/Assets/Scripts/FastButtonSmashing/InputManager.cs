@@ -6,6 +6,8 @@ public class InputManager : MonoBehaviour {
     public Slider successBarSlider;
     public Slider gameTimeBarSlider;
 
+    public MessageManager MessageMgr;
+
     public KeyCode LeftKey = KeyCode.LeftArrow;
     public KeyCode RightKey = KeyCode.RightArrow;
 
@@ -18,7 +20,6 @@ public class InputManager : MonoBehaviour {
     private float mGameTime = 0;
     private int mCurrState = 0;
 
-    private Animator mAnimator = null;
 
 	// Use this for initialization
 	void Start () {
@@ -26,7 +27,7 @@ public class InputManager : MonoBehaviour {
         mGameTime = GameTotalTime;
         mKeyTimer = 0;
 
-        mAnimator = GetComponentInParent<Animator>();
+       
     }
 	
 	// Update is called once per frame
@@ -76,9 +77,10 @@ public class InputManager : MonoBehaviour {
         }
 
         mGameTime -= Time.deltaTime;
-        if (mGameTime <= 0.0f)
+        if (mCurrState != -5 && mGameTime <= 0.0f)
         {
-            mAnimator.SetTrigger("GameOver");
+            MessageMgr.GameOver();
+            mCurrState = -5;
         }
         else
         {
