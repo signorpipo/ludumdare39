@@ -414,7 +414,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1021942516444126, guid: 9f1d509574894c24182bf9cca470bcbd, type: 2}
       propertyPath: m_Name
-      value: Game over
+      value: Message
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9f1d509574894c24182bf9cca470bcbd, type: 2}
@@ -864,6 +864,12 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1619694464 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114498017375278792, guid: 9f1d509574894c24182bf9cca470bcbd,
+    type: 2}
+  m_PrefabInternal: {fileID: 586202156}
+  m_Script: {fileID: 11500000, guid: 77508e52437ef164b98d1c7e54cef24a, type: 3}
 --- !u!1 &1713684071
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,6 +1133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   successBarSlider: {fileID: 904967684}
   gameTimeBarSlider: {fileID: 1917341308}
+  MessageMgr: {fileID: 1619694464}
   LeftKey: 97
   RightKey: 108
   GameTotalTime: 5
