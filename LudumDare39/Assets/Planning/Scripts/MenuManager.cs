@@ -5,10 +5,13 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-	[Header("Minigames Settings")]
+    [Header("Minigames Settings")]
 
 	[SerializeField]
 	private List<MinigameInterface> m_minigames;
+
+    [SerializeField]
+    private List<DailyProperties> m_weekDaysMap;
 
 	private int m_numberOfSelectedGames = 3;
 
@@ -50,7 +53,10 @@ public class MenuManager : MonoBehaviour
 			m_middlePanels[i].GetComponent<Slot>().onNewSon += UpdateSelectedMinigames;
 			m_middlePanels[i].GetComponent<Slot>().onTrashedSon += UpdateSelectedMinigames;
 		}
-	}
+
+        GameManager gameManager = GameManager.Instance;
+        gameManager.SetWeekDays(m_weekDaysMap);
+    }
 
     //void OnDisable()
     //{
