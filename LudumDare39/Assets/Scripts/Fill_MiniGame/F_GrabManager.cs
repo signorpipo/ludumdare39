@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public delegate void TryDockEvent(F_Pluggable i_ToDock);
+public delegate void F_TryDockEvent(F_Pluggable i_ToDock);
 
 public class F_GrabManager : MonoBehaviour {
     
-    public TryDockEvent OnTryDockEvent;
+    public F_TryDockEvent OnTryDockEvent;
 
     private F_Pluggable[] m_Grabbables;
 

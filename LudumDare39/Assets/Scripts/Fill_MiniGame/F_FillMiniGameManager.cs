@@ -24,19 +24,15 @@ public class F_FillMiniGameManager : MonoBehaviour {
     [SerializeField]
     private SpriteRenderer m_PrefabCellBackground;
 
+    [SerializeField]
+    private F_Timer m_PrefabTimer;
+
+    private F_Timer m_Timer;
+
     private F_GridManager m_GridManager;
     private F_GrabManager m_GrabManager;
     private Dictionary<string, F_Pluggable> m_PrefabPluggablesDictionary;
     private int m_ToDock;
-
-    [SerializeField]
-    private CM_Timer m_PrefabTimer;
-    [SerializeField]
-    private GameObject m_LevelTimer;
-    [SerializeField]
-    private GameObject m_MiddleMessage;
-    private CM_Timer m_StartTimer;
-    private CM_Timer m_RunningTimer;
 
     public void Awake () {
 
@@ -60,18 +56,15 @@ public class F_FillMiniGameManager : MonoBehaviour {
 
         if (m_PrefabTimer != null)
         {
-            m_StartTimer = Instantiate(m_PrefabTimer).GetComponent<CM_Timer>();
-            m_RunningTimer = Instantiate(m_PrefabTimer).GetComponent<CM_Timer>();
+            m_Timer = Instantiate(m_PrefabTimer).GetComponent<F_Timer>();
+            m_Timer.transform.parent = this.transform;
         }
 
     }
 
     private void Start()
     {
-        m_MiddleMessage.SetActive(true);
-        m_MiddleMessage.GetComponentInChildren<Text>().text = "Fill the bag!";
-        m_StartTimer.OnTimesUp += OnStartTimerEnd;
-        m_StartTimer.StartTimer(2, "Fill the bag!", "", null);
+        m_Timer.StartTimer(OnStartTimerEnd, OnFailure, "Fill the bag!", 3, "Times Up!!", 5);
     }
 
     private void TryDock(F_Pluggable i_ToDock)
@@ -164,29 +157,23 @@ public class F_FillMiniGameManager : MonoBehaviour {
     {
         yield return new WaitForSeconds(3);
 
-        m_WinCanvas.gameObject.SetActive(false);
+        m_WinCanvas.gameObject.SetActive(!m_WinCanvas.gameObject.activeSelf);
     }
 
     private void OnStartTimerEnd()
     {
-        m_MiddleMessage.SetActive(false);
-        m_LevelTimer.SetActive(true);
-        m_RunningTimer.OnTimesUp += OnFailure;
-        m_RunningTimer.StartTimer(10, "Time Left: ", "", m_LevelTimer.GetComponentInChildren<Text>());
         m_GrabManager.EnableInput();
     }
 
     private void OnFailure()
     {
-        m_MiddleMessage.GetComponentInChildren<Text>().text = "You Lose";
-        m_MiddleMessage.SetActive(true);
         EngGame(false);
     }
 
     private void EngGame(bool i_Success)
     {
         m_GrabManager.DisableInput();
-        m_RunningTimer.StopTimer();
+        m_Timer.StopTimer();
         if (i_Success)
         {
 

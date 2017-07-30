@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public delegate void ClickEvent(F_Pluggable i_Clicked);
+public delegate void F_ClickEvent(F_Pluggable i_Clicked);
 public class F_Pluggable : MonoBehaviour
 {
 
@@ -13,7 +13,7 @@ public class F_Pluggable : MonoBehaviour
     }
 
 
-    public ClickEvent OnClickEvent;
+    public F_ClickEvent OnClickEvent;
 
     [SerializeField]
     private IntArray[] m_MatrixGrid;
