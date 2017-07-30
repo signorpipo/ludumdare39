@@ -4,4 +4,16 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/StartMenu.unity
+    guid: fbe800c9ac77aee4bbe396ac5eb9f853
+  - enabled: 1
+    path: Assets/Scenes/PlanningMenu.unity
+    guid: b8acedd82316c1a46a4a7f9e1274442e
+  - enabled: 1
+    path: Assets/Scenes/Connect.unity
+    guid: 47d40910f8025fb41993064bd9a2b513
+  - enabled: 1
+    path: Assets/Scenes/Dodge_minigame.unity
+    guid: 013106faaa6ffb344b2581c256251a6b

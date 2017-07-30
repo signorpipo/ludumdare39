@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,9 +12,6 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private MenuManager m_menuManager = null;
-
-    [SerializeField]
-    private List<string> m_scenesNames = null;
 
     [SerializeField]
     private float m_currentPsychophysicsValue = 0.0f;
@@ -51,37 +49,44 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private SceneLoaderManager m_sceneLoaderManager = null;
+    private SceneLoaderSingleManager m_sceneLoaderManager = null;
 
     void Start()
     {
-        m_sceneLoaderManager = m_sceneLoader.GetComponent<SceneLoaderManager>();
-        m_sceneLoaderManager.SetAllScenesNames(m_scenesNames);
-        m_sceneLoaderManager.LoadAllScenes();
+        m_sceneLoaderManager = m_sceneLoader.GetComponent<SceneLoaderSingleManager>();
     }
 
     public void StartGame()
     {
         m_selectedMinigames = m_menuManager.GetSelectedMinigamesList();
-        int count = m_menuManager.GetSelectedMinigamesList().Count;
+        int countl = m_menuManager.GetSelectedMinigamesList().Count;
  
-        if (count == 3)
+        if (countl == 3)
         {
             List<string> selectedScenesNames = new List<string>();
 
-            for (int index = 0; index < count; ++index)
+            for (int index = 0; index < countl; ++index)
             {
                 selectedScenesNames.Add(m_selectedMinigames[index].GetName());
             }
 
             m_sceneLoaderManager.SetSelectedScenesNames(selectedScenesNames);
-            m_sceneLoaderManager.LoadAllScenes();
             m_sceneLoaderManager.LoadNextScene();
+
+            SceneManager.sceneLoaded += SceneLoaded;
         }
         else
         {
-            // ...
+            Debug.Log("Gesù è l'unico e vero Signore");
         }
+    }
+
+    private void SceneLoaded(Scene i_scene, LoadSceneMode i_mode)
+    {
+        AbstarcMinigameManager CurrentGame = FindObjectOfType<AbstarcMinigameManager>();
+        CurrentGame.StartMinigame(m_selectedMinigames[count].GetGameVersion(), m_currentPsychophysicsValue, m_currentMoneyValue, m_currentSocialValue);
+        CurrentGame.onSceneEnded += LoadNextSceneAndUpdateStats;
+        SceneManager.sceneLoaded -= SceneLoaded;
     }
 
     public void ClearSelectedMinigames()

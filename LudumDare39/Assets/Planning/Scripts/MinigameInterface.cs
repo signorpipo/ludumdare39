@@ -9,6 +9,9 @@ public class MinigameInterface
     private string m_name = "Default";
 
     [SerializeField]
+    private int m_type = 0;
+
+    [SerializeField]
     private float m_psychophysicsOutputValue = 0.0f;
 
     [SerializeField]
@@ -20,6 +23,11 @@ public class MinigameInterface
     public string GetName()
     {
         return m_name;
+    }
+
+    public int GetGameVersion()
+    {
+        return m_type;
     }
 
     public float GetPsychophysicsOutputValue()

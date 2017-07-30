@@ -572,7 +572,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4106431377503634, guid: 1004998814233624dac8c042b9352761, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1004998814233624dac8c042b9352761, type: 2}
@@ -1944,7 +1944,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 707465006}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 713741055}
+        m_MethodName: StartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &707465006
@@ -2008,25 +2019,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sceneLoader: {fileID: 873505236}
-  m_scenesNames:
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  m_menuManager: {fileID: 1363337159}
   m_currentPsychophysicsValue: 50
   m_currentMoneyValue: 12
   m_currentSocialValue: 61
@@ -2350,10 +2343,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 873505236}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fdd40d99ce794a46b95008ce96aa660, type: 3}
+  m_Script: {fileID: 11500000, guid: b25ccb358f397bc48a4f7bb4117a1597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  main_scene: 
+  main_scene: PlanningMenu
 --- !u!4 &873505238
 Transform:
   m_ObjectHideFlags: 0
@@ -3140,39 +3133,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_minigames:
-  - m_name: Game1
+  - m_name: Connect
+    m_type: 0
     m_psychophysicsOutputValue: 15
     m_moneyOutputValue: 15
     m_socialOutputValue: 15
-  - m_name: Game2
+  - m_name: StartMenu
+    m_type: 0
     m_psychophysicsOutputValue: 16
     m_moneyOutputValue: 16
     m_socialOutputValue: 16
-  - m_name: Game3
+  - m_name: Dodge_minigame
+    m_type: 0
     m_psychophysicsOutputValue: 1
     m_moneyOutputValue: 1
     m_socialOutputValue: 1
   - m_name: Game3
+    m_type: 0
     m_psychophysicsOutputValue: 1
     m_moneyOutputValue: 1
     m_socialOutputValue: 1
   - m_name: Game3
+    m_type: 0
     m_psychophysicsOutputValue: 1
     m_moneyOutputValue: 1
     m_socialOutputValue: 1
   - m_name: Game3
+    m_type: 0
     m_psychophysicsOutputValue: 1
     m_moneyOutputValue: 1
     m_socialOutputValue: 1
   - m_name: Game3
+    m_type: 0
     m_psychophysicsOutputValue: 1
     m_moneyOutputValue: 1
     m_socialOutputValue: 1
   - m_name: Game3
+    m_type: 0
     m_psychophysicsOutputValue: 1
     m_moneyOutputValue: 1
     m_socialOutputValue: 1
   - m_name: Game3
+    m_type: 0
     m_psychophysicsOutputValue: 1
     m_moneyOutputValue: 1
     m_socialOutputValue: 1
