@@ -17,6 +17,11 @@ public class MinigameInterface
     [SerializeField]
     private float m_socialOutputValue = 0.0f;
 
+    public string GetName()
+    {
+        return m_name;
+    }
+
     public float GetPsychophysicsOutputValue()
     {
         return m_psychophysicsOutputValue;

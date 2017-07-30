@@ -1,41 +1,63 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StatsCalculator : MonoBehaviour
 {
     [SerializeField]
-    private GameObject m_menuManagerPrefab = null;
+    private GameManager m_gameManager = null;
 
-    private MenuManager m_menuManager = null;
+    [Header("Front Sliders")]
 
-    private float m_finalPsychophysicsOutputValue = 0.0f;
+    [SerializeField]
+    private Slider m_leftSliderFront = null;
 
-    private float m_finalMoneyOutputValue = 0.0f;
+    [SerializeField]
+    private Slider m_middleSliderFront = null;
 
-    private float m_finalSocialOutputValue = 0.0f;
+    [SerializeField]
+    private Slider m_rightSliderFront = null;
+
+    [Header("Back Sliders")]
+
+    [SerializeField]
+    private Slider m_leftSliderBack = null;
+
+    [SerializeField]
+    private Slider m_middleSliderBack = null;
+
+    [SerializeField]
+    private Slider m_rightSliderBack = null;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
-        m_menuManager = m_menuManagerPrefab.GetComponent<MenuManager>();
-	}
-	
-	// Update is called once per frame
-	void Update ()
+        SetStatiSliders();
+    }
+
+    public void UpdateSliders(float psychophysicsValue, float moneyValue, float socialValue)
     {
-        List<MinigameInterface> m_seletedMinigames = m_menuManager.GetSelectedMinigamesList();
-        int numberOfMinigames = m_seletedMinigames.Count;
+        m_leftSliderFront.value += psychophysicsValue;
+        m_middleSliderFront.value += moneyValue;
+        m_rightSliderFront.value += socialValue;
+    }
 
-        for (int index = 0; index < numberOfMinigames; ++index)
-        {
-            m_finalPsychophysicsOutputValue += m_seletedMinigames[index].GetPsychophysicsOutputValue();
-            m_finalMoneyOutputValue += m_seletedMinigames[index].GetMoneyOutputValue();
-            m_finalSocialOutputValue += m_seletedMinigames[index].GetSocialOutputvalue();
-        }
+    public void SetStatiSliders()
+    {
+        m_leftSliderBack.value = m_gameManager.m_currentPsychophysicsValue;
+        m_middleSliderBack.value = m_gameManager.m_currentMoneyValue;
+        m_rightSliderBack.value = m_gameManager.m_currentSocialValue;
 
-        m_finalPsychophysicsOutputValue /= numberOfMinigames;
-        m_finalMoneyOutputValue /= numberOfMinigames;
-        m_finalSocialOutputValue /= numberOfMinigames;
+        m_leftSliderFront.value = m_gameManager.m_currentPsychophysicsValue;
+        m_middleSliderFront.value = m_gameManager.m_currentMoneyValue;
+        m_rightSliderFront.value = m_gameManager.m_currentSocialValue;
+    }
+
+    public void ResetSliders()
+    {
+        m_leftSliderFront.value = m_gameManager.m_currentPsychophysicsValue;
+        m_middleSliderFront.value = m_gameManager.m_currentMoneyValue;
+        m_rightSliderFront.value = m_gameManager.m_currentSocialValue;
     }
 }

@@ -2,8 +2,24 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 
+
+public delegate void OnNewSon();
+public delegate void OnTrashedSon();
+
 public class Slot : MonoBehaviour, IDropHandler
 {
+    public event OnNewSon onNewSon = null;
+    public event OnTrashedSon onTrashedSon = null;
+    private bool hasChild = false;
+
+    void Update()
+    {
+        if (hasChild && transform.childCount <= 0)
+        {
+            onTrashedSon.Invoke();
+        }
+    }
+
     public GameObject item
     {
         get
@@ -22,6 +38,8 @@ public class Slot : MonoBehaviour, IDropHandler
         {
             DragHandler.itemDragged.transform.SetParent(transform);
             DragHandler.itemDragged.transform.position = transform.position;
+            hasChild = true;
+            onNewSon.Invoke();
         }
     }
 }
