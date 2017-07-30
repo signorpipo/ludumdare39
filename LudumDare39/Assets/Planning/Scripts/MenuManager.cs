@@ -52,24 +52,31 @@ public class MenuManager : MonoBehaviour
 		}
 	}
 
-	void OnDisable()
-	{
-		for (int i = 0; i < m_middlePanels.Count; ++i)
-		{
-			m_middlePanels[i].GetComponent<Slot>().onNewSon -= UpdateSelectedMinigames;
-			m_middlePanels[i].GetComponent<Slot>().onTrashedSon -= UpdateSelectedMinigames;
-		}
-	}
+    //void OnDisable()
+    //{
+    //	for (int i = 0; i < m_middlePanels.Count; ++i)
+    //	{
+    //		m_middlePanels[i].GetComponent<Slot>().onNewSon -= UpdateSelectedMinigames;
+    //		m_middlePanels[i].GetComponent<Slot>().onTrashedSon -= UpdateSelectedMinigames;
+    //	}
+    //}
 
-	public void StartGame()
-	{
-		// Per ogni oggetto in lista di selezione
-			// salva informazioni sul minigame
-			// verifica che siano consistenti (grandezza lista == 3)
-			// invoca metodo da SceneLoader del tipo LoadScenes(scene1, scene2, scene3);
-	}
 
-	public List<MinigameInterface> GetSelectedMinigamesList()
+    public void StartGame()
+    {
+        if (3 == m_seletedMinigames.Count)
+        {
+            GameManager gameManager = GameManager.Instance;
+            gameManager.SetSelectedMiniGames(m_seletedMinigames);
+            gameManager.StartGame();
+        }
+        else
+        {
+            Debug.Log("Gesù è l'unico e vero Signore");
+        }
+    }
+
+    public List<MinigameInterface> GetSelectedMinigamesList()
 	{
 		return m_seletedMinigames;
 	}

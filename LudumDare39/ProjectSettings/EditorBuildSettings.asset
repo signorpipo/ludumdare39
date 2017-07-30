@@ -17,3 +17,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dodge_minigame.unity
     guid: 013106faaa6ffb344b2581c256251a6b
+  - enabled: 1
+    path: Assets/Scenes/CutTheRope.unity
+    guid: e6a0e947648edd54abfee7673a096102
+  - enabled: 1
+    path: Assets/Scenes/BouncingBall_minigame.unity
+    guid: 5b135567118a595448297a20c8355082
+  - enabled: 1
+    path: Assets/Scenes/Fill_MiniGame.unity
+    guid: 2e8b8ef8fe2363c40ae5a422aec66dab
+  - enabled: 1
+    path: Assets/Scenes/FastButtonSmashing.unity
+    guid: e3293c6e4eb476444a4e79990504e19e

@@ -3,24 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    Singleton<GameManager> m_gameManager;
+   GameManager m_gameManager;
 
-    [SerializeField]
+    //[SerializeField]
     private GameObject m_sceneLoader = null;
 
-    [SerializeField]
-    private MenuManager m_menuManager = null;
+    /*[SerializeField]
+    private MenuManager m_menuManager = null;*/
 
-    [SerializeField]
-    private float m_currentPsychophysicsValue = 0.0f;
-    [SerializeField]
-    private float m_currentMoneyValue = 0.0f;
-    [SerializeField]
-    private float m_currentSocialValue = 0.0f;
-
-    private float m_outputResult = 0.0f;
+    //[SerializeField]
+    private float m_currentPsychophysicsValue = 20.0f;
+    //[SerializeField]
+    private float m_currentMoneyValue = 20.0f;
+    //[SerializeField]
+    private float m_currentSocialValue = 20.0f;
 
     private int count = 0;
 
@@ -53,10 +51,33 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        m_sceneLoaderManager = m_sceneLoader.GetComponent<SceneLoaderSingleManager>();
+        //m_gameManager = GameManager.Instance;
+
+    }
+
+    public void SetSelectedMiniGames(List<MinigameInterface> selectedMinigames)
+    {
+        m_selectedMinigames = selectedMinigames;
     }
 
     public void StartGame()
+    {
+        m_sceneLoaderManager = SceneLoaderSingleManager.Instance;
+
+        List<string> selectedScenesNames = new List<string>();
+
+        for (int index = 0; index < m_selectedMinigames.Count; ++index)
+        {
+            selectedScenesNames.Add(m_selectedMinigames[index].GetName());
+        }
+
+        m_sceneLoaderManager.SetSelectedScenesNames(selectedScenesNames);
+        m_sceneLoaderManager.LoadNextScene();
+
+        SceneManager.sceneLoaded += SceneLoaded;
+    }
+
+    /*public void StartGame()
     {
         m_selectedMinigames = m_menuManager.GetSelectedMinigamesList();
         int countl = m_menuManager.GetSelectedMinigamesList().Count;
@@ -79,7 +100,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Gesù è l'unico e vero Signore");
         }
-    }
+    }*/
 
     private void SceneLoaded(Scene i_scene, LoadSceneMode i_mode)
     {
@@ -93,6 +114,7 @@ public class GameManager : MonoBehaviour
     {
         m_selectedMinigames.Clear();
         count = 0;
+        SceneManager.sceneLoaded -= SceneLoaded;
     }
 
     /// <summary>
@@ -120,13 +142,13 @@ public class GameManager : MonoBehaviour
                 m_currentMoneyValue = Mathf.Clamp(m_currentMoneyValue + m_selectedMinigames[count].GetMoneyOutputValue(), 0.0f, 100.0f);
             }
 
-            if (m_selectedMinigames[count].GetMoneyOutputValue() >= 0)
+            if (m_selectedMinigames[count].GetSocialOutputvalue() >= 0)
             {
-                m_currentSocialValue = Mathf.Clamp(m_currentSocialValue + m_selectedMinigames[count].GetMoneyOutputValue() * resultMutator, 0.0f, 100.0f);
+                m_currentSocialValue = Mathf.Clamp(m_currentSocialValue + m_selectedMinigames[count].GetSocialOutputvalue() * resultMutator, 0.0f, 100.0f);
             }
             else
             {
-                m_currentSocialValue = Mathf.Clamp(m_currentSocialValue + m_selectedMinigames[count].GetMoneyOutputValue(), 0.0f, 100.0f);
+                m_currentSocialValue = Mathf.Clamp(m_currentSocialValue + m_selectedMinigames[count].GetSocialOutputvalue(), 0.0f, 100.0f);
             }
         }
         else
@@ -138,20 +160,23 @@ public class GameManager : MonoBehaviour
 
             if (m_selectedMinigames[count].GetMoneyOutputValue() < 0)
             {
-                m_currentPsychophysicsValue = Mathf.Clamp(m_currentPsychophysicsValue + m_selectedMinigames[count].GetMoneyOutputValue(), 0.0f, 100.0f);
+                m_currentMoneyValue = Mathf.Clamp(m_currentMoneyValue + m_selectedMinigames[count].GetMoneyOutputValue(), 0.0f, 100.0f);
             }
 
-            if (m_selectedMinigames[count].GetMoneyOutputValue() < 0)
+            if (m_selectedMinigames[count].GetSocialOutputvalue() < 0)
             {
-                m_currentPsychophysicsValue = Mathf.Clamp(m_currentPsychophysicsValue + m_selectedMinigames[count].GetMoneyOutputValue(), 0.0f, 100.0f);
+                m_currentSocialValue = Mathf.Clamp(m_currentSocialValue + m_selectedMinigames[count].GetSocialOutputvalue(), 0.0f, 100.0f);
             }
         }
-
+        
         count++;
-
         if (count == 3)
         {
             ClearSelectedMinigames();
+        }
+        else
+        {
+             SceneManager.sceneLoaded += SceneLoaded;
         }
 
         m_sceneLoaderManager.LoadNextScene();

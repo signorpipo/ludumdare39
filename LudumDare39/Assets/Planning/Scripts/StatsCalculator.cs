@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class StatsCalculator : MonoBehaviour
 {
-    [SerializeField]
     private GameManager m_gameManager = null;
 
     [Header("Front Sliders")]
@@ -33,6 +32,7 @@ public class StatsCalculator : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        m_gameManager = GameManager.Instance;
         SetStaticSliders();
     }
 
@@ -45,6 +45,7 @@ public class StatsCalculator : MonoBehaviour
 
     public void SetStaticSliders()
     {
+
         m_leftSliderBack.value = m_gameManager.CurrentPsychophysicsValue;
         m_middleSliderBack.value = m_gameManager.CurrentMoneyValue;
         m_rightSliderBack.value = m_gameManager.CurrentSocialValue;

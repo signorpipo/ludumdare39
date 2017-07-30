@@ -6,11 +6,13 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Carica le scene una alla volta. Compreso la main
 /// </summary>
-public class SceneLoaderSingleManager : MonoBehaviour
+public class SceneLoaderSingleManager : Singleton<SceneLoaderSingleManager>
 {
+    //Singleton<SceneLoaderSingleManager> m_sceneManager;
+    protected SceneLoaderSingleManager() { } // guarantee this will be always a singleton only - can't use the constructor!
 
     //Scena principale
-    public string main_scene;
+    private string main_scene = "PlanningMenu";
     private static SceneLoaderSingleManager instance = null;
     private List<string> list_select_minigame_scene;
 
@@ -22,7 +24,7 @@ public class SceneLoaderSingleManager : MonoBehaviour
     /// </summary>
     void Start()
     {
-        DontDestroyOnLoad(transform.gameObject);
+        DontDestroyOnLoad(gameObject);
         run_scene = main_scene;
     }
 
