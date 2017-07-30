@@ -255,12 +255,7 @@ public class F_FillMiniGameManager : MonoBehaviour {
     {
         yield return new WaitForSeconds(m_StartEndSeconds);
 
-        GameManager manager = FindObjectOfType<GameManager>();
-
-        if (manager != null)
-        {
-            manager.LoadNextSceneAndUpdateStats(i_Success);
-        }
+        SceneEnd((i_Success) ? 1 : 0);
     }
 
     private void OnStartTimerEnd()
