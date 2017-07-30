@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Bar : MonoBehaviour {
-    public const float MAX_VALUE = 15.0f;
+    public float MAX_VALUE = 15.0f;
     public float MIN_VALUE = 5.0f;
     private bool increment = true;
     private float m_value;
