@@ -9,6 +9,14 @@ public struct F_Matrix {
     public F_Matrix(int i_Rows, int i_Columns)
     {
         m_Matrix = new int[i_Rows, i_Columns];
+        for (int row = 0; row < Rows(); ++row)
+        {
+            for (int column = 0; column < Columns(); ++column)
+            {
+                Set(row, column, 0);
+            }
+
+        }
     }
 
     public void Set(int i_Row, int i_Column, int value)

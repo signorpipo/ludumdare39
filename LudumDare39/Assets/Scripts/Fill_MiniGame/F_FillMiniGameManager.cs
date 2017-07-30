@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class F_FillMiniGameManager : MonoBehaviour {
+public class F_FillMiniGameManager : AbstarcMinigameManager {
 
     [System.Serializable]
     public struct NamedPluggable
@@ -38,9 +38,13 @@ public class F_FillMiniGameManager : MonoBehaviour {
 
     [SerializeField]
     private bool m_Restart;
+    [SerializeField]
+    private float[] m_StartInput;
 
     private Dictionary<string, F_Pluggable>[] m_PrefabPluggablesDictionary;
-    private int m_StartEndSeconds = 3;
+    private int m_StartSeconds = 2;
+    private int m_EndSeconds = 2;
+    private int m_Seconds = 2;
     private int m_ToDock;
     private float m_CellSize = 1;
 
@@ -81,16 +85,14 @@ public class F_FillMiniGameManager : MonoBehaviour {
     {
         if (m_Restart)
         {
-            m_Restart = false;
-            StartGame(0,0,0,0);
+            StartMinigame((int)m_StartInput[0], m_StartInput[1], m_StartInput[2], m_StartInput[3]);
         }
     }
 
-
-
-
-    public void StartGame(float i_PhysicsValue, float i_MoneyValue, float i_SocialValue, int i_Kind)
+    public override void StartMinigame(int i_Kind, float i_PhysicsValue, float i_MoneyValue, float i_SocialValue)
     {
+        m_Restart = false;
+
         m_PhysicsValue = i_PhysicsValue;
         m_MoneyValue = i_MoneyValue;
         m_SocialValue = i_SocialValue;
@@ -108,47 +110,47 @@ public class F_FillMiniGameManager : MonoBehaviour {
             case 0:
                 if (m_PhysicsValue < 0.35f)
                 {
-                    m_StartEndSeconds = 7;
+                    m_Seconds = 7;
                 }
                 else if (m_PhysicsValue < 0.7f)
                 {
-                    m_StartEndSeconds = 13;
+                    m_Seconds = 13;
                 }
                 else
                 {
-                    m_StartEndSeconds = 17;
+                    m_Seconds = 17;
                 }
                 break;
             case 1:
                 if (m_PhysicsValue < 0.35f)
                 {
-                    m_StartEndSeconds = 7;
+                    m_Seconds = 7;
                 }
                 else if (m_PhysicsValue < 0.7f)
                 {
-                    m_StartEndSeconds = 13;
+                    m_Seconds = 13;
                 }
                 else
                 {
-                    m_StartEndSeconds = 17;
+                    m_Seconds = 17;
                 }
                 break;
             case 2:
-                if (m_PhysicsValue < 0.35f)
+                if (m_SocialValue < 0.35f)
                 {
-                    m_StartEndSeconds = 7;
+                    m_Seconds = 7;
                 }
-                else if (m_PhysicsValue < 0.7f)
+                else if (m_SocialValue < 0.7f)
                 {
-                    m_StartEndSeconds = 13;
+                    m_Seconds = 13;
                 }
                 else
                 {
-                    m_StartEndSeconds = 17;
+                    m_Seconds = 17;
                 }
                 break;
         }
-        m_Timer.StartTimer(OnStartTimerEnd, OnFailure, "Fill the bag!", m_StartEndSeconds, "Times Up!!", 15);
+        m_Timer.StartTimer(OnStartTimerEnd, OnFailure, "Fill the bag!", m_StartSeconds, "Times Up!!", m_Seconds);
 
     }
 
@@ -253,9 +255,9 @@ public class F_FillMiniGameManager : MonoBehaviour {
 
     IEnumerator LoadNextScene(bool i_Success)
     {
-        yield return new WaitForSeconds(m_StartEndSeconds);
+        yield return new WaitForSeconds(m_EndSeconds);
 
-        SceneEnd((i_Success) ? 1 : 0);
+        SceneEnded((i_Success) ? 1 : 0);
     }
 
     private void OnStartTimerEnd()
@@ -375,47 +377,220 @@ public class F_FillMiniGameManager : MonoBehaviour {
 
     private F_Matrix Physics1Grid()
     {
-        return FakeGrid();
+        F_Matrix grid = new F_Matrix(5, 6);
+
+        for (int row = 0; row < grid.Rows(); ++row)
+        {
+            for (int column = 1; column < grid.Columns()-1; ++column)
+            {
+                grid.Set(row, column, 1);
+            }
+
+        }
+
+        grid.Set(1, 0, 1);
+        grid.Set(2, 0, 1);
+        grid.Set(3, 0, 1);
+
+        grid.Set(1, 5, 1);
+        grid.Set(2, 5, 1);
+        grid.Set(3, 5, 1);
+
+        return grid;
+
     }
 
     private F_Matrix Physics2Grid()
     {
-        return new F_Matrix(4, 8);
+        F_Matrix grid = new F_Matrix(6, 5);
+
+        for (int row = 0; row < 3; ++row)
+        {
+            for (int column = 0; column < 3; ++column)
+            {
+                grid.Set(row, column, 1);
+            }
+
+        }
+
+        for (int row = 3; row < 6; ++row)
+        {
+            for (int column = 2; column < 5; ++column)
+            {
+                grid.Set(row, column, 1);
+            }
+
+        }
+
+        return grid;
     }
 
     private F_Matrix Physics3Grid()
     {
-        return new F_Matrix(4, 8);
+        F_Matrix grid = new F_Matrix(8, 6);
+
+        grid.Set(0,2, 1);
+
+        grid.Set(1, 2, 1);
+        grid.Set(1, 3, 1);
+        grid.Set(1, 4, 1);
+
+        grid.Set(2, 0, 1);
+
+        grid.Set(3, 0, 1);
+        grid.Set(3, 3, 1);
+        grid.Set(3, 4, 1);
+
+        grid.Set(4, 0, 1);
+        grid.Set(4, 1, 1);
+        grid.Set(4, 4, 1);
+        grid.Set(4, 5, 1);
+
+        grid.Set(6, 1, 1);
+        grid.Set(6, 2, 1);
+        grid.Set(6, 3, 1);
+
+        grid.Set(7, 3, 1);
+
+
+        return grid;
     }
 
     private F_Matrix Money1Grid()
     {
-        return new F_Matrix(4, 8);
+        F_Matrix grid = new F_Matrix(5, 5);
+
+        for (int row = 0; row < grid.Rows(); ++row)
+        {
+            for (int column = 0; column < grid.Columns(); ++column)
+            {
+                grid.Set(row, column, 1);
+            }
+
+        }
+
+        grid.Set(grid.Rows() - 1, 0, 0);
+        grid.Set(0, grid.Columns()-1, 0);
+
+        return grid;
     }
 
     private F_Matrix Money2Grid()
     {
-        return new F_Matrix(4, 8);
+        F_Matrix grid = new F_Matrix(6, 6);
+
+        for (int row = 0; row < 6; ++row)
+        {
+            grid.Set(row, 2, 1);
+            grid.Set(row, 3, 1);
+
+        }
+
+        for (int column = 0; column < 6; ++column)
+        {
+            grid.Set(2, column, 1);
+            grid.Set(3, column, 1);
+
+        }
+
+        return grid;
     }
 
     private F_Matrix Money3Grid()
     {
-        return new F_Matrix(4, 8);
+        F_Matrix grid = new F_Matrix(7, 7);
+
+        grid.Set(0, 4, 1);
+
+        grid.Set(1, 2, 1);
+        grid.Set(1, 3, 1);
+        grid.Set(1, 4, 1);
+
+        grid.Set(2, 0, 1);
+        grid.Set(2, 1, 1);
+        grid.Set(2, 5, 1);
+
+        grid.Set(3, 1, 1);
+        grid.Set(3, 5, 1);
+
+        grid.Set(4, 1, 1);
+        grid.Set(4, 5, 1);
+        grid.Set(4, 6, 1);
+
+        grid.Set(5, 2, 1);
+        grid.Set(5, 3, 1);
+        grid.Set(5, 4, 1);
+
+        grid.Set(6, 2, 1);
+
+
+        return grid;
     }
 
     private F_Matrix Social1Grid()
     {
-        return new F_Matrix(4, 8);
+        F_Matrix grid = new F_Matrix(5, 5);
+
+        for (int row = 0; row < grid.Rows(); ++row)
+        {
+            for (int column = 0; column < grid.Columns(); ++column)
+            {
+                grid.Set(row, column, 1);
+            }
+
+        }
+
+        grid.Set(2, 2, 0);
+
+        return grid;
     }
 
     private F_Matrix Social2Grid()
     {
-        return new F_Matrix(4, 8);
+        F_Matrix grid = new F_Matrix(5, 6);
+
+        for (int row = 0; row < 5; ++row)
+        {
+            grid.Set(row, 2, 1);
+            grid.Set(row, 3, 1);
+
+        }
+
+        for (int column = 0; column < 6; ++column)
+        {
+            grid.Set(0, column, 1);
+            grid.Set(1, column, 1);
+
+        }
+
+        return grid;
     }
 
     private F_Matrix Social3Grid()
     {
-        return new F_Matrix(4, 8);
+        F_Matrix grid = new F_Matrix(4,7);
+
+        grid.Set(0, 0, 1);
+        grid.Set(0, 3, 1);
+        grid.Set(0, 6, 1);
+
+        grid.Set(1, 0, 1);
+        grid.Set(1, 2, 1);
+        grid.Set(1, 3, 1);
+        grid.Set(1, 4, 1);
+        grid.Set(1, 6, 1);
+
+        grid.Set(2, 0, 1);
+        grid.Set(2, 1, 1);
+        grid.Set(2, 2, 1);
+        grid.Set(2, 3, 1);
+        grid.Set(2, 4, 1);
+        grid.Set(2, 5, 1);
+        grid.Set(2, 6, 1);
+
+        grid.Set(3, 3, 1);
+
+        return grid;
     }
 
 
@@ -431,7 +606,7 @@ public class F_FillMiniGameManager : MonoBehaviour {
         pluggableObject.transform.position = new Vector3(7.2f, 0, 1);
         pluggables[1] = pluggableObject.GetComponent<F_Pluggable>();
 
-        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_PPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_TPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
         pluggableObject.transform.position = new Vector3(4.6f, 0, 1);
         pluggables[2] = pluggableObject.GetComponent<F_Pluggable>();
 
@@ -534,46 +709,4 @@ public class F_FillMiniGameManager : MonoBehaviour {
         m_GrabManager.Initialize(pluggables);
         m_ToDock = pluggables.GetLength(0);
     }
-
-    private F_Matrix FakeGrid()
-    {
-
-        F_Matrix fakeGrid = new F_Matrix(4, 8);
-        fakeGrid.Set(0, 0, 1);
-        fakeGrid.Set(1, 0, 0);
-        fakeGrid.Set(2, 0, 1);
-        fakeGrid.Set(3, 0, 1);
-        fakeGrid.Set(0, 1, 1);
-        fakeGrid.Set(1, 1, 1);
-        fakeGrid.Set(2, 1, 1);
-        fakeGrid.Set(3, 1, 0);
-        fakeGrid.Set(0, 2, 1);
-        fakeGrid.Set(1, 2, 1);
-        fakeGrid.Set(2, 2, 1);
-        fakeGrid.Set(3, 2, 0);
-        fakeGrid.Set(0, 3, 1);
-        fakeGrid.Set(1, 3, 1);
-        fakeGrid.Set(2, 3, 1);
-        fakeGrid.Set(3, 3, 1);
-        fakeGrid.Set(0, 4, 1);
-        fakeGrid.Set(1, 4, 1);
-        fakeGrid.Set(2, 4, 1);
-        fakeGrid.Set(3, 4, 1);
-        fakeGrid.Set(0, 5, 1);
-        fakeGrid.Set(1, 5, 0);
-        fakeGrid.Set(2, 5, 1);
-        fakeGrid.Set(3, 5, 1);
-        fakeGrid.Set(0, 6, 1);
-        fakeGrid.Set(1, 6, 1);
-        fakeGrid.Set(2, 6, 1);
-        fakeGrid.Set(3, 6, 1);
-        fakeGrid.Set(0, 7, 0);
-        fakeGrid.Set(1, 7, 0);
-        fakeGrid.Set(2, 7, 0);
-        fakeGrid.Set(3, 7, 1);
-
-        return fakeGrid;
-    }
-
-
 }

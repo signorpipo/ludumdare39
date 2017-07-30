@@ -534,3 +534,8 @@ MonoBehaviour:
   m_PrefabTimer: {fileID: 114319255096026534, guid: 5cc9c071635050741befcc9acf6e5eab,
     type: 2}
   m_Restart: 1
+  m_StartInput:
+  - 0
+  - 1
+  - 1
+  - 1
