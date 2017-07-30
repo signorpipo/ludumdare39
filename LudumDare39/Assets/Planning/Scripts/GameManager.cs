@@ -87,18 +87,42 @@ public class GameManager : MonoBehaviour
     public void ClearSelectedMinigames()
     {
         m_selectedMinigames.Clear();
+        count = 0;
     }
 
     /// <summary>
     /// Load next scene from scene load manager class
     /// </summary>
-    public void LoadNextSceneAndUpdateStats(bool hasWon)
+    public void LoadNextSceneAndUpdateStats(float resultMutator)
     {
-        if (hasWon)
+        if (resultMutator > 0)
         {
-            m_currentPsychophysicsValue = Mathf.Clamp(m_currentPsychophysicsValue + m_selectedMinigames[count].GetPsychophysicsOutputValue(), 0.0f, 100.0f);
-            m_currentMoneyValue = Mathf.Clamp(m_currentMoneyValue + m_selectedMinigames[count].GetMoneyOutputValue(), 0.0f, 100.0f);
-            m_currentSocialValue = Mathf.Clamp(m_currentSocialValue + m_selectedMinigames[count].GetMoneyOutputValue(), 0.0f, 100.0f);
+            if (m_selectedMinigames[count].GetPsychophysicsOutputValue() >= 0)
+            {
+                m_currentPsychophysicsValue = Mathf.Clamp(m_currentPsychophysicsValue + m_selectedMinigames[count].GetPsychophysicsOutputValue() * resultMutator, 0.0f, 100.0f);
+            }
+            else
+            {
+                m_currentPsychophysicsValue = Mathf.Clamp(m_currentPsychophysicsValue + m_selectedMinigames[count].GetPsychophysicsOutputValue(), 0.0f, 100.0f);
+            }
+
+            if (m_selectedMinigames[count].GetMoneyOutputValue() >= 0)
+            {
+                m_currentMoneyValue = Mathf.Clamp(m_currentMoneyValue + m_selectedMinigames[count].GetMoneyOutputValue() * resultMutator, 0.0f, 100.0f);
+            }
+            else
+            {
+                m_currentMoneyValue = Mathf.Clamp(m_currentMoneyValue + m_selectedMinigames[count].GetMoneyOutputValue(), 0.0f, 100.0f);
+            }
+
+            if (m_selectedMinigames[count].GetMoneyOutputValue() >= 0)
+            {
+                m_currentSocialValue = Mathf.Clamp(m_currentSocialValue + m_selectedMinigames[count].GetMoneyOutputValue() * resultMutator, 0.0f, 100.0f);
+            }
+            else
+            {
+                m_currentSocialValue = Mathf.Clamp(m_currentSocialValue + m_selectedMinigames[count].GetMoneyOutputValue(), 0.0f, 100.0f);
+            }
         }
         else
         {

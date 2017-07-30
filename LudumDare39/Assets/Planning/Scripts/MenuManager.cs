@@ -69,11 +69,6 @@ public class MenuManager : MonoBehaviour
             // invoca metodo da SceneLoader del tipo LoadScenes(scene1, scene2, scene3);
     }
 
-    void Update()
-    {
-
-    }
-
     public List<MinigameInterface> GetSelectedMinigamesList()
     {
         return m_seletedMinigames;
