@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public class F_GrabManager : MonoBehaviour {
     private F_Pluggable m_Grabbed;
 
     private bool m_SkipFirst;
+    private bool m_Enabled;
 
     public void Initialize(F_Pluggable[] i_Grabbables)
     {
@@ -21,11 +23,12 @@ public class F_GrabManager : MonoBehaviour {
         {
             grabbable.OnClickEvent += GrabObject;
         }
+        m_Enabled = true;
     }
 
     private void Update()
     {
-        if(m_Grabbed != null)
+        if(m_Grabbed != null && m_Enabled)
         {
             if (m_SkipFirst)
             {
@@ -58,6 +61,11 @@ public class F_GrabManager : MonoBehaviour {
         }
     }
 
+    public void DisableInput()
+    {
+        m_Enabled = false;
+    }
+
     public void ReleaseGrabbed(bool i_ToInitial)
     {
         if (i_ToInitial)
@@ -70,11 +78,21 @@ public class F_GrabManager : MonoBehaviour {
 
     public void GrabObject(F_Pluggable i_ToGrab)
     {
-        if(m_Grabbed == null)
+        if(!IsGrabbing())
         {
             m_Grabbed = i_ToGrab;
             m_SkipFirst = true;
         }
+    }
+
+    public bool IsGrabbing()
+    {
+        return m_Grabbed != null;
+    }
+
+    public F_Pluggable GetGrabbed()
+    {
+        return m_Grabbed;
     }
 
 }

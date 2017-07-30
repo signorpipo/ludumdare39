@@ -11,6 +11,7 @@ public class F_GridManager : MonoBehaviour {
     private float m_CellSize;
     private Vector2 m_TopLeft;
     private F_Matrix m_Grid;
+    private F_GrabManager m_GrabManager;
 
     private int m_Docked;
 
@@ -142,25 +143,29 @@ public class F_GridManager : MonoBehaviour {
         }
     }
 
-    public void Initialize(F_Matrix i_Grid, float i_CellSize, LineRenderer i_PrefabGridLine, SpriteRenderer i_PrefabCellBackground)
+    public void Initialize(F_Matrix i_Grid, float i_CellSize, LineRenderer i_PrefabGridLine, SpriteRenderer i_PrefabCellBackground, F_GrabManager i_GrabManager)
     {
         m_Grid = i_Grid;
         m_CellSize = i_CellSize;
         m_PrefabGridLine = i_PrefabGridLine;
         m_Docked = 0;
         m_PrefabCellBackground = i_PrefabCellBackground;
+        m_GrabManager = i_GrabManager;
 
         CreateGrid();
     }
 
     public void RemoveFromGrid(F_Pluggable i_ToRemove)
     {
-        i_ToRemove.OnClickEvent -= RemoveFromGrid;
-        --m_Docked;
-        Rect gridRect = GetRect();
-        Rect pluggableRect = i_ToRemove.GetRect();
-        Vector2 topLeftInGrid = GetTopLeftInGrid(gridRect, pluggableRect);
-        FreeGrid(topLeftInGrid, i_ToRemove.GetGrid());
+        if (!m_GrabManager.IsGrabbing() || i_ToRemove == m_GrabManager.GetGrabbed())
+        {
+            i_ToRemove.OnClickEvent -= RemoveFromGrid;
+            --m_Docked;
+            Rect gridRect = GetRect();
+            Rect pluggableRect = i_ToRemove.GetRect();
+            Vector2 topLeftInGrid = GetTopLeftInGrid(gridRect, pluggableRect);
+            FreeGrid(topLeftInGrid, i_ToRemove.GetGrid());
+        }
 
     }
 

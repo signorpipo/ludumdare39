@@ -14,6 +14,8 @@ public class F_FillMiniGameManager : MonoBehaviour {
 
     public NamedPluggable[] m_PrefabPluggables;
 
+    public Canvas m_WinCanvas;
+
     public LineRenderer m_PrefabGridLine;
     public SpriteRenderer m_PrefabCellBackground;
 
@@ -50,7 +52,9 @@ public class F_FillMiniGameManager : MonoBehaviour {
             m_GrabManager.ReleaseGrabbed(false);
             if(m_GridManager.GetDocked() == m_ToDock)
             {
-                Debug.Log("WIN");
+                m_GrabManager.DisableInput();
+                m_WinCanvas.gameObject.SetActive(true);
+                StartCoroutine(LoadNextScene());
             }
         }
     }
@@ -63,7 +67,7 @@ public class F_FillMiniGameManager : MonoBehaviour {
 
     private void LoadGrid()
     {
-        m_GridManager.Initialize(FakeGrid(), 1, m_PrefabGridLine, m_PrefabCellBackground);
+        m_GridManager.Initialize(FakeGrid(), 1, m_PrefabGridLine, m_PrefabCellBackground, m_GrabManager);
     }
 
     private void LoadGrab()
@@ -79,7 +83,7 @@ public class F_FillMiniGameManager : MonoBehaviour {
         pluggables[1] = pluggableObject.GetComponent<F_Pluggable>();
 
         pluggableObject = Instantiate(m_PrefabPluggablesDictionary["F_PPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
-        pluggableObject.transform.position = new Vector3(5.1f, 0, 1);
+        pluggableObject.transform.position = new Vector3(4.6f, 0, 1);
         pluggables[2] = pluggableObject.GetComponent<F_Pluggable>();
 
         m_GrabManager.Initialize(pluggables);
@@ -125,6 +129,13 @@ public class F_FillMiniGameManager : MonoBehaviour {
         fakeGrid.Set(3, 7, 1);
 
         return fakeGrid;
+    }
+
+    IEnumerator LoadNextScene()
+    {
+        yield return new WaitForSeconds(3);
+
+        m_WinCanvas.gameObject.SetActive(false);
     }
 
 }
