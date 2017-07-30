@@ -33,7 +33,7 @@ public class StatsCalculator : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        SetStatiSliders();
+        SetStaticSliders();
     }
 
     public void UpdateSliders(float psychophysicsValue, float moneyValue, float socialValue)
@@ -43,21 +43,19 @@ public class StatsCalculator : MonoBehaviour
         m_rightSliderFront.value += socialValue;
     }
 
-    public void SetStatiSliders()
+    public void SetStaticSliders()
     {
-        m_leftSliderBack.value = m_gameManager.m_currentPsychophysicsValue;
-        m_middleSliderBack.value = m_gameManager.m_currentMoneyValue;
-        m_rightSliderBack.value = m_gameManager.m_currentSocialValue;
+        m_leftSliderBack.value = m_gameManager.CurrentPsychophysicsValue;
+        m_middleSliderBack.value = m_gameManager.CurrentMoneyValue;
+        m_rightSliderBack.value = m_gameManager.CurrentSocialValue;
 
-        m_leftSliderFront.value = m_gameManager.m_currentPsychophysicsValue;
-        m_middleSliderFront.value = m_gameManager.m_currentMoneyValue;
-        m_rightSliderFront.value = m_gameManager.m_currentSocialValue;
+        ResetSliders();
     }
 
     public void ResetSliders()
     {
-        m_leftSliderFront.value = m_gameManager.m_currentPsychophysicsValue;
-        m_middleSliderFront.value = m_gameManager.m_currentMoneyValue;
-        m_rightSliderFront.value = m_gameManager.m_currentSocialValue;
+        m_leftSliderFront.value = m_gameManager.CurrentPsychophysicsValue;
+        m_middleSliderFront.value = m_gameManager.CurrentMoneyValue;
+        m_rightSliderFront.value = m_gameManager.CurrentSocialValue;
     }
 }
