@@ -18,11 +18,15 @@ public class InputManager : MonoBehaviour {
     private float mGameTime = 0;
     private int mCurrState = 0;
 
+    private Animator mAnimator = null;
+
 	// Use this for initialization
 	void Start () {
         successBarSlider.value = 0;
         mGameTime = GameTotalTime;
         mKeyTimer = 0;
+
+        mAnimator = GetComponentInParent<Animator>();
     }
 	
 	// Update is called once per frame
@@ -72,10 +76,13 @@ public class InputManager : MonoBehaviour {
         }
 
         mGameTime -= Time.deltaTime;
-        gameTimeBarSlider.value = mGameTime / GameTotalTime;
-        if (gameTimeBarSlider.value <= 0.0f)
+        if (mGameTime <= 0.0f)
         {
-
+            mAnimator.SetTrigger("GameOver");
+        }
+        else
+        {
+            gameTimeBarSlider.value = mGameTime / GameTotalTime;
         }
     }
 }
