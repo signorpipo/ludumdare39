@@ -151,6 +151,7 @@ public class GameManager : Singleton<GameManager>
         {
             ClearSelectedMinigames();
             m_weekDaysCounter++;
+            EndGameCondition();
         }
         else
         {
@@ -159,8 +160,15 @@ public class GameManager : Singleton<GameManager>
 
         m_sceneLoaderManager.LoadNextScene();
     }
-}
 
+    private void EndGameCondition()
+    {
+        if (m_weekDaysCounter >= 5 || m_currentPsychophysicsValue <= 0 || m_currentMoneyValue <= 0 || m_currentSocialValue <= 0)
+        {
+            SceneManager.LoadScene("EndScene");
+        }
+    }
+}
 
 
 /*public void StartGame()

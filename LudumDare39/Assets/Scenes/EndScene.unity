@@ -207,6 +207,7 @@ GameObject:
   - component: {fileID: 37470443}
   - component: {fileID: 37470445}
   - component: {fileID: 37470444}
+  - component: {fileID: 37470446}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -271,6 +272,21 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 37470442}
+--- !u!114 &37470446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 37470442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1e9717f067b87f49bc9abf2a95a6f22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_loseText: You are too weak to do anything!\nYou die at home!
+  m_highPsychophysicsText: Now you have two huge biceps!\nEveryone will stare at you!
+  m_highMoneyText: You now own three yacht and a spider!\nAnd also a personal Chef
+  m_highSocialText: SEX!! a lot of Sex!
 --- !u!1 &1200819021
 GameObject:
   m_ObjectHideFlags: 0

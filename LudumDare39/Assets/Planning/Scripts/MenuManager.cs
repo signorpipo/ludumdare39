@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-    [Header("Minigames Settings")]
+	[Header("Minigames Settings")]
 
 	[SerializeField]
 	private List<MinigameInterface> m_minigames;
 
-    [SerializeField]
-    private List<DailyProperties> m_weekDaysMap;
+	[SerializeField]
+	private List<DailyProperties> m_weekDaysMap;
 
 	private int m_numberOfSelectedGames = 3;
 
@@ -54,35 +54,35 @@ public class MenuManager : MonoBehaviour
 			m_middlePanels[i].GetComponent<Slot>().onTrashedSon += UpdateSelectedMinigames;
 		}
 
-        GameManager gameManager = GameManager.Instance;
-        gameManager.SetWeekDays(m_weekDaysMap);
-    }
+		GameManager gameManager = GameManager.Instance;
+		gameManager.SetWeekDays(m_weekDaysMap);
+	}
 
-    //void OnDisable()
-    //{
-    //	for (int i = 0; i < m_middlePanels.Count; ++i)
-    //	{
-    //		m_middlePanels[i].GetComponent<Slot>().onNewSon -= UpdateSelectedMinigames;
-    //		m_middlePanels[i].GetComponent<Slot>().onTrashedSon -= UpdateSelectedMinigames;
-    //	}
-    //}
+	//void OnDisable()
+	//{
+	//	for (int i = 0; i < m_middlePanels.Count; ++i)
+	//	{
+	//		m_middlePanels[i].GetComponent<Slot>().onNewSon -= UpdateSelectedMinigames;
+	//		m_middlePanels[i].GetComponent<Slot>().onTrashedSon -= UpdateSelectedMinigames;
+	//	}
+	//}
 
 
-    public void StartGame()
-    {
-        if (3 == m_seletedMinigames.Count)
-        {
-            GameManager gameManager = GameManager.Instance;
-            gameManager.SetSelectedMiniGames(m_seletedMinigames);
-            gameManager.StartGame();
-        }
-        else
-        {
-            Debug.Log("Gesù è l'unico e vero Signore");
-        }
-    }
+	public void StartGame()
+	{
+		if (3 == m_seletedMinigames.Count)
+		{
+			GameManager gameManager = GameManager.Instance;
+			gameManager.SetSelectedMiniGames(m_seletedMinigames);
+			gameManager.StartGame();
+		}
+		else
+		{
+			Debug.Log("Gesù è l'unico e vero Signore");
+		}
+	}
 
-    public List<MinigameInterface> GetSelectedMinigamesList()
+	public List<MinigameInterface> GetSelectedMinigamesList()
 	{
 		return m_seletedMinigames;
 	}
