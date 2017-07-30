@@ -21,7 +21,7 @@ public class LetterFall : MonoBehaviour {
 
     public void FixedUpdate()
     {
-        if (gameObject.transform.position.y < (Camera.main.orthographicSize*1.2f)*-1.0f)
+        if (gameObject.transform.position.y < (Camera.main.orthographicSize*1.1f)*-1.0f)
         {
             if (onLetterPass != null)
             {
