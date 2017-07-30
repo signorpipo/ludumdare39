@@ -28,7 +28,6 @@ public class F_Timer : MonoBehaviour
 
     public void StartTimer(F_TimesUpEvent i_OnGameStart, F_TimesUpEvent i_OnTimesUp, string i_StartMessage, int i_GameStartSeconds, string i_TimesUpMessage, int i_TimerSeconds)
     {
-
         OnGameStart += i_OnGameStart;
         OnTimesUp += i_OnTimesUp;
         m_StartMessage = i_StartMessage;
@@ -107,8 +106,10 @@ public class F_Timer : MonoBehaviour
             m_ElapsedTime = 0.0f;
         }
     }
-
-
-
+    
+    public int GetSecondsLeft()
+    {
+        return m_Seconds;
+    }
 
 }
