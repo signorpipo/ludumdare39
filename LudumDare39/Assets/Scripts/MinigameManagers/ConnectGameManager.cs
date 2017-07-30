@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ConnectGameManager : MinigameManager
 {
     public RectTransform LeftPanel;
-    public RectTransform Rightpanel;
+    public RectTransform RightPanel;
 
     public List<Sprite> GameItems;
 
@@ -16,12 +16,20 @@ public class ConnectGameManager : MinigameManager
 
     // Use this for initialization
     public override void Start () {
-        float deltaHeight = LeftPanel.GetComponent<RectTransform>().sizeDelta.y;
+        float deltaHeight = LeftPanel.rect.height / NumGameItems;
         for (int i =0; i<NumGameItems; ++i)
         {
-            MonoBehaviour itm = Instantiate(ItemPrefab, LeftPanel);
-            itm.GetComponent<Image>().sprite = GameItems[(int)(Random.value * GameItems.Count) % GameItems.Count];
-            //itm.GetComponent<RectTransform>().SetPositionAndRotation(Vector3.up * deltaHeight, Quaternion.identity);
+            int spriteIdx = (int)(Random.value * GameItems.Count) % GameItems.Count;
+            float spriteScale = LeftPanel.rect.width / GameItems[0].rect.width;
+            MonoBehaviour lItm = Instantiate(ItemPrefab, LeftPanel);
+            lItm.GetComponent<Image>().sprite = GameItems[spriteIdx];
+            lItm.transform.localPosition = Vector3.up * (deltaHeight * i - LeftPanel.rect.height * 0.5f);
+            lItm.transform.localScale = Vector3.one * spriteScale;
+
+            MonoBehaviour rItm = Instantiate(ItemPrefab, RightPanel);
+            rItm.GetComponent<Image>().sprite = GameItems[spriteIdx];
+            rItm.transform.localPosition = Vector3.up * (deltaHeight * i - LeftPanel.rect.height * 0.5f);
+            rItm.transform.localScale = Vector3.one * spriteScale;
         }
 
         base.Start();
