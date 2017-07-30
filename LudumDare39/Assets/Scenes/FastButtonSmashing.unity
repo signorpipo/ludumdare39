@@ -1108,7 +1108,7 @@ MonoBehaviour:
   successBarSlider: {fileID: 904967684}
   LeftKey: 97
   RightKey: 108
-  PositiveMult: 0.3
+  PositiveMult: 0.6
   NegativeMult: 0.1
   KeyTimer: 0.08
 --- !u!1 &2041039287

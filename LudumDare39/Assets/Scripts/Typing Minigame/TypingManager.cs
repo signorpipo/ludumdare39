@@ -73,7 +73,7 @@ public class TypingManager : AbstarcMinigameManager
     }
 
     //for testing alone
-   /* void Start()
+    void Start()
     {
         Camera camera = FindObjectOfType<Camera>();
         newCanvas = Instantiate(canvas);
@@ -106,7 +106,7 @@ public class TypingManager : AbstarcMinigameManager
             letterFalling.SetActive(false);
             letterFallPool.Enqueue(letterFalling);
         }
-    }*/
+    }
     
     public void Update()
     {
