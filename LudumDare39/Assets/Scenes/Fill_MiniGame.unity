@@ -239,8 +239,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PrefabPluggables:
-  - m_Name: ZPiece
-    m_Pluggable: {fileID: 114162972732865040, guid: 2c7b3a1cbbadfd34baccbd3e2a143dbc,
+  - m_Name: F_ZPiece
+    m_Pluggable: {fileID: 114406544642811986, guid: 2c7b3a1cbbadfd34baccbd3e2a143dbc,
+      type: 2}
+  - m_Name: F_OPiece
+    m_Pluggable: {fileID: 114499581284162026, guid: 8c90cfbc91ad0b447b457cf372a60555,
+      type: 2}
+  - m_Name: F_PPiece
+    m_Pluggable: {fileID: 114959081729453384, guid: a7075db3588aca3408cbdeb9003f8b51,
       type: 2}
   m_PrefabGridLine: {fileID: 120697323196621642, guid: cbfdccf27b04341478711ea78597603e,
+    type: 2}
+  m_PrefabCellBackground: {fileID: 212510848807690234, guid: 698d7d1aadc7c944aaf95d33d02223a5,
     type: 2}

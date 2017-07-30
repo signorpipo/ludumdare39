@@ -11,11 +11,11 @@ public class F_Test : MonoBehaviour {
     private void TestMatrix()
     {
         F_Matrix matrix = new F_Matrix(5, 3);
-        for(int i = 0; i < 4; ++i)
+        for(int i = 0; i < 5; ++i)
         {
-            for (int j = 0; j < 2; ++j)
+            for (int j = 0; j < 3; ++j)
             {
-                matrix.Set(i, j, i + j);
+                matrix.Set(i, j, i + j+1);
             }
 
         }

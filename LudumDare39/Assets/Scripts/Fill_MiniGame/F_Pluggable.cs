@@ -60,20 +60,20 @@ public class F_Pluggable : MonoBehaviour
 
     public void Dock(Vector2 i_TopLeft)
     {
-        int xOffset = (m_Grid.Columns() * m_CellSize) / 2;
-        int yOffset = (m_Grid.Rows() * m_CellSize) / 2;
+        float xOffset = (m_Grid.Columns() * m_CellSize) / 2.0f;
+        float yOffset = (m_Grid.Rows() * m_CellSize) / 2.0f;
 
-        Vector3 newPosition = new Vector3(i_TopLeft.x, i_TopLeft.y, 0);
+        Vector3 newPosition = new Vector3(i_TopLeft.x, i_TopLeft.y, 1);
 
         if (m_Direction == F_Direction.UP || m_Direction == F_Direction.DOWN)
         {
             newPosition.x += xOffset;
-            newPosition.y += yOffset;
+            newPosition.y -= yOffset;
         }
         else
         {
             newPosition.x += yOffset;
-            newPosition.y += xOffset;
+            newPosition.y -= xOffset;
         }
 
         gameObject.transform.position = newPosition;
@@ -87,25 +87,36 @@ public class F_Pluggable : MonoBehaviour
 
     }
 
-    public Vector2 GetTopLeft()
+    public Rect GetRect()
     {
         Vector2 position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
 
-        int xOffset = (m_Grid.Columns() * m_CellSize) / 2;
-        int yOffset = (m_Grid.Rows() * m_CellSize) / 2;
+        float xOffset = (m_Grid.Columns() * m_CellSize) / 2.0f;
+        float yOffset = (m_Grid.Rows() * m_CellSize) / 2.0f;
+
+        Rect objectRect = new Rect();
 
         if (m_Direction == F_Direction.UP || m_Direction == F_Direction.DOWN)
         {
             position.x -= xOffset;
-            position.y -= yOffset;
+            position.y += yOffset;
+
+            objectRect.width = m_Grid.Columns() * m_CellSize;
+            objectRect.height = m_Grid.Rows() * m_CellSize;
         }
         else
         {
             position.x -= yOffset;
-            position.y -= xOffset;
+            position.y += xOffset;
+
+            objectRect.height = m_Grid.Columns() * m_CellSize;
+            objectRect.width = m_Grid.Rows() * m_CellSize;
         }
 
-        return position;
+        objectRect.x = position.x;
+        objectRect.y = position.y;
+
+        return objectRect;
     }
 
     public F_Matrix GetGrid()

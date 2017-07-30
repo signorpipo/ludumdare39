@@ -46,7 +46,7 @@ public struct F_Matrix {
                 {
                     for (int column = 0; column < columns; ++column)
                     {
-                        rotatedMatrix.Set(row, column, Get(rows-1-row, column));
+                        rotatedMatrix.Set(row, column, Get(rows-1-row, columns -1 -column));
                     }
 
                 }

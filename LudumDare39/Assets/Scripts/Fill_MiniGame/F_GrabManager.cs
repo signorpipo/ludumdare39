@@ -40,7 +40,7 @@ public class F_GrabManager : MonoBehaviour {
             }
             else if (Input.GetMouseButtonDown(1))
             {
-                ReleaseGrabbed();
+                ReleaseGrabbed(true);
             }
             else if (Input.GetAxis("Mouse ScrollWheel") > 0f)
             {
@@ -53,14 +53,18 @@ public class F_GrabManager : MonoBehaviour {
             else
             {
                 Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                m_Grabbed.gameObject.transform.position = new Vector3(mousePosition.x, mousePosition.y, 1);
+                m_Grabbed.gameObject.transform.position = new Vector3(mousePosition.x, mousePosition.y, 0.9f);
             }
         }
     }
 
-    public void ReleaseGrabbed()
+    public void ReleaseGrabbed(bool i_ToInitial)
     {
-        m_Grabbed.GoToInitial();
+        if (i_ToInitial)
+        {
+            m_Grabbed.GoToInitial();
+        }
+        m_Grabbed.transform.position = new Vector3(m_Grabbed.transform.position.x, m_Grabbed.transform.position.y, 1);
         m_Grabbed = null;
     }
 
