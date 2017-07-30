@@ -105,8 +105,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MatrixGrid:
-  - m_Array: 000000000100000001000000
   - m_Array: 010000000100000000000000
+  - m_Array: 000000000100000001000000
   m_CellSize: 1
 --- !u!212 &212475585404220624
 SpriteRenderer:

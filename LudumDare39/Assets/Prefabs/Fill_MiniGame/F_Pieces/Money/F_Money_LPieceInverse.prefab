@@ -91,7 +91,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.9751755, y: 1.0200701}
+  m_Size: {x: 1.9751756, y: 1.0200701}
   m_EdgeRadius: 0
 --- !u!114 &114414079807319962
 MonoBehaviour:
@@ -105,8 +105,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MatrixGrid:
-  - m_Array: 0100000000000000
-  - m_Array: 0100000000000000
+  - m_Array: 0000000001000000
+  - m_Array: 0000000001000000
   - m_Array: 0100000001000000
   m_CellSize: 1
 --- !u!212 &212766658649586270

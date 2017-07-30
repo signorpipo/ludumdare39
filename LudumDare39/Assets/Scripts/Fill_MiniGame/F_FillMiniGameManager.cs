@@ -40,6 +40,8 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
     private bool m_Restart;
     [SerializeField]
     private float[] m_StartInput;
+    [SerializeField]
+    private int m_Level = -1;
 
     private Dictionary<string, F_Pluggable>[] m_PrefabPluggablesDictionary;
     private int m_StartSeconds = 2;
@@ -122,11 +124,11 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
                 }
                 break;
             case 1:
-                if (m_PhysicsValue < 0.35f)
+                if (m_MoneyValue < 0.35f)
                 {
                     m_Seconds = 7;
                 }
-                else if (m_PhysicsValue < 0.7f)
+                else if (m_MoneyValue < 0.7f)
                 {
                     m_Seconds = 13;
                 }
@@ -150,6 +152,7 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
                 }
                 break;
         }
+
         m_Timer.StartTimer(OnStartTimerEnd, OnFailure, "Fill the bag!", m_StartSeconds, "Times Up!!", m_Seconds);
 
     }
@@ -206,50 +209,89 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
             m_Timer.transform.SetParent(m_LoadedLevel.transform);
         }
 
-        switch (m_Kind)
+        if (m_Level >= 0)
         {
-            case 0:
-                if (m_MoneyValue < 0.35f)
-                {
-                    Load1();
-                }
-                else if (m_MoneyValue < 0.7f)
-                {
-                    Load2();
-                }
-                else
-                {
-                    Load3();
-                }
-                break;
-            case 1:
-                if (m_MoneyValue < 0.35f)
-                {
-                    Load1();
-                }
-                else if (m_MoneyValue < 0.7f)
-                {
-                    Load2();
-                }
-                else
-                {
-                    Load3();
-                }
-                break;
-            case 2:
-                if (m_MoneyValue < 0.35f)
-                {
-                    Load1();
-                }
-                else if (m_MoneyValue < 0.7f)
-                {
-                    Load2();
-                }
-                else
-                {
-                    Load3();
-                }
-                break;
+            switch (m_Level)
+            {
+                case 0:
+                    LoadPhysics1();
+                    break;
+                case 1:
+                    LoadPhysics2();
+                    break;
+                case 2:
+                    LoadPhysics3();
+                    break;
+                case 3:
+                    LoadMoney1();
+                    break;
+                case 4:
+                    LoadMoney2();
+                    break;
+                case 5:
+                    LoadMoney3();
+                    break;
+                case 6:
+                    LoadSocial1();
+                    break;
+                case 7:
+                    LoadSocial2();
+                    break;
+                case 8:
+                    LoadSocial3();
+                    break;
+            }
+
+        }
+        else
+        {
+
+            switch (m_Kind)
+            {
+                case 0:
+                    if (m_MoneyValue < 0.35f)
+                    {
+                        Load1();
+                    }
+                    else if (m_MoneyValue < 0.7f)
+                    {
+                        Load2();
+                    }
+                    else
+                    {
+                        Load3();
+                    }
+                    break;
+                case 1:
+                    if (m_MoneyValue < 0.35f)
+                    {
+                        Load1();
+                    }
+                    else if (m_MoneyValue < 0.7f)
+                    {
+                        Load2();
+                    }
+                    else
+                    {
+                        Load3();
+                    }
+                    break;
+                case 2:
+                    if (m_MoneyValue < 0.35f)
+                    {
+                        Load1();
+                    }
+                    else if (m_MoneyValue < 0.7f)
+                    {
+                        Load2();
+                    }
+                    else
+                    {
+                        Load3();
+                    }
+                    break;
+            }
+
         }
     }
 
@@ -446,9 +488,9 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
         grid.Set(4, 4, 1);
         grid.Set(4, 5, 1);
 
-        grid.Set(6, 1, 1);
         grid.Set(6, 2, 1);
         grid.Set(6, 3, 1);
+        grid.Set(6, 4, 1);
 
         grid.Set(7, 3, 1);
 
@@ -598,16 +640,16 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
     {
         F_Pluggable[] pluggables = new F_Pluggable[3];
 
-        GameObject pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_ZPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
-        pluggableObject.transform.position = new Vector3(3f, 0, 1);
+        GameObject pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_TPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(3.5f, -2, 1);
         pluggables[0] = pluggableObject.GetComponent<F_Pluggable>();
 
-        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_OPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_LPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
         pluggableObject.transform.position = new Vector3(7.2f, 0, 1);
         pluggables[1] = pluggableObject.GetComponent<F_Pluggable>();
 
-        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_TPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
-        pluggableObject.transform.position = new Vector3(4.6f, 0, 1);
+        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_ZPieceInverse"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(3.5f, 2, 1);
         pluggables[2] = pluggableObject.GetComponent<F_Pluggable>();
 
         m_GrabManager.Initialize(pluggables);
@@ -616,11 +658,19 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
 
     private void Physics2Grab()
     {
-        F_Pluggable[] pluggables = new F_Pluggable[1];
+        F_Pluggable[] pluggables = new F_Pluggable[3];
 
-        GameObject pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_ZPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
-        pluggableObject.transform.position = new Vector3(3f, 0, 1);
+        GameObject pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_OPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(6, 2, 1);
         pluggables[0] = pluggableObject.GetComponent<F_Pluggable>();
+
+        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_ZPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(5, -1, 1);
+        pluggables[1] = pluggableObject.GetComponent<F_Pluggable>();
+
+        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_LPieceInverse"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(3.5f, 2, 1);
+        pluggables[2] = pluggableObject.GetComponent<F_Pluggable>();
 
         m_GrabManager.Initialize(pluggables);
         m_ToDock = pluggables.GetLength(0);
@@ -628,11 +678,23 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
 
     private void Physics3Grab()
     {
-        F_Pluggable[] pluggables = new F_Pluggable[1];
+        F_Pluggable[] pluggables = new F_Pluggable[4];
 
-        GameObject pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_ZPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
-        pluggableObject.transform.position = new Vector3(3f, 0, 1);
+        GameObject pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_TPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(4.5f, -1.5f, 1);
         pluggables[0] = pluggableObject.GetComponent<F_Pluggable>();
+
+        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_LPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(7.5f, 0, 1);
+        pluggables[1] = pluggableObject.GetComponent<F_Pluggable>();
+
+        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_LPieceInverse"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(1.5f, 0, 1);
+        pluggables[2] = pluggableObject.GetComponent<F_Pluggable>();
+
+        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_ZPieceInverse"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(4.5f, 1.5f, 1);
+        pluggables[3] = pluggableObject.GetComponent<F_Pluggable>();
 
         m_GrabManager.Initialize(pluggables);
         m_ToDock = pluggables.GetLength(0);
@@ -640,11 +702,19 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
 
     private void Money1Grab()
     {
-        F_Pluggable[] pluggables = new F_Pluggable[1];
+        F_Pluggable[] pluggables = new F_Pluggable[3];
 
-        GameObject pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_ZPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
-        pluggableObject.transform.position = new Vector3(3f, 0, 1);
+        GameObject pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_OPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(3.5f, 2, 1);
         pluggables[0] = pluggableObject.GetComponent<F_Pluggable>();
+
+        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_OPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(7f, 1.5f, 1);
+        pluggables[1] = pluggableObject.GetComponent<F_Pluggable>();
+
+        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_TPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(4.5f, -1, 1);
+        pluggables[2] = pluggableObject.GetComponent<F_Pluggable>();
 
         m_GrabManager.Initialize(pluggables);
         m_ToDock = pluggables.GetLength(0);
@@ -652,11 +722,27 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
 
     private void Money2Grab()
     {
-        F_Pluggable[] pluggables = new F_Pluggable[1];
+        F_Pluggable[] pluggables = new F_Pluggable[5];
 
-        GameObject pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_ZPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
-        pluggableObject.transform.position = new Vector3(3f, 0, 1);
+        GameObject pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_OPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(6.5f, 2.5f, 1);
         pluggables[0] = pluggableObject.GetComponent<F_Pluggable>();
+
+        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_OPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(3.5f, 2.5f, 1);
+        pluggables[1] = pluggableObject.GetComponent<F_Pluggable>();
+
+        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_OPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(5, 0, 1);
+        pluggables[2] = pluggableObject.GetComponent<F_Pluggable>();
+
+        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_OPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(6.5f, -2.5f, 1);
+        pluggables[3] = pluggableObject.GetComponent<F_Pluggable>();
+
+        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_OPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(3.5f, -2.5f, 1);
+        pluggables[4] = pluggableObject.GetComponent<F_Pluggable>();
 
         m_GrabManager.Initialize(pluggables);
         m_ToDock = pluggables.GetLength(0);
@@ -664,11 +750,23 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
 
     private void Money3Grab()
     {
-        F_Pluggable[] pluggables = new F_Pluggable[1];
+        F_Pluggable[] pluggables = new F_Pluggable[4];
 
-        GameObject pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_ZPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
-        pluggableObject.transform.position = new Vector3(3f, 0, 1);
+        GameObject pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_LPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(3.5f, 2, 1);
         pluggables[0] = pluggableObject.GetComponent<F_Pluggable>();
+
+        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_LPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(3.5f, -2, 1);
+        pluggables[1] = pluggableObject.GetComponent<F_Pluggable>();
+
+        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_LPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(6.5f, 2, 1);
+        pluggables[2] = pluggableObject.GetComponent<F_Pluggable>();
+
+        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_LPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(6.5f, -2, 1);
+        pluggables[3] = pluggableObject.GetComponent<F_Pluggable>();
 
         m_GrabManager.Initialize(pluggables);
         m_ToDock = pluggables.GetLength(0);
@@ -676,11 +774,19 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
 
     private void Social1Grab()
     {
-        F_Pluggable[] pluggables = new F_Pluggable[1];
+        F_Pluggable[] pluggables = new F_Pluggable[3];
 
         GameObject pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_ZPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
-        pluggableObject.transform.position = new Vector3(3f, 0, 1);
+        pluggableObject.transform.position = new Vector3(3.5f, 1.5f, 1);
         pluggables[0] = pluggableObject.GetComponent<F_Pluggable>();
+
+        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_ZPieceInverse"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(3.5f, -1.5f, 1);
+        pluggables[1] = pluggableObject.GetComponent<F_Pluggable>();
+
+        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_LPieceInverse"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(6f, 1, 1);
+        pluggables[2] = pluggableObject.GetComponent<F_Pluggable>();
 
         m_GrabManager.Initialize(pluggables);
         m_ToDock = pluggables.GetLength(0);
@@ -688,11 +794,19 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
 
     private void Social2Grab()
     {
-        F_Pluggable[] pluggables = new F_Pluggable[1];
+        F_Pluggable[] pluggables = new F_Pluggable[3];
 
-        GameObject pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_ZPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
-        pluggableObject.transform.position = new Vector3(3f, 0, 1);
+        GameObject pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_OPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(3.5f, 2, 1);
         pluggables[0] = pluggableObject.GetComponent<F_Pluggable>();
+
+        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_ZPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(7f, 1.5f, 1);
+        pluggables[1] = pluggableObject.GetComponent<F_Pluggable>();
+
+        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_ZPieceInverse"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(4.5f, -1, 1);
+        pluggables[2] = pluggableObject.GetComponent<F_Pluggable>();
 
         m_GrabManager.Initialize(pluggables);
         m_ToDock = pluggables.GetLength(0);
@@ -700,11 +814,23 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
 
     private void Social3Grab()
     {
-        F_Pluggable[] pluggables = new F_Pluggable[1];
+        F_Pluggable[] pluggables = new F_Pluggable[4];
 
-        GameObject pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_ZPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
-        pluggableObject.transform.position = new Vector3(3f, 0, 1);
+        GameObject pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_TPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(4.5f, 2, 1);
         pluggables[0] = pluggableObject.GetComponent<F_Pluggable>();
+
+        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_TPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(4.5f, -2, 1);
+        pluggables[1] = pluggableObject.GetComponent<F_Pluggable>();
+
+        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_LPiece"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(1.5f, 0, 1);
+        pluggables[2] = pluggableObject.GetComponent<F_Pluggable>();
+
+        pluggableObject = Instantiate(m_PrefabPluggablesDictionary[m_Kind]["F_LPieceInverse"].gameObject, Vector3.zero, Quaternion.identity, m_GrabManager.gameObject.transform);
+        pluggableObject.transform.position = new Vector3(7.5f, 0, 1);
+        pluggables[3] = pluggableObject.GetComponent<F_Pluggable>();
 
         m_GrabManager.Initialize(pluggables);
         m_ToDock = pluggables.GetLength(0);

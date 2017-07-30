@@ -105,8 +105,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MatrixGrid:
-  - m_Array: 0100000000000000
-  - m_Array: 0100000000000000
+  - m_Array: 0000000001000000
+  - m_Array: 0000000001000000
   - m_Array: 0100000001000000
   m_CellSize: 1
 --- !u!212 &212014736118743880
