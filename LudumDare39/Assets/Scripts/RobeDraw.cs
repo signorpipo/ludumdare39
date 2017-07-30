@@ -35,8 +35,8 @@ public class RobeDraw : MonoBehaviour {
         }
 
 		Vector3[] points = Curver.MakeSmoothCurve(positions.ToArray(), m_smoothness);
-		m_myRenderer.positionCount = points.Length;
-		for (int i = 0; i < m_myRenderer.positionCount; ++i)
+		m_myRenderer.numPositions = points.Length;
+		for (int i = 0; i < m_myRenderer.numPositions; ++i)
         {
             m_myRenderer.SetPosition(i, points[i]);
 		}

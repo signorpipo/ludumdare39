@@ -221,7 +221,7 @@ public class F_GridManager : MonoBehaviour {
         GameObject line = Instantiate(m_PrefabGridLine.gameObject, Vector3.zero, Quaternion.identity, this.gameObject.transform);
 
         LineRenderer lineRenderer = line.GetComponent<LineRenderer>();
-        lineRenderer.positionCount = 6;
+        lineRenderer.numPositions = 6;
         lineRenderer.SetPosition(0, new Vector3(m_TopLeft.x + m_CellSize * column, m_TopLeft.y - m_CellSize * row, 2));
         lineRenderer.SetPosition(1, new Vector3(m_TopLeft.x + m_CellSize * (column + 1), m_TopLeft.y - m_CellSize * row, 2));
         lineRenderer.SetPosition(2, new Vector3(m_TopLeft.x + m_CellSize * (column + 1), m_TopLeft.y - m_CellSize * (row + 1), 2));
