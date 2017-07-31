@@ -6,11 +6,14 @@ public class ColorizeBckManager : MonoBehaviour
 {
     public enum BckTypes
     {
+        BCK_NONE,
         BCK_SOCIAL = 0,
         BCK_PLANNING,
         BCK_PHYSICS,
         BCK_MONEY
     }
+
+    public BckTypes ForceBackground = BckTypes.BCK_NONE;
 
     public List<ColorizeBck> ColorizingBck;
 
@@ -19,7 +22,8 @@ public class ColorizeBckManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        SetUncoloredBckType(BckTypes.BCK_PHYSICS);
+        if (ForceBackground != BckTypes.BCK_NONE)
+            SetUncoloredBckType(ForceBackground);
     }
 
     public void SetUncoloredBckType(BckTypes type)
