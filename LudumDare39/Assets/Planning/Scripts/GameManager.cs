@@ -28,9 +28,21 @@ public class GameManager : Singleton<GameManager>
     public string m_currentSceneName = "null";
 
     private float[] m_oldValues = new float[3];
+    
+    public AudioSource m_backgroundMusic = null;
+
+    private AudioClip m_track = null;
 
     public void Awake()
     {
+        m_backgroundMusic = gameObject.AddComponent<AudioSource>();
+
+        m_track = Resources.Load<AudioClip>("Audio/GameOST");
+
+        m_backgroundMusic.loop = true;
+
+        m_backgroundMusic.clip = m_track;
+
         m_defaultPsychophysicsValue = UnityEngine.Random.Range(40, 61);
 
         m_defaultMoneyValue = UnityEngine.Random.Range(40, 61);
@@ -194,6 +206,7 @@ public class GameManager : Singleton<GameManager>
                 m_weekDaysCounter++;
                 if (m_weekDaysCounter >= m_weekDays.Count || m_currentPsychophysicsValue <= 0 || m_currentMoneyValue <= 0 || m_currentSocialValue <= 0)
                 {
+                    m_backgroundMusic.Stop();
                     m_sceneLoaderManager.LoadEndGame();
                 }
                 else
@@ -203,8 +216,8 @@ public class GameManager : Singleton<GameManager>
             }
             else
             {
-            m_currentSceneName = m_selectedMinigames[m_selectedGamesCounter].GetVisibleName();
-            SceneManager.sceneLoaded += SceneLoaded;
+                m_currentSceneName = m_selectedMinigames[m_selectedGamesCounter].GetVisibleName();
+                SceneManager.sceneLoaded += SceneLoaded;
                 m_sceneLoaderManager.LoadNextScene();
             }
 

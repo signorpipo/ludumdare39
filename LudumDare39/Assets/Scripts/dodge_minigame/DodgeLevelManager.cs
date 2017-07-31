@@ -24,7 +24,12 @@ public class DodgeLevelManager : AbstarcMinigameManager
     [SerializeField]
     private Text m_TimeLeftUI;
     [SerializeField]
+    private GameObject m_TimeLeftObj;
+
+    [SerializeField]
     private Text m_CentralText;
+    [SerializeField]
+    private GameObject m_CentralObj;
 
     [SerializeField]
     private GameObject m_Player;
@@ -131,6 +136,7 @@ public class DodgeLevelManager : AbstarcMinigameManager
     private void DoRunning()
     {
         m_CentralText.enabled = false;
+        m_CentralObj.SetActive(false);
         m_SpawnManager.SetActive(true);
         if (m_ElapsedTime >= 1 && m_TimeLeft != 0)
         {
@@ -150,6 +156,7 @@ public class DodgeLevelManager : AbstarcMinigameManager
     private void DoEnd()
     {
         m_CentralText.enabled = true;
+        m_CentralObj.SetActive(true);
         m_SpawnManager.SetActive(false);
         if (m_LevelFinishedSuccesfully)
         {
