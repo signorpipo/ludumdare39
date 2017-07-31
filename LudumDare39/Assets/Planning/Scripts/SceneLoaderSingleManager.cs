@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using System;
 
 /// <summary>
 /// Carica le scene una alla volta. Compreso la main
@@ -13,14 +14,22 @@ public class SceneLoaderSingleManager : Singleton<SceneLoaderSingleManager>
 
     //Scena principale
     private string main_scene = "PlanningMenu";
+    private string end_minigame_scene = "EndMinigame";
+    private string end_game_scene = "EndScene";
+    private bool m_isMinigame = true;
     private static SceneLoaderSingleManager instance = null;
     private List<string> list_select_minigame_scene;
 
     private string run_scene;
     private int index = 0;
 
+    public bool IsMinigame
+    {
+        get{ return m_isMinigame;}
+    }
+
     /// <summary>
-    /// Imposta la scena come in esecuzione.
+    /// Imposta la scena come in esecuzione. 
     /// </summary>
     void Start()
     {
@@ -34,21 +43,34 @@ public class SceneLoaderSingleManager : Singleton<SceneLoaderSingleManager>
     /// </summary>
     public void LoadNextScene()
     {
-        if (index < list_select_minigame_scene.Count)
+        if (m_isMinigame)
         {
-            SceneManager.LoadScene(list_select_minigame_scene[index], LoadSceneMode.Single);
+            if (index < list_select_minigame_scene.Count)
+            {
+                m_isMinigame = false;
+                SceneManager.LoadScene(list_select_minigame_scene[index], LoadSceneMode.Single);
 
-            run_scene = list_select_minigame_scene[index];
-            Debug.Log("Caricate le scene in unity");
-            index++;
-            Debug.Log("Attivata scena numero " + index + " nome: " + run_scene);
+                run_scene = list_select_minigame_scene[index];
+                Debug.Log("Caricate le scene in unity");
+                index++;
+                Debug.Log("Attivata scena numero " + index + " nome: " + run_scene);
+            }
+            else
+            {
+                index = 0;
+                run_scene = main_scene;
+                Debug.Log("Finite scene minigame, riattivata scena principale " + main_scene);
+                SceneManager.LoadScene(main_scene);
+            }
         }
         else
         {
-            index = 0;
-            run_scene = main_scene;
-            Debug.Log("Finite scene minigame, riattivata scena principale " + main_scene);
-            SceneManager.LoadScene(main_scene);
+            m_isMinigame = true;
+            SceneManager.LoadScene(end_minigame_scene);
+            run_scene = end_minigame_scene;
+            Debug.Log("Caricato livello di recap gioco");
+
+            
         }
     }
 
@@ -73,5 +95,13 @@ public class SceneLoaderSingleManager : Singleton<SceneLoaderSingleManager>
     public void Reset()
     {
         index = 0;
+        m_isMinigame = true;
+    }
+
+    internal void LoadEndGame()
+    {
+        SceneManager.LoadScene(end_game_scene);
+        run_scene = end_game_scene;
+        Debug.Log("Caricato endlevel");
     }
 }
