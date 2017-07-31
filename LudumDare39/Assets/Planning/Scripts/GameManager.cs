@@ -19,6 +19,13 @@ public class GameManager : Singleton<GameManager>
 
     public int m_weekDaysCounter = 0;
 
+    private float[] m_oldValues = new float[3];
+
+    public float[] OldValues
+    {
+        get { return m_oldValues; }
+    }
+
     // Initialized/updated when start button has been pressed, cleared when 3 minigames have been played
     private List<MinigameInterface> m_selectedMinigames = new List<MinigameInterface>();
 
@@ -77,7 +84,6 @@ public class GameManager : Singleton<GameManager>
 
     private void SceneLoaded(Scene i_scene, LoadSceneMode i_mode)
     {
-        //Debug.Log("hola");
         AbstarcMinigameManager CurrentGame = FindObjectOfType<AbstarcMinigameManager>();
         CurrentGame.StartMinigame(m_selectedMinigames[m_selectedGamesCounter].GetGameVersion(), m_currentPsychophysicsValue / 100, m_currentMoneyValue / 100, m_currentSocialValue / 100);
         CurrentGame.onSceneEnded += LoadNextSceneAndUpdateStats;
@@ -96,78 +102,89 @@ public class GameManager : Singleton<GameManager>
     /// </summary>
     public void LoadNextSceneAndUpdateStats(float resultMutator)
     {
-        if (resultMutator > 0)
+        if (!m_sceneLoaderManager.IsMinigame)
         {
-            if (m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue() >= 0)
+            m_oldValues[0] = m_currentPsychophysicsValue;
+            m_oldValues[1] = m_currentMoneyValue;
+            m_oldValues[2] = m_currentSocialValue;
+
+            if (resultMutator > 0)
             {
-                m_currentPsychophysicsValue = Mathf.Clamp(m_currentPsychophysicsValue + m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue() * resultMutator *
-                    m_weekDays[m_weekDaysCounter].m_psychophysicsBonus,
-                    0.0f, 100.0f);
+                if (m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue() >= 0)
+                {
+                    m_currentPsychophysicsValue = Mathf.Clamp(m_currentPsychophysicsValue + m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue() * resultMutator *
+                        m_weekDays[m_weekDaysCounter].m_psychophysicsBonus,
+                        0.0f, 100.0f);
+                }
+                else
+                {
+                    m_currentPsychophysicsValue = Mathf.Clamp(m_currentPsychophysicsValue + m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue(), 0.0f, 100.0f);
+                }
+
+                if (m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue() >= 0)
+                {
+                    m_currentMoneyValue = Mathf.Clamp(m_currentMoneyValue + m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue() * resultMutator *
+                        m_weekDays[m_weekDaysCounter].m_moneyBonus, 0.0f, 100.0f);
+                }
+                else
+                {
+                    m_currentMoneyValue = Mathf.Clamp(m_currentMoneyValue + m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue(), 0.0f, 100.0f);
+                }
+
+                if (m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue() >= 0)
+                {
+                    m_currentSocialValue = Mathf.Clamp(m_currentSocialValue + m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue() * resultMutator *
+                        m_weekDays[m_weekDaysCounter].m_socialBonus, 0.0f, 100.0f);
+                }
+                else
+                {
+                    m_currentSocialValue = Mathf.Clamp(m_currentSocialValue + m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue(), 0.0f, 100.0f);
+                }
             }
             else
             {
-                m_currentPsychophysicsValue = Mathf.Clamp(m_currentPsychophysicsValue + m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue(), 0.0f, 100.0f);
+                if (m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue() < 0)
+                {
+                    m_currentPsychophysicsValue = Mathf.Clamp(m_currentPsychophysicsValue + m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue(), 0.0f, 100.0f);
+                }
+
+                if (m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue() < 0)
+                {
+                    m_currentMoneyValue = Mathf.Clamp(m_currentMoneyValue + m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue(), 0.0f, 100.0f);
+                }
+
+                if (m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue() < 0)
+                {
+                    m_currentSocialValue = Mathf.Clamp(m_currentSocialValue + m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue(), 0.0f, 100.0f);
+                }
             }
 
-            if (m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue() >= 0)
-            {
-                m_currentMoneyValue = Mathf.Clamp(m_currentMoneyValue + m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue() * resultMutator *
-                    m_weekDays[m_weekDaysCounter].m_moneyBonus, 0.0f, 100.0f);
             }
-            else
-            {
-                m_currentMoneyValue = Mathf.Clamp(m_currentMoneyValue + m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue(), 0.0f, 100.0f);
-            }
-
-            if (m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue() >= 0)
-            {
-                m_currentSocialValue = Mathf.Clamp(m_currentSocialValue + m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue() * resultMutator *
-                    m_weekDays[m_weekDaysCounter].m_socialBonus, 0.0f, 100.0f);
-            }
-            else
-            {
-                m_currentSocialValue = Mathf.Clamp(m_currentSocialValue + m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue(), 0.0f, 100.0f);
-            }
-        }
         else
         {
-            if (m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue() < 0)
-            {
-                m_currentPsychophysicsValue = Mathf.Clamp(m_currentPsychophysicsValue + m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue(), 0.0f, 100.0f);
-            }
-
-            if (m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue() < 0)
-            {
-                m_currentMoneyValue = Mathf.Clamp(m_currentMoneyValue + m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue(), 0.0f, 100.0f);
-            }
-
-            if (m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue() < 0)
-            {
-                m_currentSocialValue = Mathf.Clamp(m_currentSocialValue + m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue(), 0.0f, 100.0f);
-            }
+            m_selectedGamesCounter++;
         }
-
-        m_selectedGamesCounter++;
-        if (m_selectedGamesCounter == 3)
-        {
-            ClearSelectedMinigames();
-            m_weekDaysCounter++;
-            if (m_weekDaysCounter >= m_weekDays.Count || m_currentPsychophysicsValue <= 0 || m_currentMoneyValue <= 0 || m_currentSocialValue <= 0)
+           
+            if (m_selectedGamesCounter == 3)
             {
-                SceneManager.LoadScene("EndScene");
+                ClearSelectedMinigames();
+                m_weekDaysCounter++;
+                if (m_weekDaysCounter >= m_weekDays.Count || m_currentPsychophysicsValue <= 0 || m_currentMoneyValue <= 0 || m_currentSocialValue <= 0)
+                {
+                    m_sceneLoaderManager.LoadEndGame();
+                }
+                else
+                {
+                    m_sceneLoaderManager.LoadNextScene();
+                }
             }
             else
             {
+                SceneManager.sceneLoaded += SceneLoaded;
                 m_sceneLoaderManager.LoadNextScene();
             }
-        }
-        else
-        {
-            SceneManager.sceneLoaded += SceneLoaded;
-            m_sceneLoaderManager.LoadNextScene();
-        }
 
-        //m_sceneLoaderManager.LoadNextScene();
+
     }
 
     private void EndGameCondition()
