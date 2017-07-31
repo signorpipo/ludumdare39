@@ -7,6 +7,18 @@ public class EnemyItem : MonoBehaviour {
     [SerializeField]
     private float m_VerticalSpeed = -5.0f;
 
+    public float VerticalSpeed
+    {
+        set
+        {
+            m_VerticalSpeed = value;
+        }
+        get
+        {
+            return m_VerticalSpeed;
+        }
+    }
+
 	// Use this for initialization
 	void Start () {
 		

@@ -15,6 +15,33 @@ public class SpawnManager : MonoBehaviour {
 
     private float m_ElapsedTime = 0.0f;
 
+    private float m_EnemyVerticalSpeed = 0.0f;
+
+    public float EnemyVerticalSPeed
+    {
+        set
+        {
+            m_EnemyVerticalSpeed = value;
+        }
+        get
+        {
+            return m_EnemyVerticalSpeed;
+        }
+    }
+
+
+    public float SpawnRate
+    {
+        get
+        {
+            return m_SpawnRateInSeconds;
+        }
+        set
+        {
+            m_SpawnRateInSeconds = value;
+        }
+    }
+
     private void Awake()
     {
         m_CameraWidthSize = Camera.main.orthographicSize * Camera.main.aspect;
@@ -30,7 +57,8 @@ public class SpawnManager : MonoBehaviour {
 
         if(m_ElapsedTime >= m_SpawnRateInSeconds)
         {
-            Instantiate(m_EnemyItemPrefab, new Vector3(Random.Range(-m_CameraWidthSize, m_CameraWidthSize), Camera.main.orthographicSize, 0), Quaternion.identity);
+            GameObject enemy = Instantiate(m_EnemyItemPrefab, new Vector3(Random.Range(-m_CameraWidthSize, m_CameraWidthSize), Camera.main.orthographicSize, 0), Quaternion.identity);
+            enemy.GetComponent<EnemyItem>().VerticalSpeed = m_EnemyVerticalSpeed;
 
             m_ElapsedTime = 0.0f;
         }
