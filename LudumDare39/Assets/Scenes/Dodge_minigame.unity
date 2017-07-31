@@ -210,7 +210,7 @@ Prefab:
     - target: {fileID: 224603431337785144, guid: 875fc146ffb80804c9665b1e1789aa03,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -9.14
       objectReference: {fileID: 0}
     - target: {fileID: 224603431337785144, guid: 875fc146ffb80804c9665b1e1789aa03,
         type: 2}
@@ -646,7 +646,7 @@ Prefab:
     - target: {fileID: 224603431337785144, guid: 875fc146ffb80804c9665b1e1789aa03,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 224603431337785144, guid: 875fc146ffb80804c9665b1e1789aa03,
         type: 2}
@@ -689,19 +689,19 @@ Prefab:
     - target: {fileID: 114134207718021368, guid: 875fc146ffb80804c9665b1e1789aa03,
         type: 2}
       propertyPath: m_Text
-      value: 'Save Your Ice Cream
+      value: 'Save Your Ice Cream!  Move with A and D.
 
 '
       objectReference: {fileID: 0}
     - target: {fileID: 224708344924883484, guid: 875fc146ffb80804c9665b1e1789aa03,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 400
+      value: 479.2
       objectReference: {fileID: 0}
     - target: {fileID: 224920943944283826, guid: 875fc146ffb80804c9665b1e1789aa03,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 400
+      value: 570.5
       objectReference: {fileID: 0}
     - target: {fileID: 224920943944283826, guid: 875fc146ffb80804c9665b1e1789aa03,
         type: 2}
@@ -711,7 +711,7 @@ Prefab:
     - target: {fileID: 224708344924883484, guid: 875fc146ffb80804c9665b1e1789aa03,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 77.2
       objectReference: {fileID: 0}
     - target: {fileID: 114134207718021368, guid: 875fc146ffb80804c9665b1e1789aa03,
         type: 2}
@@ -721,6 +721,16 @@ Prefab:
     - target: {fileID: 1095631452349226, guid: 875fc146ffb80804c9665b1e1789aa03, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114134207718021368, guid: 875fc146ffb80804c9665b1e1789aa03,
+        type: 2}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114134207718021368, guid: 875fc146ffb80804c9665b1e1789aa03,
+        type: 2}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 875fc146ffb80804c9665b1e1789aa03, type: 2}
@@ -754,7 +764,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4432817077372888, guid: 1e198b8d64a1e9d43a950c3565e42421, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -3.78
+      value: -3.65
       objectReference: {fileID: 0}
     - target: {fileID: 4432817077372888, guid: 1e198b8d64a1e9d43a950c3565e42421, type: 2}
       propertyPath: m_LocalPosition.z
