@@ -42,7 +42,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 11
+  serializedVersion: 9
   m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -54,7 +54,7 @@ LightmapSettings:
     m_EnableBakedLightmaps: 0
     m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
-    serializedVersion: 9
+    serializedVersion: 8
     m_Resolution: 2
     m_BakeResolution: 40
     m_TextureWidth: 1024
@@ -87,7 +87,7 @@ LightmapSettings:
     m_PVRFilteringAtrousNormalSigma: 1
     m_PVRFilteringAtrousPositionSigma: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_ShadowMaskMode: 2
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -525,11 +525,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54a94aa411f177a43aaa8691f39dcdaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StartMessage: 'Left click: select - rotate
+  m_StartMessage: 'Drag to move
 
-    Mouse wheel: rotate
+    Right click ro rotate
 
-    Right click: put back'
+'
   m_PrefabPhysicsPluggables:
   - m_Name: F_ZPiece
     m_Pluggable: {fileID: 114406544642811986, guid: 2c7b3a1cbbadfd34baccbd3e2a143dbc,
