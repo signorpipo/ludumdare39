@@ -8,6 +8,7 @@ public delegate void OnLetterMiss();
 public class LetterTrigger : MonoBehaviour
 {
     private bool inside= false;
+    private GameObject objectReturn;
     private KeyCode myKey;
     public KeyCode MyKey
     {
@@ -18,17 +19,11 @@ public class LetterTrigger : MonoBehaviour
     public OnLetterHit onLetterHit = null;
     public OnLetterMiss onLetterMiss = null;
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (Input.GetKeyDown(myKey)&&onLetterHit != null)
-        {
-            onLetterHit(collision.gameObject);
-        }
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         inside = true;
+        objectReturn = collision.gameObject;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -41,7 +36,12 @@ public class LetterTrigger : MonoBehaviour
         if (Input.GetKeyDown(myKey))
         {
             GetComponent<Animator>().SetTrigger("goToResize");
-            if (!inside && onLetterMiss != null)
+            if (inside && onLetterHit != null)
+            {
+                onLetterHit(objectReturn);
+            }
+            
+            else if (!inside && onLetterMiss != null)
             {
                 onLetterMiss();              
             }
