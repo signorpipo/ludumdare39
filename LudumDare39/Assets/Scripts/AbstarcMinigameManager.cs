@@ -47,5 +47,9 @@ public abstract class AbstarcMinigameManager : MonoBehaviour
         return m_Timer.GetSecondsLeft();
     }
 
+    public void DecreaseTime(float i_Delta)
+    {
+        m_Timer.DecreaseTime(i_Delta);
+    }
 }
 
