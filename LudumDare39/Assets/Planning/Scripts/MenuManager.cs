@@ -57,7 +57,7 @@ public class MenuManager : MonoBehaviour
             bool found = false;
             do
             {
-                int value = UnityEngine.Random.Range(0, 18);
+                int value = UnityEngine.Random.Range(0, 21);
                 if (!randomIndexes.Contains(value))
                 {
                     randomIndexes.Add(value);
