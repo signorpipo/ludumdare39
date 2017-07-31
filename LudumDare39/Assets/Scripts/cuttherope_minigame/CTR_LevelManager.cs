@@ -10,7 +10,7 @@ public class CTR_LevelManager : AbstarcMinigameManager
     private GameObject m_Basket;
 
 
-    private bool m_MouseAlreadyPressed = false;
+    private bool m_MouseAlreadyPressed = true;
 
     [SerializeField]
     private bool m_ForceStart = false;
@@ -23,6 +23,9 @@ public class CTR_LevelManager : AbstarcMinigameManager
 
     [SerializeField]
     private Text m_Life;
+
+
+    private int m_GravityScale = 1;
 
     
     public int m_NumAttemptes = 2;
@@ -57,13 +60,14 @@ public class CTR_LevelManager : AbstarcMinigameManager
         float i_NumItemValue,
         float i_ItemVelocityValue) //i_type will be between 0 and 2
     {
-
+        m_NumAttemptes = (int)((3 - 1) * i_NumItemValue + 1);
+        m_GravityScale = (int)((5 - 1) * (1- i_ItemVelocityValue) + 1);
         DoStart();
     }
 
     private void DoStart()
     {
-        m_MouseAlreadyPressed = false;
+        m_MouseAlreadyPressed = true;
         StartTimer(
             transform,
             TimerStart,
@@ -94,7 +98,10 @@ public class CTR_LevelManager : AbstarcMinigameManager
 
     public void TimerStart()
     {
+        m_MouseAlreadyPressed = false;
         m_CurrentRopeAndBallInstance = Instantiate(m_RopeAndBalPrefab, transform.parent);
+        GameObject ball = GameObject.Find("BB_Ball");
+        ball.GetComponent<Rigidbody2D>().gravityScale = m_GravityScale;
     }
 
     public void TimerEnd()
@@ -116,10 +123,12 @@ public class CTR_LevelManager : AbstarcMinigameManager
     {
         if (--m_NumAttemptes > 0)
         {
-            m_Life.text = "Life: " + m_NumAttemptes;
+           
             Destroy(m_CurrentRopeAndBallInstance);
             m_MouseAlreadyPressed = false;
             m_CurrentRopeAndBallInstance = Instantiate(m_RopeAndBalPrefab, transform.parent);
+            GameObject ball = GameObject.Find("BB_Ball");
+            ball.GetComponent<Rigidbody2D>().gravityScale = m_GravityScale;
 
         }
         else
@@ -127,6 +136,8 @@ public class CTR_LevelManager : AbstarcMinigameManager
             StopTimer();
             SceneEnded(0.0f);
         }
+
+        m_Life.text = "Life: " + m_NumAttemptes;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

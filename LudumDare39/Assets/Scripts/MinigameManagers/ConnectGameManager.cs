@@ -95,14 +95,22 @@ public class ConnectGameManager : MinigameManager
     {
         if (matched)
         {
+            mAudioSource.PlayOneShot(mWinSound, 0.5F);
             mMatchedItem++;
             mScore = (float)mMatchedItem / (float)mNumGameItems * 0.85f;
             if (mMatchedItem == mNumGameItems)
             {
                 // Bonus se si finisce prima dello scadere
-                mScore += 0.15f * Mathf.Clamp(mGameTime / (MIN_GAME_TIME * 0.5f),0f,1f);
+                mScore += 0.15f * Mathf.Clamp01(mGameTime / (MIN_GAME_TIME * 0.5f));
                 SceneEnded(1.0f);
             }
+        }
+        else
+        {
+            // Trig infame
+            if (--mNumGameItems - mMatchedItem == 0)
+                SceneEnded(Mathf.Clamp01(mScore - 0.15f));
+            mAudioSource.PlayOneShot(mTimesUpSound, 0.5F);
         }
     }
 

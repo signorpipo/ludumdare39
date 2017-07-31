@@ -20,8 +20,10 @@ public class FastButtonSmashingGameManager : MinigameManager
     private string mLeftKey = "a";
     private string mRightKey = "l";
 
+    private bool lastIsLeft = false;
+
     // Use this for initialization
-    public override void Start ()
+    public override void Start()
     {
         base.Start();
     }
@@ -54,34 +56,50 @@ public class FastButtonSmashingGameManager : MinigameManager
         if (i_ItemVelocityValue > 0.5f)
             refKeys = "tgbnhyujmkilop";
         int rightIdx = ((int)(Random.value * refKeys.Length)) % refKeys.Length;
-        if(rightIdx==leftIdx)
-            rightIdx = (rightIdx+1) % refKeys.Length;
+        if (rightIdx == leftIdx)
+            rightIdx = (rightIdx + 1) % refKeys.Length;
         mRightKey = refKeys[rightIdx].ToString();
         LeftImage.GetComponentInChildren<Text>().text = mLeftKey.ToUpper();
         RightImage.GetComponentInChildren<Text>().text = mRightKey.ToUpper();
     }
 
     // Update is called once per frame
-    public override void Update ()
+    public override void Update()
     {
-        if(mCurrState != GameState.NO_GAME)
+        if (mCurrState != GameState.NO_GAME)
         {
             bool keyLeft = Input.GetKey(mLeftKey);
             bool keyRight = Input.GetKey(mRightKey);
 
-            if (mCurrState == GameState.PLAY_GAME_RELEASE)
+            if (mCurrState == GameState.PLAY_GAME_RELEASE_LEFT && !keyLeft)
             {
-                if (!keyLeft && !keyRight)
-                    mCurrState = GameState.PLAY_GAME;
+                mCurrState = GameState.PLAY_GAME;
                 successBarSlider.value -= NegativeMult * Time.deltaTime;
             }
-            else if (mCurrState == GameState.PLAY_GAME)
+            else if (mCurrState == GameState.PLAY_GAME_RELEASE_RIGHT && !keyRight)
+            {
+                mCurrState = GameState.PLAY_GAME;
+                successBarSlider.value -= NegativeMult * Time.deltaTime;
+            }
+            else if(mCurrState == GameState.PLAY_GAME)
             {
                 mKeyTimer = 0;
-                if (keyLeft && !keyRight)
+                if (keyLeft && !keyRight && !lastIsLeft)
+                {
                     mCurrState = GameState.PLAY_GAME_LEFT;
-                else if (keyRight && !keyLeft)
+                    mAudioSource.PlayOneShot(mTimesUpSound, 0.5F);
+                    lastIsLeft = true;
+                }
+                else if (keyRight && !keyLeft && lastIsLeft)
+                {
                     mCurrState = GameState.PLAY_GAME_RIGHT;
+                    mAudioSource.PlayOneShot(mTimesUpSound, 0.5F);
+                    lastIsLeft = !lastIsLeft;
+                }
+                else if(keyRight || keyLeft)
+                {
+                    mAudioSource.PlayOneShot(mDockSound, 0.5F);
+                }
                 successBarSlider.value -= NegativeMult * Time.deltaTime;
             }
             else if (mCurrState == GameState.PLAY_GAME_LEFT)
@@ -93,7 +111,7 @@ public class FastButtonSmashingGameManager : MinigameManager
                 }
                 else
                 {
-                    mCurrState = GameState.PLAY_GAME_RELEASE;
+                    mCurrState = GameState.PLAY_GAME_RELEASE_LEFT;
                 }
             }
             else if (mCurrState == GameState.PLAY_GAME_RIGHT)
@@ -105,12 +123,14 @@ public class FastButtonSmashingGameManager : MinigameManager
                 }
                 else
                 {
-                    mCurrState = GameState.PLAY_GAME_RELEASE;
+                    mCurrState = GameState.PLAY_GAME_RELEASE_RIGHT;
                 }
             }
 
             LeftImage.color = (mCurrState == GameState.PLAY_GAME_LEFT ? Color.red : Color.white);
             RightImage.color = (mCurrState == GameState.PLAY_GAME_RIGHT ? Color.red : Color.white);
+
+            mScore = successBarSlider.value;
         }
         base.Update();
     }
