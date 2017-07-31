@@ -58,11 +58,12 @@ public class ConnectGameManager : MinigameManager
         {
             int spriteIdx = (int)(UnityEngine.Random.value * GameItems.Count) % GameItems.Count;
             int colorIdx = (int)(UnityEngine.Random.value * 2f);
+            Color color = (colorIdx == 0 ? new Color(1f,0.5f,0.5f) : colorIdx == 1 ? new Color(0.5f, 1f, 0.5f) : new Color(0.5f, 0.5f, 1.0f));
             float itemScale = Math.Min(LeftPanel.rect.width * 0.95f / DEFAULT_IMAGE_WIDTH, deltaHeight / DEFAULT_IMAGE_WIDTH);
 
             MonoBehaviour lItm = Instantiate(ItemPrefab, LeftPanel);
             lItm.GetComponent<Image>().sprite = GameItems[spriteIdx];
-            lItm.GetComponent<Image>().color = ColorizeBck.yellowColors[colorIdx];
+            lItm.GetComponent<Image>().color = color;
             lItm.GetComponent<DropHandler>().onDroppedItem += ConnectGameManager_onDroppedItem;
             lItm.transform.localPosition = Vector3.up * (deltaHeight * i - (LeftPanel.rect.height * 0.95f - DEFAULT_IMAGE_WIDTH * itemScale) * 0.5f);
             lItm.transform.localScale = Vector3.one * itemScale;
@@ -70,7 +71,7 @@ public class ConnectGameManager : MinigameManager
 
             MonoBehaviour rItm = Instantiate(ItemPrefab, RightPanel);
             rItm.GetComponent<Image>().sprite = GameItems[spriteIdx];
-            rItm.GetComponent<Image>().color = ColorizeBck.yellowColors[colorIdx];
+            rItm.GetComponent<Image>().color = color;
             rItm.GetComponent<DropHandler>().onDroppedItem += ConnectGameManager_onDroppedItem;
             rItm.transform.localScale = Vector3.one * itemScale;
         }
