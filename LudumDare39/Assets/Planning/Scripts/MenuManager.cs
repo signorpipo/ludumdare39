@@ -48,7 +48,9 @@ public class MenuManager : MonoBehaviour
 		GameManager gameManager = GameManager.Instance;
 		gameManager.SetWeekDays(m_weekDaysList);
 
-		for (int index = 0; index < m_minigames.Count; ++index)
+        FindObjectOfType<ColorizeBckManager>().SetUncoloredBckType(ColorizeBckManager.BckTypes.BCK_PLANNING);
+
+        for (int index = 0; index < m_minigames.Count; ++index)
 		{
 			MinigameInfo tileInfo = Instantiate(m_minigameGUITilePrefab, m_verticalLayoutMinigames);
 			tileInfo.transform.localScale = new Vector3(1, 1, 1);

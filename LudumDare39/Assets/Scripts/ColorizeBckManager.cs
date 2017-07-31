@@ -19,7 +19,7 @@ public class ColorizeBckManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        SetUncoloredBckType(BckTypes.BCK_PLANNING);
+        SetUncoloredBckType(BckTypes.BCK_PHYSICS);
     }
 
     public void SetUncoloredBckType(BckTypes type)
