@@ -112,43 +112,43 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
             case 0:
                 if (m_PhysicsValue < 0.35f)
                 {
-                    m_Seconds = 7;
+                    m_Seconds = 10;
                 }
                 else if (m_PhysicsValue < 0.7f)
                 {
-                    m_Seconds = 13;
+                    m_Seconds = 15;
                 }
                 else
                 {
-                    m_Seconds = 17;
+                    m_Seconds = 20;
                 }
                 break;
             case 1:
                 if (m_MoneyValue < 0.35f)
                 {
-                    m_Seconds = 7;
+                    m_Seconds = 10;
                 }
                 else if (m_MoneyValue < 0.7f)
                 {
-                    m_Seconds = 13;
+                    m_Seconds = 15;
                 }
                 else
                 {
-                    m_Seconds = 17;
+                    m_Seconds = 20;
                 }
                 break;
             case 2:
                 if (m_SocialValue < 0.35f)
                 {
-                    m_Seconds = 7;
+                    m_Seconds = 10;
                 }
                 else if (m_SocialValue < 0.7f)
                 {
-                    m_Seconds = 13;
+                    m_Seconds = 15;
                 }
                 else
                 {
-                    m_Seconds = 17;
+                    m_Seconds = 20;
                 }
                 break;
         }
@@ -249,37 +249,37 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
             switch (m_Kind)
             {
                 case 0:
-                    if (m_MoneyValue < 0.35f)
+                    if (m_SocialValue < 0.35f)
                     {
-                        Load1();
+                        Load3();
                     }
-                    else if (m_MoneyValue < 0.7f)
+                    else if (m_SocialValue < 0.7f)
                     {
                         Load2();
                     }
                     else
                     {
-                        Load3();
+                        Load1();
                     }
                     break;
                 case 1:
-                    if (m_MoneyValue < 0.35f)
+                    if (m_PhysicsValue < 0.35f)
                     {
-                        Load1();
+                        Load3();
                     }
-                    else if (m_MoneyValue < 0.7f)
+                    else if (m_PhysicsValue < 0.7f)
                     {
                         Load2();
                     }
                     else
                     {
-                        Load3();
+                        Load1();
                     }
                     break;
                 case 2:
                     if (m_MoneyValue < 0.35f)
                     {
-                        Load1();
+                        Load3();
                     }
                     else if (m_MoneyValue < 0.7f)
                     {
@@ -287,7 +287,7 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
                     }
                     else
                     {
-                        Load3();
+                        Load1();
                     }
                     break;
             }
