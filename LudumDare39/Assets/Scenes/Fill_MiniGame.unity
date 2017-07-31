@@ -529,6 +529,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54a94aa411f177a43aaa8691f39dcdaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_StartMessage: 'Left click: select - rotate
+
+    Mouse wheel: rotate
+
+    Right click: put back'
   m_PrefabPhysicsPluggables:
   - m_Name: F_ZPiece
     m_Pluggable: {fileID: 114406544642811986, guid: 2c7b3a1cbbadfd34baccbd3e2a143dbc,
