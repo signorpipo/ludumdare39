@@ -15,14 +15,22 @@ public class ConnectGameManager : MinigameManager
 
     private const float DEFAULT_IMAGE_WIDTH = 100f;
 
+    private const float MIN_GAME_TIME = 6f;
+    private const float MAX_GAME_TIME = 14f;
+
+    private const float MIN_NUM_ITEMS = 4f;
+    private const float MAX_NUM_ITEMS = 8f;
+
+    private const float DELTA_NONMATCHED_ITEMS = 3;
+
     private int mNumGameItems = 0;
     private int mMatchedItem = 0;
 
     // 1 facile, 0 difficile
     public override void StartMinigame(int i_Type, float i_TimeValue, float i_NumItemValue, float i_ItemVelocityValue) //i_type will be between 0 and 2
     {
-        mNumGameItems = 8 - (int)(4f * i_NumItemValue);
-        mGameTotalTime = mGameTime = 6f + 8f * i_TimeValue;
+        mNumGameItems = (int)(MAX_NUM_ITEMS - (MIN_NUM_ITEMS * i_NumItemValue));
+        mGameTotalTime = mGameTime = MIN_GAME_TIME + (MAX_GAME_TIME - MIN_GAME_TIME) * i_TimeValue;
         mCurrState = GameState.PLAY_GAME;
         mScore = 0;
 
@@ -80,7 +88,11 @@ public class ConnectGameManager : MinigameManager
             mMatchedItem++;
             mScore = (float)mMatchedItem / (float)mNumGameItems * 0.85f;
             if (mMatchedItem == mNumGameItems)
+            {
+                // Bonus se si finisce prima dello scadere
+                mScore += 0.15f * Mathf.Clamp(mGameTime / (MIN_GAME_TIME * 0.5f),0f,1f);
                 SceneEnded(1.0f);
+            }
         }
     }
 
