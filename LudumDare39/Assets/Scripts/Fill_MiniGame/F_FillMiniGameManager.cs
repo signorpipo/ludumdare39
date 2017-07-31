@@ -62,6 +62,7 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
     private AudioSource m_AudioSource;
     private AudioClip m_DockSound;
     private AudioClip m_WinSound;
+    private AudioClip m_TimesUpSound;
 
     public void Awake () {
 
@@ -85,6 +86,7 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
         m_AudioSource = gameObject.AddComponent<AudioSource>();
         m_DockSound = Resources.Load<AudioClip>("Audio/SFX/F_Dock");
         m_WinSound = Resources.Load<AudioClip>("Audio/SFX/F_Win");
+        m_TimesUpSound = Resources.Load<AudioClip>("Audio/SFX/F_TimesUp");
 
     }
 
@@ -318,6 +320,7 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
 
     private void OnFailure()
     {
+        m_AudioSource.PlayOneShot(m_TimesUpSound, 0.5F);
         EngGame(false);
     }
 
