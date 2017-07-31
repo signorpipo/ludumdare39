@@ -77,9 +77,9 @@ public class GameManager : Singleton<GameManager>
 
     private void SceneLoaded(Scene i_scene, LoadSceneMode i_mode)
     {
-        Debug.Log("hola");
+        //Debug.Log("hola");
         AbstarcMinigameManager CurrentGame = FindObjectOfType<AbstarcMinigameManager>();
-        CurrentGame.StartMinigame(m_selectedMinigames[m_selectedGamesCounter].GetGameVersion(), m_currentPsychophysicsValue, m_currentMoneyValue, m_currentSocialValue);
+        CurrentGame.StartMinigame(m_selectedMinigames[m_selectedGamesCounter].GetGameVersion(), m_currentPsychophysicsValue / 100, m_currentMoneyValue / 100, m_currentSocialValue / 100);
         CurrentGame.onSceneEnded += LoadNextSceneAndUpdateStats;
         SceneManager.sceneLoaded -= SceneLoaded;
     }
