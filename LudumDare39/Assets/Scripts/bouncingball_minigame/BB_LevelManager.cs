@@ -136,6 +136,10 @@ public class BB_LevelManager : AbstarcMinigameManager
             m_StartTimer.OnTimesUp += OnStartTimerEnd;
             m_StartTimer.StartTimer(2, "Slam-dunk!", "", null);
         }
+        else
+        {
+            SceneEnded(.0f);
+        }
 
         m_AttemptsOrLife.text = "Life: " + m_AttemptsNumber;
     }
@@ -146,6 +150,8 @@ public class BB_LevelManager : AbstarcMinigameManager
         m_RunningTimer.StopTimer();
         m_MiddleMessage.text = "Good Work!";
         m_MiddleMessage.enabled = true;
+
+        SceneEnded(1.0f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

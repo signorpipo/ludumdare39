@@ -147,10 +147,15 @@ public class DodgeLevelManager : AbstarcMinigameManager
         if (m_LevelFinishedSuccesfully)
         {
             m_CentralText.text = "Good Work!";
+
+            SceneEnded(1.0f);
+ 
         }
         else
         {
             m_CentralText.text = "Bleah! Holy Shit!";
+            SceneEnded(.0f);
+
         }
     } 
 
