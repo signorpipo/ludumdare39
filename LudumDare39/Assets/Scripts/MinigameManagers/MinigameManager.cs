@@ -15,10 +15,6 @@ public class MinigameManager : AbstarcMinigameManager
         END_GAME
     }
 
-    public Slider gameTimeBarSlider;
-
-    public MessageManager MessageMgr;
-
     protected GameState mCurrState = GameState.NO_GAME;
     protected float mGameTotalTime = 0;
     protected float mGameTime = 0;
@@ -46,7 +42,7 @@ public class MinigameManager : AbstarcMinigameManager
             }
             else
             {
-                gameTimeBarSlider.value = mGameTime / mGameTotalTime;
+                //gameTimeBarSlider.value = mGameTime / mGameTotalTime;
             }
         }
     }

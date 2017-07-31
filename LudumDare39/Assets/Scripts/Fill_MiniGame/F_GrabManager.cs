@@ -33,7 +33,7 @@ public class F_GrabManager : MonoBehaviour {
             {
                 m_SkipFirst = false;
             }
-            else if (Input.GetMouseButtonDown(0))
+            else if (Input.GetMouseButtonUp(0))
             {
                 if(OnTryDockEvent != null)
                 {
@@ -42,7 +42,7 @@ public class F_GrabManager : MonoBehaviour {
             }
             else if (Input.GetMouseButtonDown(1))
             {
-                ReleaseGrabbed(true);
+                m_Grabbed.Turn(F_Direction.RIGHT);
             }
             else if (Input.GetAxis("Mouse ScrollWheel") > 0f)
             {

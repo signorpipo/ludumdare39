@@ -46,9 +46,9 @@ public class StatsCalculator : MonoBehaviour
     public void SetStaticSliders()
     {
 
-        m_leftSliderBack.value = m_gameManager.CurrentPsychophysicsValue;
-        m_middleSliderBack.value = m_gameManager.CurrentMoneyValue;
-        m_rightSliderBack.value = m_gameManager.CurrentSocialValue;
+        m_leftSliderFront.value = m_gameManager.CurrentPsychophysicsValue;
+        m_leftSliderFront.value = m_gameManager.CurrentMoneyValue;
+        m_leftSliderFront.value = m_gameManager.CurrentSocialValue;
 
         ResetSliders();
     }

@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class TypingManager : AbstarcMinigameManager
 {
+    private bool go=false;
+
     [SerializeField]
     private GameObject letterFallPref;
 
@@ -32,17 +34,20 @@ public class TypingManager : AbstarcMinigameManager
     private int points = 0;
     private int maxPoint = 0;
     private Text timeText;
-    
+    [SerializeField]
+    private List<Sprite> typeItem;
+
     public override void StartMinigame(int i_Type, float i_TimeValue, float i_NumItemValue, float i_ItemVelocityValue)
     {
-        numLet = 3 + (int)Mathf.Lerp(3.0f, 0.0f, i_NumItemValue);
+        
+        numLet = 3 + (int)Mathf.Lerp(4.0f, 0.0f, i_NumItemValue);
         timeGame = 10.0f + (10.0f * i_TimeValue);
         glitchVelocity = Mathf.Lerp(30.0f, 0.0f, i_ItemVelocityValue);
 
         Camera camera = FindObjectOfType<Camera>();
         newCanvas = Instantiate(canvas);
         newCanvas.worldCamera = camera;
-
+        timeText = newCanvas.transform.Find("Time").GetComponent<Text>();
         letterTriggerList = new List<GameObject>();
 
         float left = camera.orthographicSize * camera.aspect * -1;
@@ -70,71 +75,45 @@ public class TypingManager : AbstarcMinigameManager
             letterFalling.SetActive(false);
             letterFallPool.Enqueue(letterFalling);
         }
+        go = true;
     }
 
     //for testing alone
     void Start()
     {
-        Camera camera = FindObjectOfType<Camera>();
-        newCanvas = Instantiate(canvas);
-        newCanvas.worldCamera = camera;
-        timeText= newCanvas.transform.Find("Time").GetComponent<Text>();
-        letterTriggerList = new List<GameObject>();
-
-        float left = camera.orthographicSize * camera.aspect * -1;
-        float space = (camera.orthographicSize * camera.aspect * 2) / (numLet + 1);
-        for (int index = 1; index <= numLet; index++)
-        {
-            GameObject letterTrigger = Instantiate(letterTriggerPref, new Vector3(left + (space * index), (camera.orthographicSize * 0.85f) * -1, -1), Quaternion.identity, newCanvas.transform);//0.9f= 90% of camera hight
-            letterTriggerList.Add(letterTrigger);
-            letterTrigger.name = typeCode[index - 1].ToString();
-            Transform text=letterTrigger.transform.Find("Text");
-           
-            text.GetComponent<Text>().text= typeCode[index - 1].ToString();
-            LetterTrigger letterListener = letterTrigger.GetComponent<LetterTrigger>();
-            letterListener.MyKey = typeCode[index - 1];
-            letterListener.onLetterHit += OnLetterHit;
-            letterListener.onLetterMiss += OnLetterMiss;
-        }
-        letterFallPool = new Queue<GameObject>();
-        for(int i =0; i < 10; i++)
-        {
-            GameObject letterFalling = Instantiate(letterFallPref);
-            
-            LetterFall letterFallListener = letterFalling.GetComponent<LetterFall>();
-            letterFallListener.onLetterPass += OnLetterPass;
-            letterFalling.SetActive(false);
-            letterFallPool.Enqueue(letterFalling);
-        }
+        StartMinigame(0,1.0f, 1.0f, 1.0f);
     }
     
     public void Update()
     {
-        timer -= Time.deltaTime;
-        timeGame -= Time.deltaTime;
-        timeText.text = ((int)timeGame).ToString();
-        
-        if (timer < 0.0f && timeGame>0.0f)
+        if (go)
         {
-            timer = timeSpawnLetter+ UnityEngine.Random.Range(-0.4f, 0.4f);
-            GameObject letterFallSpawn= letterFallPool.Dequeue();
-            int random = UnityEngine.Random.Range(0, letterTriggerList.Count);
-            float positionX=letterTriggerList[random].transform.position.x;
-            
-            letterFallSpawn.transform.position = new Vector3(positionX, (Camera.main.orthographicSize * 1.2f), 0.0f);
-            letterFallSpawn.SetActive(true);
-            float addGlitchVelocity=0.0f;
-            if(glitchVelocity> UnityEngine.Random.Range(0, 100))
+            timer -= Time.deltaTime;
+            timeGame -= Time.deltaTime;
+            timeText.text = ((int)timeGame).ToString();
+
+            if (timer < 0.0f && timeGame > 0.0f)
             {
-                addGlitchVelocity = 2.0f;
+                timer = timeSpawnLetter + UnityEngine.Random.Range(-0.4f, 0.4f);
+                GameObject letterFallSpawn = letterFallPool.Dequeue();
+                int random = UnityEngine.Random.Range(0, letterTriggerList.Count);
+                float positionX = letterTriggerList[random].transform.position.x;
+
+                letterFallSpawn.transform.position = new Vector3(positionX, (Camera.main.orthographicSize * 1.2f), 0.0f);
+                letterFallSpawn.SetActive(true);
+                float addGlitchVelocity = 0.0f;
+                if (glitchVelocity > UnityEngine.Random.Range(0, 100))
+                {
+                    addGlitchVelocity = 2.0f;
+                }
+                letterFallSpawn.GetComponent<LetterFall>().Velocity = fallingVelocity + addGlitchVelocity;
             }
-            letterFallSpawn.GetComponent<LetterFall>().Velocity =fallingVelocity+addGlitchVelocity;
+            if (timeGame < 0.0f)
+            {
+                float finalScore = ((100.0f / maxPoint) * points) / 100;
+                SceneEnded(finalScore);
+            }
         }
-        if (timeGame < 0.0f)
-        {
-            float finalScore = ((100.0f/maxPoint)*points)/100;
-            SceneEnded(finalScore);
-        } 
     }
 
     public void OnLetterHit(GameObject letterFall)
