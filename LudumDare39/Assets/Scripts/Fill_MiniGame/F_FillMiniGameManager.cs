@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class F_FillMiniGameManager : AbstarcMinigameManager {
 
     [System.Serializable]
@@ -52,12 +53,15 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
     private F_GridManager m_GridManager;
     private F_GrabManager m_GrabManager;
 
-
     private float m_PhysicsValue;
     private float m_MoneyValue;
     private float m_SocialValue;
 
     private int m_Kind;
+
+    private AudioSource m_AudioSource;
+    private AudioClip m_DockSound;
+    private AudioClip m_WinSound;
 
     public void Awake () {
 
@@ -77,6 +81,10 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
         {
             m_PrefabPluggablesDictionary[2].Add(namedPluggable.m_Name, namedPluggable.m_Pluggable);
         }
+
+        m_AudioSource = gameObject.AddComponent<AudioSource>();
+        m_DockSound = Resources.Load<AudioClip>("Audio/SFX/F_Dock");
+        m_WinSound = Resources.Load<AudioClip>("Audio/SFX/F_Win");
 
     }
 
@@ -183,9 +191,14 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
             m_GrabManager.ReleaseGrabbed(false);
             if(m_GridManager.GetDocked() == m_ToDock)
             {
+                m_AudioSource.PlayOneShot(m_WinSound, 0.7F);
                 m_GrabManager.DisableInput();
                 m_WinCanvas.gameObject.SetActive(true);
                 EngGame(true);
+            }
+            else
+            {
+                m_AudioSource.PlayOneShot(m_DockSound, 0.7F);
             }
         }else
         {
