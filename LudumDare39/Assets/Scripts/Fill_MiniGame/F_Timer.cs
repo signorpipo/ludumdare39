@@ -20,7 +20,7 @@ public class F_Timer : MonoBehaviour
     [SerializeField]
     private GameObject m_EndText;
 
-    private int m_TimerSeconds = 10;
+    private float m_TimerSeconds = 10;
 
     private string m_StartTitle = "Title";
     private string m_StartMessage = "Start!";
@@ -28,7 +28,7 @@ public class F_Timer : MonoBehaviour
 
     private float m_ElapsedTime = 0.0f;
     private bool m_GameStarted = false;
-    private int m_Seconds;
+    private float m_Seconds;
     private bool m_IsRunningMode = false;
 
     public void StartTimer(F_TimesUpEvent i_OnGameStart, F_TimesUpEvent i_OnTimesUp, string i_StartTitle, string i_StartMessage, int i_GameStartSeconds, string i_TimesUpMessage, int i_TimerSeconds)
@@ -69,7 +69,7 @@ public class F_Timer : MonoBehaviour
 
                 if (m_GameStarted)
                 {
-                    m_LevelTimer.GetComponentInChildren<Text>().text = "Time Left: " + m_Seconds;
+                    m_LevelTimer.GetComponentInChildren<Text>().text = "Time Left: " + (int)m_Seconds;
                 }
             }
 
@@ -118,7 +118,11 @@ public class F_Timer : MonoBehaviour
     
     public int GetSecondsLeft()
     {
-        return m_Seconds;
+        return (int)m_Seconds;
     }
 
+    public void DecreaseTime(float i_Delta)
+    {
+        m_Seconds -= i_Delta;
+    }
 }

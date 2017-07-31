@@ -83,14 +83,18 @@ public class TypingManager : AbstarcMinigameManager
             letterFalling.SetActive(false);
             letterFallPool.Enqueue(letterFalling);
         }
-        go = true;
+        StartTimer(gameObject.transform, begin, endGame, "typing", "is guitar hero", 4, "Time out", (int)timeGame);
     }
 
+    public void begin()
+    {
+        go = true;
+    }
     //for testing alone
-    //void Start()
-    //{
-    //    StartMinigame(2, 1.0f, 1.0f, 1.0f);
-    //}
+   /* void Start()
+    {
+        StartMinigame(2, 1.0f, 1.0f, 1.0f);
+    }*/
 
     public void Update()
     {
@@ -98,7 +102,7 @@ public class TypingManager : AbstarcMinigameManager
         {
             timer -= Time.deltaTime;
             timeGame -= Time.deltaTime;
-            timeText.text = ((int)timeGame).ToString();
+            //timeText.text = ((int)timeGame).ToString();
 
             if (timer < 0.0f && timeGame > 0.0f)
             {
@@ -116,12 +120,14 @@ public class TypingManager : AbstarcMinigameManager
                 }
                 letterFallSpawn.GetComponent<LetterFall>().Velocity = fallingVelocity + addGlitchVelocity;
             }
-            if (timeGame < 0.0f)
-            {
-                float finalScore = ((100.0f / maxPoint) * points) / 100;
-                SceneEnded(finalScore);
-            }
+
         }
+    }
+
+    public void endGame()
+    {
+        float finalScore = ((100.0f / maxPoint) * points) / 100;
+        SceneEnded(finalScore);
     }
 
     public void OnLetterHit(GameObject letterFall)
@@ -143,8 +149,12 @@ public class TypingManager : AbstarcMinigameManager
 
     public void OnLetterMiss()
     {
-        newCanvas.GetComponent<Animator>().SetTrigger("onResizeMiss");
-        timeGame -= 0.3f;
+        if (go)
+        {
+            newCanvas.GetComponent<Animator>().SetTrigger("onResizeMiss");
+            timeGame -= 0.3f;
+            DecreaseTime(0.3f);
+        }
     }
 
 
