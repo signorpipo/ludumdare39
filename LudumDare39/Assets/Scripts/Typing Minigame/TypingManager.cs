@@ -51,7 +51,7 @@ public class TypingManager : AbstarcMinigameManager
         }
         FindObjectOfType<ColorizeBckManager>().SetUncoloredBckType(type);
 
-        numLet = 3 + (int)Mathf.Lerp(4.0f, 0.0f, i_NumItemValue);
+        numLet = 3 + Mathf.Clamp((int)Mathf.Lerp(4.0f, 0.0f, i_NumItemValue),0,3);
         timeGame = 10.0f + (10.0f * i_TimeValue);
         glitchVelocity = Mathf.Lerp(30.0f, 0.0f, i_ItemVelocityValue);
 
@@ -97,7 +97,7 @@ public class TypingManager : AbstarcMinigameManager
     //for testing alone
     /*void Start()
     {
-        StartMinigame(1, 1.0f, 1.0f, 1.0f);
+        StartMinigame(1, 1.0f, 0.0f, 0.0f);
 
     }*/
 
