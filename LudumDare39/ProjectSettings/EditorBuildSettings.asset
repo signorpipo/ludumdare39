@@ -35,3 +35,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EndMinigame.unity
     guid: 5547cfb228892de4cb94860b376ee60b
+  - enabled: 1
+    path: Assets/Scenes/Typing_minigame.unity
+    guid: 00000000000000000000000000000000

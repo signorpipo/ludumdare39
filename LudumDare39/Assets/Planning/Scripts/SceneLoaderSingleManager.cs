@@ -67,7 +67,7 @@ public class SceneLoaderSingleManager : Singleton<SceneLoaderSingleManager>
         {
             m_isMinigame = true;
             SceneManager.LoadScene(end_minigame_scene);
-            run_scene = end_minigame_scene;
+            //run_scene = end_minigame_scene;
             Debug.Log("Caricato livello di recap gioco");
 
             
