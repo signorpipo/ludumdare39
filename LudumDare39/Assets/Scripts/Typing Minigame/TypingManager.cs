@@ -20,11 +20,14 @@ public class TypingManager : AbstarcMinigameManager
 
     [SerializeField]
     private GameObject letterTriggerPref;
-
+    [SerializeField]
+    private AudioClip audioHit;
+    [SerializeField]
+    private AudioClip audioMiss;
     [SerializeField]
     private Canvas canvas;
     private Canvas newCanvas;
-
+    private AudioSource playEffect;
     [SerializeField]
     private List<KeyCode> typeCode;
     private Queue<GameObject> letterFallPool;
@@ -33,7 +36,7 @@ public class TypingManager : AbstarcMinigameManager
     private List<GameObject> letterTriggerList;
     private int points = 0;
     private int maxPoint = 0;
-    private Text timeText;
+
     [SerializeField]
     private List<Sprite> typeItem;
 
@@ -52,10 +55,10 @@ public class TypingManager : AbstarcMinigameManager
         timeGame = 10.0f + (10.0f * i_TimeValue);
         glitchVelocity = Mathf.Lerp(30.0f, 0.0f, i_ItemVelocityValue);
 
+        playEffect = gameObject.AddComponent<AudioSource>();
         Camera camera = FindObjectOfType<Camera>();
         newCanvas = Instantiate(canvas);
         newCanvas.worldCamera = camera;
-        timeText = newCanvas.transform.Find("Time").GetComponent<Text>();
         letterTriggerList = new List<GameObject>();
 
         float left = camera.orthographicSize * camera.aspect * -1;
@@ -83,17 +86,19 @@ public class TypingManager : AbstarcMinigameManager
             letterFalling.SetActive(false);
             letterFallPool.Enqueue(letterFalling);
         }
-        StartTimer(gameObject.transform, begin, endGame, "typing", "is guitar hero", 4, "Time out", (int)timeGame);
+        StartTimer(gameObject.transform, begin, endGame, "Texting", "Press the corresponding key to take the item ", 4, "Time out", (int)timeGame);
     }
 
     public void begin()
     {
         go = true;
     }
+
     //for testing alone
-   /* void Start()
+    /*void Start()
     {
-        StartMinigame(2, 1.0f, 1.0f, 1.0f);
+        StartMinigame(1, 1.0f, 1.0f, 1.0f);
+
     }*/
 
     public void Update()
@@ -102,7 +107,6 @@ public class TypingManager : AbstarcMinigameManager
         {
             timer -= Time.deltaTime;
             timeGame -= Time.deltaTime;
-            //timeText.text = ((int)timeGame).ToString();
 
             if (timer < 0.0f && timeGame > 0.0f)
             {
@@ -134,6 +138,7 @@ public class TypingManager : AbstarcMinigameManager
     {
         letterFall.SetActive(false);
         letterFallPool.Enqueue(letterFall);
+        playEffect.PlayOneShot(audioHit,0.3f);
         points++;
         maxPoint++;
         newCanvas.GetComponent<Animator>().SetTrigger("onResizeHit");
@@ -152,6 +157,7 @@ public class TypingManager : AbstarcMinigameManager
         if (go)
         {
             newCanvas.GetComponent<Animator>().SetTrigger("onResizeMiss");
+            playEffect.PlayOneShot(audioMiss, 1.0f);
             timeGame -= 0.3f;
             DecreaseTime(0.3f);
         }
