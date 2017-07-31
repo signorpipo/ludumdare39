@@ -85,15 +85,6 @@ public class TypingManager : AbstarcMinigameManager
         }
         go = true;
     }
-<<<<<<< HEAD
-=======
-
-    //for testing alone
-    void Start()
-    {
-        StartMinigame(2,1.0f, 1.0f, 1.0f);
-    }
->>>>>>> MINIGAME_-_Typing
     
     public void Update()
     {
