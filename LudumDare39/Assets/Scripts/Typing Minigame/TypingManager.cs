@@ -77,7 +77,7 @@ public class TypingManager : AbstarcMinigameManager
         for (int i = 0; i < 10; i++)
         {
             GameObject letterFalling = Instantiate(letterFallPref);
-
+            letterFalling.GetComponent<SpriteRenderer>().sprite = typeItem[i_Type];
             LetterFall letterFallListener = letterFalling.GetComponent<LetterFall>();
             letterFallListener.onLetterPass += OnLetterPass;
             letterFalling.SetActive(false);
@@ -85,6 +85,15 @@ public class TypingManager : AbstarcMinigameManager
         }
         go = true;
     }
+<<<<<<< HEAD
+=======
+
+    //for testing alone
+    void Start()
+    {
+        StartMinigame(2,1.0f, 1.0f, 1.0f);
+    }
+>>>>>>> MINIGAME_-_Typing
     
     public void Update()
     {
