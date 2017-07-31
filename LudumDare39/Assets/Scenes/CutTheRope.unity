@@ -552,7 +552,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Basket: {fileID: 1737358013}
-  m_ForceStart: 1
+  m_ForceStart: 0
   m_RopeAndBalPrefab: {fileID: 1440550671677760, guid: dfc9271d076daf54c800f51e2d11623a,
     type: 2}
   m_Life: {fileID: 531457025}
