@@ -57,6 +57,15 @@ public class ShootingGame : AbstarcMinigameManager
 
     public override void StartMinigame(int i_Type, float i_TimeValue, float i_NumItemValue, float i_ItemVelocityValue)
     {
+        ColorizeBckManager.BckTypes type = ColorizeBckManager.BckTypes.BCK_PLANNING;
+        switch (i_Type)
+        {
+            case 0: type = ColorizeBckManager.BckTypes.BCK_PHYSICS; break;
+            case 1: type = ColorizeBckManager.BckTypes.BCK_MONEY; break;
+            case 2: type = ColorizeBckManager.BckTypes.BCK_SOCIAL; break;
+        }
+        FindObjectOfType<ColorizeBckManager>().SetUncoloredBckType(type);
+
         float difficultySpeed = i_ItemVelocityValue;
 
         m_directionArrow = Instantiate(m_arrowPrefab);
