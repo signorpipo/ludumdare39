@@ -87,10 +87,10 @@ public class TypingManager : AbstarcMinigameManager
     }
 
     //for testing alone
-    void Start()
-    {
-        StartMinigame(2,1.0f, 1.0f, 1.0f);
-    }
+    //void Start()
+    //{
+    //    StartMinigame(2,1.0f, 1.0f, 1.0f);
+    //}
     
     public void Update()
     {
