@@ -69,7 +69,14 @@ public class DodgeLevelManager : AbstarcMinigameManager
         m_SpawnManager.GetComponent<SpawnManager>().SpawnRate = ((0.5f - 0.2f) * i_NumItemValue + 0.2f);
         m_EnemyVerticalSpeed = -(((1.0f - i_ItemVelocityValue) * (13 - 5) + 5));
 
-
+        ColorizeBckManager.BckTypes type = ColorizeBckManager.BckTypes.BCK_PLANNING;
+        switch(i_Type)
+        {
+            case 0: type = ColorizeBckManager.BckTypes.BCK_PHYSICS; break;
+            case 1: type = ColorizeBckManager.BckTypes.BCK_MONEY; break;
+            case 2: type = ColorizeBckManager.BckTypes.BCK_SOCIAL; break;
+        }
+        FindObjectOfType<ColorizeBckManager>().SetUncoloredBckType(type);
         DoStart();
     }
 

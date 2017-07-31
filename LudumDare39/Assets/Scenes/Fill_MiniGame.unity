@@ -125,7 +125,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4106431377503634, guid: 1004998814233624dac8c042b9352761, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4106431377503634, guid: 1004998814233624dac8c042b9352761, type: 2}
       propertyPath: m_LocalRotation.x
@@ -587,16 +587,10 @@ MonoBehaviour:
   - m_Name: F_LPieceInverse
     m_Pluggable: {fileID: 114415537728405914, guid: 14507b4f32e821d489fa429311bf16dc,
       type: 2}
-  m_Backgrounds:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   m_WinCanvas: {fileID: 1343709449}
   m_PrefabGridLine: {fileID: 120697323196621642, guid: cbfdccf27b04341478711ea78597603e,
     type: 2}
   m_PrefabCellBackground: {fileID: 212510848807690234, guid: 698d7d1aadc7c944aaf95d33d02223a5,
-    type: 2}
-  m_PrefabTimer: {fileID: 114319255096026534, guid: 5cc9c071635050741befcc9acf6e5eab,
     type: 2}
   m_Restart: 0
   m_StartInput:

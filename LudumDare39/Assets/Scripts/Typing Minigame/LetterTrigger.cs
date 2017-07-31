@@ -8,7 +8,6 @@ public delegate void OnLetterMiss();
 public class LetterTrigger : MonoBehaviour
 {
     private bool inside= false;
-    private GameObject objectTriggered;
     private KeyCode myKey;
     public KeyCode MyKey
     {
@@ -19,19 +18,25 @@ public class LetterTrigger : MonoBehaviour
     public OnLetterHit onLetterHit = null;
     public OnLetterMiss onLetterMiss = null;
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (Input.GetKeyDown(myKey)&&onLetterHit != null)
+        {
+            onLetterHit(collision.gameObject);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         inside = true;
-        objectTriggered = collision.gameObject;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         inside = false;
-        objectTriggered = null;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (Input.GetKeyDown(myKey))
         {
@@ -39,10 +44,6 @@ public class LetterTrigger : MonoBehaviour
             if (!inside && onLetterMiss != null)
             {
                 onLetterMiss();              
-            }
-            else if (inside && onLetterHit != null)
-            {
-                onLetterHit(objectTriggered);
             }
         }
     }
