@@ -9,6 +9,9 @@ public class MinigameInterface
     private string m_name = "Default";
 
     [SerializeField]
+    private string m_visualizedName = "Default";
+
+    [SerializeField]
     private int m_type = 0;
 
     [SerializeField]
@@ -23,6 +26,11 @@ public class MinigameInterface
     public string GetName()
     {
         return m_name;
+    }
+
+    public string GetVisibleName()
+    {
+        return m_visualizedName;
     }
 
     public int GetGameVersion()

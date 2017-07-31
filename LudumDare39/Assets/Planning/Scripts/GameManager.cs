@@ -9,23 +9,40 @@ public class GameManager : Singleton<GameManager>
 
     private GameObject m_sceneLoader = null;
 
-    const float m_defaultPsychophysicsValue = 60.0f;
+    float m_defaultPsychophysicsValue;
 
-    const float m_defaultMoneyValue = 60.0f;
+    float m_defaultMoneyValue;
 
-    const float m_defaultSocialValue = 60.0f;
+    float m_defaultSocialValue;
 
-    private float m_currentPsychophysicsValue = m_defaultPsychophysicsValue;
+    private float m_currentPsychophysicsValue = 0;
 
-    private float m_currentMoneyValue = m_defaultMoneyValue;
+    private float m_currentMoneyValue = 0;
 
-    private float m_currentSocialValue = m_defaultSocialValue;
+    private float m_currentSocialValue = 0;
 
     private int m_selectedGamesCounter = 0;
 
     public int m_weekDaysCounter = 0;
 
+    public string m_currentSceneName = "null";
+
     private float[] m_oldValues = new float[3];
+
+    public void Awake()
+    {
+        m_defaultPsychophysicsValue = UnityEngine.Random.Range(40, 61);
+
+        m_defaultMoneyValue = UnityEngine.Random.Range(40, 61);
+
+        m_defaultSocialValue = UnityEngine.Random.Range(40, 61);
+
+        m_currentPsychophysicsValue = m_defaultPsychophysicsValue;
+
+        m_currentMoneyValue = m_defaultMoneyValue;
+
+        m_currentSocialValue = m_defaultSocialValue;
+    }
 
     public float[] OldValues
     {
@@ -92,6 +109,7 @@ public class GameManager : Singleton<GameManager>
     {
         AbstarcMinigameManager CurrentGame = FindObjectOfType<AbstarcMinigameManager>();
         CurrentGame.StartMinigame(m_selectedMinigames[m_selectedGamesCounter].GetGameVersion(), m_currentPsychophysicsValue / 100, m_currentMoneyValue / 100, m_currentSocialValue / 100);
+        m_currentSceneName = m_selectedMinigames[m_selectedGamesCounter].GetVisibleName();
         CurrentGame.onSceneEnded += LoadNextSceneAndUpdateStats;
         SceneManager.sceneLoaded -= SceneLoaded;
     }
@@ -118,53 +136,53 @@ public class GameManager : Singleton<GameManager>
             {
                 if (m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue() > 0)
                 {
-                    m_currentPsychophysicsValue = Mathf.Clamp(m_currentPsychophysicsValue + (m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue() * resultMutator +
-                        m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue() * resultMutator * m_weekDays[m_weekDaysCounter].m_psychophysicsBonus) / 100.0f, 0.0f, 100.0f);
+                    m_currentPsychophysicsValue = Mathf.Clamp(m_currentPsychophysicsValue + m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue() * resultMutator +
+                        /*m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue() * resultMutator **/ m_weekDays[m_weekDaysCounter].m_psychophysicsBonus / 3.0f, 0.0f, 100.0f);
                 }
                 else
                 {
-                    m_currentPsychophysicsValue = CalculateLosingValue(m_currentPsychophysicsValue, m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue());
+                    m_currentPsychophysicsValue = CalculateLosingValue(m_currentPsychophysicsValue, m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue(), m_weekDays[m_weekDaysCounter].m_psychophysicsBonus / 3.0f);
                 }
 
                 if (m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue() > 0)
                 {
-                    m_currentMoneyValue = Mathf.Clamp(m_currentMoneyValue + (m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue() * resultMutator +
-                        m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue() * resultMutator * m_weekDays[m_weekDaysCounter].m_moneyBonus / 100.0f), 0.0f, 100.0f);
+                    m_currentMoneyValue = Mathf.Clamp(m_currentMoneyValue + m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue() * resultMutator +
+                        /*m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue() * resultMutator **/ m_weekDays[m_weekDaysCounter].m_moneyBonus / 3.0f, 0.0f, 100.0f);
                 }
                 else
                 {
-                    m_currentMoneyValue = CalculateLosingValue(m_currentMoneyValue, m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue());
+                    m_currentMoneyValue = CalculateLosingValue(m_currentMoneyValue, m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue(), m_weekDays[m_weekDaysCounter].m_moneyBonus / 3.0f);
                 }
 
                 if (m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue() > 0)
                 {
-                    m_currentSocialValue = Mathf.Clamp(m_currentSocialValue + (m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue() * resultMutator +
-                        m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue() * resultMutator * m_weekDays[m_weekDaysCounter].m_socialBonus / 100.0f), 0.0f, 100.0f);
+                    m_currentSocialValue = Mathf.Clamp(m_currentSocialValue + m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue() * resultMutator +
+                        /*m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue() * resultMutator **/ m_weekDays[m_weekDaysCounter].m_socialBonus / 3.0f, 0.0f, 100.0f);
                 }
                 else
                 {
-                    m_currentSocialValue = CalculateLosingValue(m_currentSocialValue, m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue());
+                    m_currentSocialValue = CalculateLosingValue(m_currentSocialValue, m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue(), m_weekDays[m_weekDaysCounter].m_socialBonus / 3.0f);
                 }
             }
             else
             {
                 if (m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue() < 0)
                 {
-                    m_currentPsychophysicsValue = CalculateLosingValue(m_currentPsychophysicsValue, m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue());
+                    m_currentPsychophysicsValue = CalculateLosingValue(m_currentPsychophysicsValue, m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue(), m_weekDays[m_weekDaysCounter].m_psychophysicsBonus / 3.0f);
                 }
 
                 if (m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue() < 0)
                 {
-                    m_currentMoneyValue = CalculateLosingValue(m_currentMoneyValue, m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue());
+                    m_currentMoneyValue = CalculateLosingValue(m_currentMoneyValue, m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue(), m_weekDays[m_weekDaysCounter].m_moneyBonus / 3.0f);
                 }
 
                 if (m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue() < 0)
                 {
-                    m_currentSocialValue = CalculateLosingValue(m_currentSocialValue, m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue());
+                    m_currentSocialValue = CalculateLosingValue(m_currentSocialValue, m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue(), m_weekDays[m_weekDaysCounter].m_socialBonus / 3.0f);
                 }
             }
 
-            }
+        }
         else
         {
             m_selectedGamesCounter++;
@@ -185,14 +203,15 @@ public class GameManager : Singleton<GameManager>
             }
             else
             {
-                SceneManager.sceneLoaded += SceneLoaded;
+            m_currentSceneName = m_selectedMinigames[m_selectedGamesCounter].GetVisibleName();
+            SceneManager.sceneLoaded += SceneLoaded;
                 m_sceneLoaderManager.LoadNextScene();
             }
 
 
     }
 
-    private float CalculateLosingValue(float initialValue, float malus)
+    private float CalculateLosingValue(float initialValue, float malus, float bonus)
     {
         if (malus < 35)
         {
@@ -200,14 +219,14 @@ public class GameManager : Singleton<GameManager>
         }
         else if (malus < 70)
         {
-            malus *= 2;
+            malus *= 1.25f;
         } 
         else
         {
-            malus *= 3;
+            malus *= 1.5f;
         }
 
-        return Mathf.Clamp(m_currentPsychophysicsValue + malus, 0.0f, 100.0f);
+        return Mathf.Clamp(initialValue + malus + bonus, 0.0f, 100.0f);
     }
 
     private void EndGameCondition()
@@ -220,15 +239,17 @@ public class GameManager : Singleton<GameManager>
 
     public void ResetGame()
     {
-        m_currentPsychophysicsValue = m_defaultPsychophysicsValue;
+        m_currentPsychophysicsValue = UnityEngine.Random.Range(40, 60); ;
 
-        m_currentMoneyValue = m_defaultMoneyValue;
+        m_currentMoneyValue = UnityEngine.Random.Range(40, 60); ;
 
-        m_currentSocialValue = m_defaultSocialValue;
+        m_currentSocialValue = UnityEngine.Random.Range(40, 60); ;
 
         m_selectedGamesCounter = 0;
 
         m_weekDaysCounter = 0;
+
+        m_currentSceneName = "null";
     }
 }
 

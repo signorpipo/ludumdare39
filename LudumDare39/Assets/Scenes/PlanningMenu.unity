@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 8
+  serializedVersion: 7
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -25,7 +25,6 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 3
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -42,7 +41,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 11
+  serializedVersion: 7
   m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -54,7 +53,7 @@ LightmapSettings:
     m_EnableBakedLightmaps: 0
     m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
-    serializedVersion: 9
+    serializedVersion: 4
     m_Resolution: 2
     m_BakeResolution: 40
     m_TextureWidth: 1024
@@ -67,27 +66,13 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
+    m_DirectLightInLightProbes: 1
     m_FinalGather: 0
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
-    m_MixedBakeMode: 1
-    m_BakeBackend: 0
-    m_PVRSampling: 1
-    m_PVRDirectSampleCount: 32
-    m_PVRSampleCount: 500
-    m_PVRBounces: 2
-    m_PVRFiltering: 0
-    m_PVRFilteringMode: 1
-    m_PVRCulling: 1
-    m_PVRFilteringGaussRadiusDirect: 1
-    m_PVRFilteringGaussRadiusIndirect: 5
-    m_PVRFilteringGaussRadiusAO: 2
-    m_PVRFilteringAtrousColorSigma: 1
-    m_PVRFilteringAtrousNormalSigma: 1
-    m_PVRFilteringAtrousPositionSigma: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_RuntimeCPUUsage: 25
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -104,8 +89,6 @@ NavMeshSettings:
     minRegionArea: 2
     manualCellSize: 0
     cellSize: 0.16666667
-    manualTileSize: 0
-    tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
 --- !u!1 &20114263
@@ -1568,8 +1551,6 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 1
-  m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -2356,6 +2337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_weekDaysCounter: 0
+  m_currentSceneName: null
 --- !u!4 &713741056
 Transform:
   m_ObjectHideFlags: 0
@@ -3010,7 +2992,7 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1022836339}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -3019,7 +3001,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -105}
+  m_AnchoredPosition: {x: 250.00002, y: -105}
   m_SizeDelta: {x: 450, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1022836341
@@ -3219,7 +3201,7 @@ Canvas:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1110282890}
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 2
   m_RenderMode: 0
   m_Camera: {fileID: 499229394}
   m_PlaneDistance: 100
@@ -3228,7 +3210,6 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -3690,116 +3671,134 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_minigames:
   - m_name: Connect
+    m_visualizedName: Thinking - Park
     m_type: 0
     m_psychophysicsOutputValue: 5
     m_moneyOutputValue: -20
     m_socialOutputValue: 0
   - m_name: Connect
+    m_visualizedName: Thinking - Office
     m_type: 1
     m_psychophysicsOutputValue: 0
     m_moneyOutputValue: 5
     m_socialOutputValue: -20
   - m_name: Connect
+    m_visualizedName: Thinking - City
     m_type: 2
     m_psychophysicsOutputValue: -20
     m_moneyOutputValue: 0
     m_socialOutputValue: 5
   - m_name: FastButtonSmashing
+    m_visualizedName: Stretching - Park
     m_type: 0
     m_psychophysicsOutputValue: 10
     m_moneyOutputValue: -10
     m_socialOutputValue: 0
   - m_name: FastButtonSmashing
+    m_visualizedName: Stretching - Office
     m_type: 1
     m_psychophysicsOutputValue: 0
     m_moneyOutputValue: 10
     m_socialOutputValue: -10
   - m_name: FastButtonSmashing
+    m_visualizedName: Stretching - City
     m_type: 2
     m_psychophysicsOutputValue: -10
     m_moneyOutputValue: 0
     m_socialOutputValue: 10
   - m_name: Dodge_minigame
+    m_visualizedName: Eating - Park
     m_type: 0
     m_psychophysicsOutputValue: 10
     m_moneyOutputValue: -5
     m_socialOutputValue: 0
   - m_name: Dodge_minigame
+    m_visualizedName: Eating - Office
     m_type: 1
     m_psychophysicsOutputValue: 0
     m_moneyOutputValue: 10
     m_socialOutputValue: -5
   - m_name: Dodge_minigame
+    m_visualizedName: Eating - City
     m_type: 2
     m_psychophysicsOutputValue: -5
     m_moneyOutputValue: 0
     m_socialOutputValue: 10
   - m_name: Fill_MiniGame
+    m_visualizedName: Organize - Park
     m_type: 0
     m_psychophysicsOutputValue: 5
     m_moneyOutputValue: -20
     m_socialOutputValue: 0
   - m_name: Fill_MiniGame
+    m_visualizedName: Organize - Office
     m_type: 1
     m_psychophysicsOutputValue: 0
     m_moneyOutputValue: 5
     m_socialOutputValue: -20
   - m_name: Fill_MiniGame
+    m_visualizedName: Organize - City
     m_type: 2
     m_psychophysicsOutputValue: -20
     m_moneyOutputValue: 0
     m_socialOutputValue: 5
-  - m_name: TypingMinigame
+  - m_name: Typing_minigame
+    m_visualizedName: Texting - Park
     m_type: 0
     m_psychophysicsOutputValue: 10
     m_moneyOutputValue: -5
     m_socialOutputValue: 0
-  - m_name: TypingMinigame
+  - m_name: Typing_minigame
+    m_visualizedName: Texting - Office
     m_type: 1
     m_psychophysicsOutputValue: 0
     m_moneyOutputValue: 10
     m_socialOutputValue: -5
-  - m_name: TypingMinigame
+  - m_name: Typing_minigame
+    m_visualizedName: Texting - City
     m_type: 2
     m_psychophysicsOutputValue: -5
     m_moneyOutputValue: 0
     m_socialOutputValue: 10
   - m_name: CutTheRope
+    m_visualizedName: Basket - Park
     m_type: 0
     m_psychophysicsOutputValue: 10
     m_moneyOutputValue: -10
     m_socialOutputValue: 0
   - m_name: CutTheRope
+    m_visualizedName: Basket - Office
     m_type: 1
     m_psychophysicsOutputValue: 0
     m_moneyOutputValue: 10
     m_socialOutputValue: -10
   - m_name: CutTheRope
+    m_visualizedName: Basket - City
     m_type: 2
     m_psychophysicsOutputValue: -10
     m_moneyOutputValue: 0
     m_socialOutputValue: 10
   m_weekDaysList:
   - m_dayName: Monday
-    m_psychophysicsBonus: -30
-    m_moneyBonus: -30
-    m_socialBonus: -30
+    m_psychophysicsBonus: 20
+    m_moneyBonus: 0
+    m_socialBonus: 0
   - m_dayName: Tuesday
-    m_psychophysicsBonus: -40
-    m_moneyBonus: -40
-    m_socialBonus: -40
+    m_psychophysicsBonus: 15
+    m_moneyBonus: 0
+    m_socialBonus: 5
   - m_dayName: Wednesday
-    m_psychophysicsBonus: -50
-    m_moneyBonus: -50
-    m_socialBonus: -50
+    m_psychophysicsBonus: 10
+    m_moneyBonus: 20
+    m_socialBonus: 10
   - m_dayName: Thursday
-    m_psychophysicsBonus: -60
-    m_moneyBonus: -60
-    m_socialBonus: -60
+    m_psychophysicsBonus: 5
+    m_moneyBonus: 0
+    m_socialBonus: 15
   - m_dayName: Friday
-    m_psychophysicsBonus: -70
-    m_moneyBonus: -70
-    m_socialBonus: -70
+    m_psychophysicsBonus: 0
+    m_moneyBonus: 0
+    m_socialBonus: 20
   m_DayOfWeek: {fileID: 595186926}
   m_minigameGUITilePrefab: {fileID: 114500912395564560, guid: b478da2a3e8da0c4d98f02fd3c5bb35a,
     type: 2}
