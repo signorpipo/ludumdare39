@@ -8,19 +8,19 @@ public class ColorizeBck : MonoBehaviour
     public List<SpriteRenderer> SecondaryColor;
     public List<SpriteRenderer> ThirdColor;
 
-    private Color[] yellowColors = {
+    public static Color[] yellowColors = {
         new Color(255.0f/255.0f,231.0f/255.0f,166.0f/255.0f),
         new Color(255.0f/255.0f,247.0f/255.0f,94.0f/255.0f),
         new Color(255.0f/255.0f,126.0f/255.0f,75.0f/255.0f)
     };
 
-    private Color[] blueColors = {
+    public static Color[] blueColors = {
         new Color(182.0f/255.0f,200.0f/255.0f,223.0f/255.0f),
         new Color(255.0f/255.0f,139.0f/255.0f,180.0f/255.0f),
         new Color(12.0f/255.0f,255.0f/255.0f,243.0f/255.0f)
     };
 
-    private Color[] greenColors = {
+    public static Color[] greenColors = {
         new Color(196/255.0f,212/255.0f,148/255.0f),
         new Color(0/255.0f,221/255.0f,57/255.0f),
         new Color(255.0f/255.0f,65/255.0f,58/255.0f)
