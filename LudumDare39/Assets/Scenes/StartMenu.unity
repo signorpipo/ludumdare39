@@ -1871,8 +1871,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -10}
-  m_SizeDelta: {x: 856, y: 389}
+  m_AnchoredPosition: {x: 2, y: 0.0012274}
+  m_SizeDelta: {x: 834, y: 388.85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1734795277
 MonoBehaviour:
@@ -1886,7 +1886,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.64705884, b: 0.03137255, a: 1}
+  m_Color: {r: 0, g: 0.454902, b: 0.9058824, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1895,7 +1895,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 32b349ab976bcc54aa10ceed88698ba1, type: 3}
-    m_FontSize: 56
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -1906,9 +1906,20 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Programming:\nDiego Zamprogno, Dadid Tessaro, Riccardo Rizzo, Alessio Bendoni,
-    \nElia Ducceschi, Riccardo Reffato, Fabio Maffioletti, Gianluca Goberti\n\nArtist:\nAlice
-    Rossetto, Diego Zamprogno, David Tessaro, Elia Ducceschi"
+  m_Text: 'Game logic Design & Programming
+
+    Alessio Bendoni, David Tessaro, Riccardo Rizzo
+
+
+    Mini-games Design & Programming
+
+    Diego Zamprogno, Elia Ducceschi, Fabio Maffioletti, Gianluca Goberti, Riccardo
+    Reffato
+
+
+    2D Assets
+
+    Alice Rossetto'
 --- !u!222 &1734795278
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1948,8 +1959,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1350, y: 300}
-  m_SizeDelta: {x: 856, y: 388.85}
+  m_AnchoredPosition: {x: 1350, y: 299}
+  m_SizeDelta: {x: 856, y: 411}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1770697883
 MonoBehaviour:
