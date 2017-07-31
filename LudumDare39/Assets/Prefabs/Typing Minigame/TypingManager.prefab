@@ -55,10 +55,12 @@ MonoBehaviour:
     type: 2}
   letterTriggerPref: {fileID: 1479294205649178, guid: a5a3b79fc4b2a93468decee8bcf2e27b,
     type: 2}
+  audioHit: {fileID: 8300000, guid: 9da285580fb44e14aa91e9d24c843d87, type: 3}
+  audioMiss: {fileID: 8300000, guid: a034753719e665a4fa7a00699a909a74, type: 3}
   canvas: {fileID: 223135163374442298, guid: 69a1b1f92e226bf47b80a70ac0915809, type: 2}
   typeCode: 710000007700000065000000720000007400000079000000
   letterTriggerList: []
   typeItem:
   - {fileID: 21300000, guid: 1632f75362981ff40b6422ee34206942, type: 3}
-  - {fileID: 21300000, guid: bebbc848e5dbf8f40a35cb1a5210b03c, type: 3}
+  - {fileID: 21300000, guid: 40fa171242fb68f4dbf9a82558b533c0, type: 3}
   - {fileID: 21300000, guid: 6a411e3415989f64e94d00cb4144f9c1, type: 3}
