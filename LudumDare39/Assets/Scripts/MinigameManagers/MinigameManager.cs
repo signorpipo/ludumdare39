@@ -8,6 +8,7 @@ public class MinigameManager : AbstarcMinigameManager
     protected enum GameState
     {
         NO_GAME,
+        SHOW_TUTORIAL,
         PLAY_GAME,
         PLAY_GAME_LEFT,
         PLAY_GAME_RIGHT,
@@ -15,6 +16,7 @@ public class MinigameManager : AbstarcMinigameManager
         END_GAME
     }
 
+    public Text TutorialText;
     public Text TimeLeft;
 
     protected GameState mCurrState = GameState.NO_GAME;
@@ -29,11 +31,13 @@ public class MinigameManager : AbstarcMinigameManager
     }
 
     // Use this for initialization
-    public virtual void Start () {
+    public virtual void Start ()
+    {
     }
 
     // Update is called once per frame
-    public virtual void Update () {
+    public virtual void Update ()
+    {
         if(mCurrState != GameState.NO_GAME)
         {
             mGameTime -= Time.deltaTime;
