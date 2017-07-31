@@ -2795,6 +2795,12 @@ Prefab:
       propertyPath: m_Name
       value: Image
       objectReference: {fileID: 0}
+    - target: {fileID: 114534659395397148, guid: b836a1d003087e64e9fdc6812e32d28e,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bebbc848e5dbf8f40a35cb1a5210b03c,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b836a1d003087e64e9fdc6812e32d28e, type: 2}
   m_IsPrefabParent: 0
@@ -3685,43 +3691,115 @@ MonoBehaviour:
   m_minigames:
   - m_name: Connect
     m_type: 0
-    m_psychophysicsOutputValue: 1
-    m_moneyOutputValue: 1
-    m_socialOutputValue: 3
-  - m_name: Fill_MiniGame
-    m_type: 0
-    m_psychophysicsOutputValue: 1
-    m_moneyOutputValue: 1
-    m_socialOutputValue: 3
+    m_psychophysicsOutputValue: 5
+    m_moneyOutputValue: -20
+    m_socialOutputValue: 0
+  - m_name: Connect
+    m_type: 1
+    m_psychophysicsOutputValue: 0
+    m_moneyOutputValue: 5
+    m_socialOutputValue: -20
+  - m_name: Connect
+    m_type: 2
+    m_psychophysicsOutputValue: -20
+    m_moneyOutputValue: 0
+    m_socialOutputValue: 5
   - m_name: FastButtonSmashing
     m_type: 0
-    m_psychophysicsOutputValue: 1
-    m_moneyOutputValue: 1
-    m_socialOutputValue: 3
+    m_psychophysicsOutputValue: 10
+    m_moneyOutputValue: -10
+    m_socialOutputValue: 0
+  - m_name: FastButtonSmashing
+    m_type: 1
+    m_psychophysicsOutputValue: 0
+    m_moneyOutputValue: 10
+    m_socialOutputValue: -10
+  - m_name: FastButtonSmashing
+    m_type: 2
+    m_psychophysicsOutputValue: -10
+    m_moneyOutputValue: 0
+    m_socialOutputValue: 10
   - m_name: Dodge_minigame
     m_type: 0
-    m_psychophysicsOutputValue: 1
-    m_moneyOutputValue: 1
-    m_socialOutputValue: 3
-  - m_name: BouncingBall_minigame
+    m_psychophysicsOutputValue: 10
+    m_moneyOutputValue: -5
+    m_socialOutputValue: 0
+  - m_name: Dodge_minigame
+    m_type: 1
+    m_psychophysicsOutputValue: 0
+    m_moneyOutputValue: 10
+    m_socialOutputValue: -5
+  - m_name: Dodge_minigame
+    m_type: 2
+    m_psychophysicsOutputValue: -5
+    m_moneyOutputValue: 0
+    m_socialOutputValue: 10
+  - m_name: Fill_MiniGame
     m_type: 0
-    m_psychophysicsOutputValue: 1
-    m_moneyOutputValue: 1
-    m_socialOutputValue: 3
-  - m_name: Typing_minigame
+    m_psychophysicsOutputValue: 5
+    m_moneyOutputValue: -20
+    m_socialOutputValue: 0
+  - m_name: Fill_MiniGame
+    m_type: 1
+    m_psychophysicsOutputValue: 0
+    m_moneyOutputValue: 5
+    m_socialOutputValue: -20
+  - m_name: Fill_MiniGame
+    m_type: 2
+    m_psychophysicsOutputValue: -20
+    m_moneyOutputValue: 0
+    m_socialOutputValue: 5
+  - m_name: TypingMinigame
     m_type: 0
-    m_psychophysicsOutputValue: 1
-    m_moneyOutputValue: 1
-    m_socialOutputValue: 3
+    m_psychophysicsOutputValue: 10
+    m_moneyOutputValue: -5
+    m_socialOutputValue: 0
+  - m_name: TypingMinigame
+    m_type: 1
+    m_psychophysicsOutputValue: 0
+    m_moneyOutputValue: 10
+    m_socialOutputValue: -5
+  - m_name: TypingMinigame
+    m_type: 2
+    m_psychophysicsOutputValue: -5
+    m_moneyOutputValue: 0
+    m_socialOutputValue: 10
+  - m_name: CutTheRope
+    m_type: 0
+    m_psychophysicsOutputValue: 10
+    m_moneyOutputValue: -10
+    m_socialOutputValue: 0
+  - m_name: CutTheRope
+    m_type: 1
+    m_psychophysicsOutputValue: 0
+    m_moneyOutputValue: 10
+    m_socialOutputValue: -10
+  - m_name: CutTheRope
+    m_type: 2
+    m_psychophysicsOutputValue: -10
+    m_moneyOutputValue: 0
+    m_socialOutputValue: 10
   m_weekDaysList:
   - m_dayName: Monday
-    m_psychophysicsBonus: 10
-    m_moneyBonus: 10
-    m_socialBonus: 10
+    m_psychophysicsBonus: -30
+    m_moneyBonus: -30
+    m_socialBonus: -30
   - m_dayName: Tuesday
-    m_psychophysicsBonus: 3
-    m_moneyBonus: 1
-    m_socialBonus: 59
+    m_psychophysicsBonus: -40
+    m_moneyBonus: -40
+    m_socialBonus: -40
+  - m_dayName: Wednesday
+    m_psychophysicsBonus: -50
+    m_moneyBonus: -50
+    m_socialBonus: -50
+  - m_dayName: Thursday
+    m_psychophysicsBonus: -60
+    m_moneyBonus: -60
+    m_socialBonus: -60
+  - m_dayName: Friday
+    m_psychophysicsBonus: -70
+    m_moneyBonus: -70
+    m_socialBonus: -70
   m_DayOfWeek: {fileID: 595186926}
   m_minigameGUITilePrefab: {fileID: 114500912395564560, guid: b478da2a3e8da0c4d98f02fd3c5bb35a,
     type: 2}
@@ -4773,6 +4851,12 @@ Prefab:
       propertyPath: m_Name
       value: Image
       objectReference: {fileID: 0}
+    - target: {fileID: 114267383126443420, guid: 8904b3cf4cf04c84dab4fca09ae39343,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6a411e3415989f64e94d00cb4144f9c1,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8904b3cf4cf04c84dab4fca09ae39343, type: 2}
   m_IsPrefabParent: 0
