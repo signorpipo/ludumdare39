@@ -95,6 +95,7 @@ public class ConnectGameManager : MinigameManager
     {
         if (matched)
         {
+            mAudioSource.PlayOneShot(mWinSound, 0.5F);
             mMatchedItem++;
             mScore = (float)mMatchedItem / (float)mNumGameItems * 0.85f;
             if (mMatchedItem == mNumGameItems)
@@ -103,6 +104,12 @@ public class ConnectGameManager : MinigameManager
                 mScore += 0.15f * Mathf.Clamp(mGameTime / (MIN_GAME_TIME * 0.5f),0f,1f);
                 SceneEnded(1.0f);
             }
+        }
+        else
+        {
+            // Trig infame
+            mNumGameItems--;
+            mAudioSource.PlayOneShot(mTimesUpSound, 0.5F);
         }
     }
 
