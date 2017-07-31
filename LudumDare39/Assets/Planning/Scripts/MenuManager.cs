@@ -50,12 +50,29 @@ public class MenuManager : MonoBehaviour
 
         FindObjectOfType<ColorizeBckManager>().SetUncoloredBckType(ColorizeBckManager.BckTypes.BCK_PLANNING);
 
-        for (int index = 0; index < m_minigames.Count; ++index)
+        ArrayList randomIndexes = new ArrayList();
+
+        for (int index = 0; index < 6; ++index)
+        {
+            bool found = false;
+            do
+            {
+                int value = UnityEngine.Random.Range(0, 18);
+                if (!randomIndexes.Contains(value))
+                {
+                    randomIndexes.Add(value);
+                    found = true;
+                }
+            }
+            while (!found); 
+        }
+
+        for (int index = 0; index < randomIndexes.Count; ++index)
 		{
 			MinigameInfo tileInfo = Instantiate(m_minigameGUITilePrefab, m_verticalLayoutMinigames);
 			tileInfo.transform.localScale = new Vector3(1, 1, 1);
-			MinigameInterface temp = m_minigames[index];
-			tileInfo.TileSetup(temp.GetName(), temp.GetPsychophysicsOutputValue(), temp.GetMoneyOutputValue(), temp.GetSocialOutputvalue(), index);
+			MinigameInterface temp = m_minigames[(int)randomIndexes[index]];
+			tileInfo.TileSetup(temp.GetVisibleName(), temp.GetPsychophysicsOutputValue(), temp.GetMoneyOutputValue(), temp.GetSocialOutputvalue(), (int)randomIndexes[index]);
 		}
 
 		m_statsCalculator = GetComponent<StatsCalculator>();
@@ -66,9 +83,9 @@ public class MenuManager : MonoBehaviour
 			m_middlePanels[index].GetComponent<Slot>().onTrashedSon += UpdateSelectedMinigames;
 		}
 
-		 m_dailyBonusPanel.GetChild(0).GetComponent<Text>().text += m_weekDaysList[gameManager.m_weekDaysCounter].m_psychophysicsBonus + "%";
-		 m_dailyBonusPanel.GetChild(1).GetComponent<Text>().text += m_weekDaysList[gameManager.m_weekDaysCounter].m_moneyBonus + "%";
-		 m_dailyBonusPanel.GetChild(2).GetComponent<Text>().text += m_weekDaysList[gameManager.m_weekDaysCounter].m_socialBonus + "%";
+		 m_dailyBonusPanel.GetChild(0).GetComponent<Text>().text += " + " + m_weekDaysList[gameManager.m_weekDaysCounter].m_psychophysicsBonus;
+		 m_dailyBonusPanel.GetChild(1).GetComponent<Text>().text += " + " + m_weekDaysList[gameManager.m_weekDaysCounter].m_moneyBonus;
+		 m_dailyBonusPanel.GetChild(2).GetComponent<Text>().text += " + " + m_weekDaysList[gameManager.m_weekDaysCounter].m_socialBonus;
 
 		m_DayOfWeek.text = m_weekDaysList[gameManager.m_weekDaysCounter].m_dayName;
 	}

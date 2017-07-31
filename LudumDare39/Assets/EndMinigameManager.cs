@@ -28,7 +28,8 @@ public class EndMinigameManager : AbstarcMinigameManager {
 
     public override void StartMinigame(int i_Type, float i_TimeValue, float i_NumItemValue, float i_ItemVelocityValue)
     {
-        m_prevGameName.text = SceneLoaderSingleManager.Instance.ActualScene();
+        //m_prevGameName.text = SceneLoaderSingleManager.Instance.ActualScene();
+        m_prevGameName.text = GameManager.Instance.m_currentSceneName;
         m_oldValues = GameManager.Instance.OldValues;
 
         m_newValues[0] = i_TimeValue * 100;

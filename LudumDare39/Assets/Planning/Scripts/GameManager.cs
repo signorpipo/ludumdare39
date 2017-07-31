@@ -9,23 +9,40 @@ public class GameManager : Singleton<GameManager>
 
     private GameObject m_sceneLoader = null;
 
-    const float m_defaultPsychophysicsValue = 60.0f;
+    float m_defaultPsychophysicsValue;
 
-    const float m_defaultMoneyValue = 60.0f;
+    float m_defaultMoneyValue;
 
-    const float m_defaultSocialValue = 60.0f;
+    float m_defaultSocialValue;
 
-    private float m_currentPsychophysicsValue = m_defaultPsychophysicsValue;
+    private float m_currentPsychophysicsValue = 0;
 
-    private float m_currentMoneyValue = m_defaultMoneyValue;
+    private float m_currentMoneyValue = 0;
 
-    private float m_currentSocialValue = m_defaultSocialValue;
+    private float m_currentSocialValue = 0;
 
     private int m_selectedGamesCounter = 0;
 
     public int m_weekDaysCounter = 0;
 
+    public string m_currentSceneName = "null";
+
     private float[] m_oldValues = new float[3];
+
+    public void Awake()
+    {
+        m_defaultPsychophysicsValue = UnityEngine.Random.Range(40, 61);
+
+        m_defaultMoneyValue = UnityEngine.Random.Range(40, 61);
+
+        m_defaultSocialValue = UnityEngine.Random.Range(40, 61);
+
+        m_currentPsychophysicsValue = m_defaultPsychophysicsValue;
+
+        m_currentMoneyValue = m_defaultMoneyValue;
+
+        m_currentSocialValue = m_defaultSocialValue;
+    }
 
     public float[] OldValues
     {
@@ -92,6 +109,7 @@ public class GameManager : Singleton<GameManager>
     {
         AbstarcMinigameManager CurrentGame = FindObjectOfType<AbstarcMinigameManager>();
         CurrentGame.StartMinigame(m_selectedMinigames[m_selectedGamesCounter].GetGameVersion(), m_currentPsychophysicsValue / 100, m_currentMoneyValue / 100, m_currentSocialValue / 100);
+        m_currentSceneName = m_selectedMinigames[m_selectedGamesCounter].GetVisibleName();
         CurrentGame.onSceneEnded += LoadNextSceneAndUpdateStats;
         SceneManager.sceneLoaded -= SceneLoaded;
     }
@@ -185,7 +203,8 @@ public class GameManager : Singleton<GameManager>
             }
             else
             {
-                SceneManager.sceneLoaded += SceneLoaded;
+            m_currentSceneName = m_selectedMinigames[m_selectedGamesCounter].GetVisibleName();
+            SceneManager.sceneLoaded += SceneLoaded;
                 m_sceneLoaderManager.LoadNextScene();
             }
 
@@ -220,15 +239,17 @@ public class GameManager : Singleton<GameManager>
 
     public void ResetGame()
     {
-        m_currentPsychophysicsValue = m_defaultPsychophysicsValue;
+        m_currentPsychophysicsValue = UnityEngine.Random.Range(40, 60); ;
 
-        m_currentMoneyValue = m_defaultMoneyValue;
+        m_currentMoneyValue = UnityEngine.Random.Range(40, 60); ;
 
-        m_currentSocialValue = m_defaultSocialValue;
+        m_currentSocialValue = UnityEngine.Random.Range(40, 60); ;
 
         m_selectedGamesCounter = 0;
 
         m_weekDaysCounter = 0;
+
+        m_currentSceneName = "null";
     }
 }
 
