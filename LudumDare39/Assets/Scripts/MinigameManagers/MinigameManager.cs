@@ -17,6 +17,7 @@ public class MinigameManager : AbstarcMinigameManager
     }
 
     public Text TutorialText;
+
     public Text TimeLeft;
 
     protected GameState mCurrState = GameState.NO_GAME;
