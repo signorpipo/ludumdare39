@@ -32,3 +32,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EndScene.unity
     guid: 1b3745d84fd12b649be36ca49af62336
+  - enabled: 1
+    path: Assets/Scenes/EndMinigame.unity
+    guid: 5547cfb228892de4cb94860b376ee60b
