@@ -76,8 +76,8 @@ public class ConnectGameManager : MinigameManager
     }
 
     // Use this for initialization
-    public override void Start () {
-        StartMinigame(0, 1f, 1f, 0f);
+    public override void Start ()
+    {
         base.Start();
 	}
 
