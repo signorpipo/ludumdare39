@@ -59,7 +59,7 @@ public class MinigameManager : AbstarcMinigameManager
             }
             else
             {
-                TimeLeft.text = string.Format("TIME LEFT : {0:n0}", mGameTime);
+                TimeLeft.text = string.Format("Time Left: {0:n0}", mGameTime);
             }
         }
     }

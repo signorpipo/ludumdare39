@@ -170,7 +170,7 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
                 break;
         }
 
-        StartTimer(m_LoadedLevel.transform, OnStartTimerEnd, OnFailure, "Fill the bag!", m_StartMessage, m_StartSeconds, "Times Up!!", m_Seconds);
+        StartTimer(m_LoadedLevel.transform, OnStartTimerEnd, OnFailure, "Tidy up!", m_StartMessage, m_StartSeconds, "Times Up!", m_Seconds);
 
     }
 

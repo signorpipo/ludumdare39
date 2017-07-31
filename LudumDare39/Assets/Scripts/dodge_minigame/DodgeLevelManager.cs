@@ -52,9 +52,9 @@ public class DodgeLevelManager : AbstarcMinigameManager
 
     private void DoStart()
     {
-        m_TimeLeftUI.text = "Time left: " + m_TimeLeft;
+        m_TimeLeftUI.text = "Time Left: " + m_TimeLeft;
 
-        m_CentralText.text = "Save Your Ice Cream";
+        m_CentralText.text = "Save Your Ice Cream!\nMove with A and D.";
 
         m_Player.GetComponent<PlayerController>().OnPlayerFailure += OnPlayerFailure;
         m_SpawnManager.SetActive(false);

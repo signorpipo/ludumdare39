@@ -86,7 +86,7 @@ public class TypingManager : AbstarcMinigameManager
             letterFalling.SetActive(false);
             letterFallPool.Enqueue(letterFalling);
         }
-        StartTimer(gameObject.transform, begin, endGame, "Texting", "Press the corresponding key to take the item ", 4, "Time out", (int)timeGame);
+        StartTimer(gameObject.transform, begin, endGame, "Texting", "Press the corresponding key to take the item ", 3, "Time out", (int)timeGame);
     }
 
     public void begin()

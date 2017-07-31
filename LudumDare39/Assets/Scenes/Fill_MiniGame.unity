@@ -264,7 +264,7 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1343709444}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
@@ -311,10 +311,10 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -374,7 +374,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 230, y: 80}
+  m_SizeDelta: {x: 460, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1467557885
 MonoBehaviour:
@@ -442,7 +442,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 210, y: 80}
+  m_SizeDelta: {x: 420, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1648532904
 MonoBehaviour:
@@ -465,7 +465,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 32b349ab976bcc54aa10ceed88698ba1, type: 3}
-    m_FontSize: 45
+    m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -476,15 +476,113 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0
-  m_Text: 'YOU WIN
-
-'
+  m_Text: Complete!
 --- !u!222 &1648532905
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1648532902}
+--- !u!1001 &1926633546
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 224918639580687726, guid: 50c4c223fe64d7a41bf93c9ed8201145,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224918639580687726, guid: 50c4c223fe64d7a41bf93c9ed8201145,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224918639580687726, guid: 50c4c223fe64d7a41bf93c9ed8201145,
+        type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224918639580687726, guid: 50c4c223fe64d7a41bf93c9ed8201145,
+        type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224918639580687726, guid: 50c4c223fe64d7a41bf93c9ed8201145,
+        type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224918639580687726, guid: 50c4c223fe64d7a41bf93c9ed8201145,
+        type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224918639580687726, guid: 50c4c223fe64d7a41bf93c9ed8201145,
+        type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224918639580687726, guid: 50c4c223fe64d7a41bf93c9ed8201145,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 224918639580687726, guid: 50c4c223fe64d7a41bf93c9ed8201145,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 6.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 224918639580687726, guid: 50c4c223fe64d7a41bf93c9ed8201145,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224918639580687726, guid: 50c4c223fe64d7a41bf93c9ed8201145,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 224918639580687726, guid: 50c4c223fe64d7a41bf93c9ed8201145,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 224918639580687726, guid: 50c4c223fe64d7a41bf93c9ed8201145,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224918639580687726, guid: 50c4c223fe64d7a41bf93c9ed8201145,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224918639580687726, guid: 50c4c223fe64d7a41bf93c9ed8201145,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224918639580687726, guid: 50c4c223fe64d7a41bf93c9ed8201145,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224918639580687726, guid: 50c4c223fe64d7a41bf93c9ed8201145,
+        type: 2}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224918639580687726, guid: 50c4c223fe64d7a41bf93c9ed8201145,
+        type: 2}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 50c4c223fe64d7a41bf93c9ed8201145, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &2101323410
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,11 +623,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54a94aa411f177a43aaa8691f39dcdaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StartMessage: 'Drag to move
+  m_StartMessage: 'Drag the items to tidy up
 
-    Right click ro rotate
+    the mess!
 
-'
+    Use the right button
+
+    to rotate the items!'
   m_PrefabPhysicsPluggables:
   - m_Name: F_ZPiece
     m_Pluggable: {fileID: 114406544642811986, guid: 2c7b3a1cbbadfd34baccbd3e2a143dbc,

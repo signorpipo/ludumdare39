@@ -127,8 +127,8 @@ public class FastButtonSmashingGameManager : MinigameManager
                 }
             }
 
-            LeftImage.color = (mCurrState == GameState.PLAY_GAME_LEFT ? Color.red : Color.white);
-            RightImage.color = (mCurrState == GameState.PLAY_GAME_RIGHT ? Color.red : Color.white);
+            LeftImage.color = (mCurrState == GameState.PLAY_GAME_LEFT ? new Color(229 / 255.0f, 66 / 255.0f, 66 / 255.0f) : new Color(42 / 255.0f, 106 / 255.0f, 208/255.0f));
+            RightImage.color = (mCurrState == GameState.PLAY_GAME_RIGHT ? new Color(229 / 255.0f, 66 / 255.0f, 66 / 255.0f) : new Color(42 / 255.0f, 106 / 255.0f, 208 / 255.0f));
 
             mScore = successBarSlider.value;
         }
