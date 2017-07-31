@@ -971,7 +971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc78f46ad8654834b8f2ca5ecdc9d742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ForceStart: 1
+  m_ForceStart: 0
   m_AttemptsNumber: 3
   m_TimerPrefab: {fileID: 1325216706284912, guid: 2e0b62ab56c5ba54495dbed6bace538a,
     type: 2}
