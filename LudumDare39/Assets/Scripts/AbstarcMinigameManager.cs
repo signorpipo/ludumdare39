@@ -6,7 +6,6 @@ public delegate void OnSceneEnded(float result);
 
 public abstract class AbstarcMinigameManager : MonoBehaviour
 {
-
     public event OnSceneEnded onSceneEnded = null;
 
     private F_Timer m_PrefabTimer;
