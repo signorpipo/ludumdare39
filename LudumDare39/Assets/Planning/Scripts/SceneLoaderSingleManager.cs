@@ -69,4 +69,9 @@ public class SceneLoaderSingleManager : Singleton<SceneLoaderSingleManager>
     {
         return run_scene;
     }
+
+    public void Reset()
+    {
+        index = 0;
+    }
 }
