@@ -38,9 +38,6 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
     private SpriteRenderer m_PrefabCellBackground;
 
     [SerializeField]
-    private F_Timer m_PrefabTimer;
-
-    [SerializeField]
     private bool m_Restart;
     [SerializeField]
     private float[] m_StartInput;
@@ -55,7 +52,6 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
     private float m_CellSize = 1;
 
     private GameObject m_LoadedLevel;
-    private F_Timer m_Timer;
     private F_GridManager m_GridManager;
     private F_GrabManager m_GrabManager;
 
@@ -158,7 +154,7 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
                 break;
         }
 
-        m_Timer.StartTimer(OnStartTimerEnd, OnFailure, "Fill the bag!", m_StartMessage, m_StartSeconds, "Times Up!!", m_Seconds);
+        StartTimer(m_LoadedLevel.transform, OnStartTimerEnd, OnFailure, "Fill the bag!", m_StartMessage, m_StartSeconds, "Times Up!!", m_Seconds);
 
     }
 
@@ -169,7 +165,6 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
             Destroy(m_LoadedLevel);
         }
         m_LoadedLevel = null;
-        m_Timer = null;
         m_GridManager = null;
         m_GrabManager = null;
 
@@ -207,12 +202,6 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
         m_GrabManager = grabbables.AddComponent<F_GrabManager>();
         m_GrabManager.OnTryDockEvent += TryDock;
         m_GrabManager.DisableInput();
-
-        if (m_PrefabTimer != null)
-        {
-            m_Timer = Instantiate(m_PrefabTimer).GetComponent<F_Timer>();
-            m_Timer.transform.SetParent(m_LoadedLevel.transform);
-        }
 
         if (m_Level >= 0)
         {
@@ -320,7 +309,7 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
     private void EngGame(bool i_Success)
     {
         m_GrabManager.DisableInput();
-        m_Timer.StopTimer();
+        StopTimer();
         StartCoroutine(LoadNextScene(i_Success));
     }
 
