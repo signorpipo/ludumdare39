@@ -39,7 +39,15 @@ public class TypingManager : AbstarcMinigameManager
 
     public override void StartMinigame(int i_Type, float i_TimeValue, float i_NumItemValue, float i_ItemVelocityValue)
     {
-        
+        ColorizeBckManager.BckTypes type = ColorizeBckManager.BckTypes.BCK_PLANNING;
+        switch (i_Type)
+        {
+            case 0: type = ColorizeBckManager.BckTypes.BCK_PHYSICS; break;
+            case 1: type = ColorizeBckManager.BckTypes.BCK_MONEY; break;
+            case 2: type = ColorizeBckManager.BckTypes.BCK_SOCIAL; break;
+        }
+        FindObjectOfType<ColorizeBckManager>().SetUncoloredBckType(type);
+
         numLet = 3 + (int)Mathf.Lerp(4.0f, 0.0f, i_NumItemValue);
         timeGame = 10.0f + (10.0f * i_TimeValue);
         glitchVelocity = Mathf.Lerp(30.0f, 0.0f, i_ItemVelocityValue);
