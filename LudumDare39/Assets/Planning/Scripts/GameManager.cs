@@ -116,7 +116,7 @@ public class GameManager : Singleton<GameManager>
 
             if (resultMutator > 0)
             {
-                if (m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue() >= 0)
+                if (m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue() > 0)
                 {
                     m_currentPsychophysicsValue = Mathf.Clamp(m_currentPsychophysicsValue + (m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue() * resultMutator +
                         m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue() * resultMutator * m_weekDays[m_weekDaysCounter].m_psychophysicsBonus) / 100.0f, 0.0f, 100.0f);
@@ -126,7 +126,7 @@ public class GameManager : Singleton<GameManager>
                     m_currentPsychophysicsValue = CalculateLosingValue(m_currentPsychophysicsValue, m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue());
                 }
 
-                if (m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue() >= 0)
+                if (m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue() > 0)
                 {
                     m_currentMoneyValue = Mathf.Clamp(m_currentMoneyValue + (m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue() * resultMutator +
                         m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue() * resultMutator * m_weekDays[m_weekDaysCounter].m_moneyBonus / 100.0f), 0.0f, 100.0f);
@@ -136,7 +136,7 @@ public class GameManager : Singleton<GameManager>
                     m_currentMoneyValue = CalculateLosingValue(m_currentMoneyValue, m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue());
                 }
 
-                if (m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue() >= 0)
+                if (m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue() > 0)
                 {
                     m_currentSocialValue = Mathf.Clamp(m_currentSocialValue + (m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue() * resultMutator +
                         m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue() * resultMutator * m_weekDays[m_weekDaysCounter].m_socialBonus / 100.0f), 0.0f, 100.0f);
