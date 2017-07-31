@@ -118,7 +118,7 @@ public class TypingManager : AbstarcMinigameManager
                 letterFallSpawn.transform.position = new Vector3(positionX, (Camera.main.orthographicSize * 1.2f), 0.0f);
                 letterFallSpawn.SetActive(true);
                 float addGlitchVelocity = 0.0f;
-                if (glitchVelocity > UnityEngine.Random.Range(0, 100))
+                if (glitchVelocity > UnityEngine.Random.Range(1, 101))
                 {
                     addGlitchVelocity = 2.0f;
                 }
