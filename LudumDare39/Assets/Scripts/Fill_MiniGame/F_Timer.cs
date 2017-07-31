@@ -14,10 +14,15 @@ public class F_Timer : MonoBehaviour
     [SerializeField]
     private GameObject m_LevelTimer;
     [SerializeField]
-    private GameObject m_MiddleMessage;
+    private GameObject m_TitleText;
+    [SerializeField]
+    private GameObject m_StartText;
+    [SerializeField]
+    private GameObject m_EndText;
 
     private int m_TimerSeconds = 10;
-    
+
+    private string m_StartTitle = "Title";
     private string m_StartMessage = "Start!";
     private string m_TimesUpMessage = "Times Up!";
 
@@ -26,10 +31,11 @@ public class F_Timer : MonoBehaviour
     private int m_Seconds;
     private bool m_IsRunningMode = false;
 
-    public void StartTimer(F_TimesUpEvent i_OnGameStart, F_TimesUpEvent i_OnTimesUp, string i_StartMessage, int i_GameStartSeconds, string i_TimesUpMessage, int i_TimerSeconds)
+    public void StartTimer(F_TimesUpEvent i_OnGameStart, F_TimesUpEvent i_OnTimesUp, string i_StartTitle, string i_StartMessage, int i_GameStartSeconds, string i_TimesUpMessage, int i_TimerSeconds)
     {
         OnGameStart += i_OnGameStart;
         OnTimesUp += i_OnTimesUp;
+        m_StartTitle = i_StartTitle;
         m_StartMessage = i_StartMessage;
         m_TimesUpMessage = i_TimesUpMessage;
         m_TimerSeconds = i_TimerSeconds;
@@ -38,8 +44,10 @@ public class F_Timer : MonoBehaviour
         m_Seconds = i_GameStartSeconds;
         if (m_StartMessage.Length > 0)
         {
-            m_MiddleMessage.GetComponentInChildren<Text>().text = m_StartMessage;
-            m_MiddleMessage.SetActive(true);
+            m_StartText.GetComponentInChildren<Text>().text = m_StartMessage;
+            m_StartText.SetActive(true);
+            m_TitleText.GetComponentInChildren<Text>().text = m_StartTitle;
+            m_TitleText.SetActive(true);
         }
     }
 
@@ -72,7 +80,8 @@ public class F_Timer : MonoBehaviour
                     m_GameStarted = true;
                     m_Seconds = m_TimerSeconds;
 
-                    m_MiddleMessage.SetActive(false);
+                    m_StartText.SetActive(false);
+                    m_TitleText.SetActive(false);
 
                     m_LevelTimer.GetComponentInChildren<Text>().text = "Time Left: "+m_Seconds;
                     m_LevelTimer.SetActive(true);
@@ -89,8 +98,8 @@ public class F_Timer : MonoBehaviour
 
                     if (m_TimesUpMessage.Length > 0)
                     {
-                        m_MiddleMessage.GetComponentInChildren<Text>().text = m_TimesUpMessage;
-                        m_MiddleMessage.SetActive(true);
+                        m_EndText.GetComponentInChildren<Text>().text = m_TimesUpMessage;
+                        m_EndText.SetActive(true);
                     }
 
                     if (OnTimesUp != null)
