@@ -181,6 +181,9 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
                 m_WinCanvas.gameObject.SetActive(true);
                 EngGame(true);
             }
+        }else
+        {
+            m_GrabManager.ReleaseGrabbed(true);
         }
     }
 
