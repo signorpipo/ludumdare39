@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DodgeLevelManager : MonoBehaviour {
+public class DodgeLevelManager : AbstarcMinigameManager
+{
 
     enum STATES{
         START,
@@ -12,7 +13,13 @@ public class DodgeLevelManager : MonoBehaviour {
     };
 
     [SerializeField]
-    private int m_TimeLeft = 50;
+    private bool m_ForceStart = false;
+
+    [SerializeField]
+    private int m_TimeLeft = 10;
+
+    [SerializeField]
+    private float m_EnemyVerticalSpeed = -5.0f;
 
     [SerializeField]
     private Text m_TimeLeftUI;
@@ -35,7 +42,10 @@ public class DodgeLevelManager : MonoBehaviour {
 
     private bool m_LevelFinishedSuccesfully = false;
 
-    private void Start()
+
+    private bool m_GameEnable = false;
+
+    private void DoStart()
     {
         m_TimeLeftUI.text = "Time left: " + m_TimeLeft;
 
@@ -43,38 +53,70 @@ public class DodgeLevelManager : MonoBehaviour {
 
         m_Player.GetComponent<PlayerController>().OnPlayerFailure += OnPlayerFailure;
         m_SpawnManager.SetActive(false);
+        m_SpawnManager.GetComponent<SpawnManager>().EnemyVerticalSPeed = m_EnemyVerticalSpeed;
+
+        m_GameEnable = true;
+    }
+
+    public override void StartMinigame
+    (
+    int i_Type,
+    float i_TimeValue,
+    float i_NumItemValue,
+    float i_ItemVelocityValue) //i_type will be between 0 and 2
+    {
+        m_TimeLeft = (int)(i_TimeValue * (30 - 10) + 10);
+        m_SpawnManager.GetComponent<SpawnManager>().SpawnRate = ((0.5f - 0.2f) * i_NumItemValue + 0.2f);
+        m_EnemyVerticalSpeed = -(((1.0f - i_ItemVelocityValue) * (13 - 5) + 5));
+
+
+        DoStart();
+    }
+
+
+
+
+    private void Start()
+    {
+        m_SpawnManager.SetActive(false);
+        if (m_ForceStart)
+        {
+            DoStart();
+            
+        }
     }
 
 
     private void Update()
     {
-        m_ElapsedTime += Time.deltaTime;
-        switch (m_CurrentState)
+        if (m_GameEnable)
         {
-            case STATES.START:
-                DoStart();
-                break;
-            case STATES.RUNNING:
-                DoRunning();
-                break;
-            case STATES.END:
-                DoEnd();
-                break;
+            m_ElapsedTime += Time.deltaTime;
+            switch (m_CurrentState)
+            {
+                case STATES.START:
+                    DoInit();
+                    break;
+                case STATES.RUNNING:
+                    DoRunning();
+                    break;
+                case STATES.END:
+                    DoEnd();
+                    break;
 
+            }
         }
 
 
     }
 
-    private void DoStart()
+    private void DoInit()
     {
         if (m_ElapsedTime >= m_TimeBeforExitStartState)
         {
             m_CurrentState = STATES.RUNNING;
 
             m_ElapsedTime = 0;
-
-           
 
         }
     }

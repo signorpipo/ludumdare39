@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2634083, g: 0.29186842, b: 0.85294116, a: 1}
+  m_Color: {r: 0.99215686, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -163,7 +163,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 32b349ab976bcc54aa10ceed88698ba1, type: 3}
     m_FontSize: 50
     m_FontStyle: 1
     m_BestFit: 0
@@ -414,7 +414,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a0ef0e7f24abad41b5bc9229c076f98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ForceStart: 0
   m_TimeLeft: 10
+  m_EnemyVerticalSpeed: -13
   m_TimeLeftUI: {fileID: 1810306450}
   m_CentralText: {fileID: 185804099}
   m_Player: {fileID: 583226359}
@@ -555,7 +557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0d95764bdda6864ea0cff62b3e67049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SpawnRateInSeconds: 0.5
+  m_SpawnRateInSeconds: 0.2
   m_EnemyItemPrefab: {fileID: 1644245938986380, guid: d6e592e4c9a3ced4789667f7dceacc16,
     type: 2}
 --- !u!1001 &1434558135
@@ -713,7 +715,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.10588236, g: 0.40784317, b: 0.64705884, a: 1}
+  m_Color: {r: 0.99215686, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -721,7 +723,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 32b349ab976bcc54aa10ceed88698ba1, type: 3}
     m_FontSize: 50
     m_FontStyle: 1
     m_BestFit: 0
