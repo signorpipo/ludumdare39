@@ -108,7 +108,7 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &587104190
+--- !u!1001 &917170370
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -146,10 +146,6 @@ Prefab:
     - target: {fileID: 4106431377503634, guid: 1004998814233624dac8c042b9352761, type: 2}
       propertyPath: m_RootOrder
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1387847060751328, guid: 1004998814233624dac8c042b9352761, type: 2}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1004998814233624dac8c042b9352761, type: 2}
@@ -587,9 +583,9 @@ MonoBehaviour:
     m_Pluggable: {fileID: 114415537728405914, guid: 14507b4f32e821d489fa429311bf16dc,
       type: 2}
   m_Backgrounds:
-  - {fileID: 21300000, guid: 462d931f08866ee4289d51a49573c3a9, type: 3}
-  - {fileID: 21300000, guid: 1d32031c0552c794cb349b818479c988, type: 3}
-  - {fileID: 21300000, guid: 464ae9743c6c0a346864b71d33195cf6, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_WinCanvas: {fileID: 1343709449}
   m_PrefabGridLine: {fileID: 120697323196621642, guid: cbfdccf27b04341478711ea78597603e,
     type: 2}
