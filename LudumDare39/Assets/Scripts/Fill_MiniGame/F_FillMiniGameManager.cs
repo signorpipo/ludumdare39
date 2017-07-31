@@ -191,14 +191,14 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
             m_GrabManager.ReleaseGrabbed(false);
             if(m_GridManager.GetDocked() == m_ToDock)
             {
-                m_AudioSource.PlayOneShot(m_WinSound, 0.7F);
+                m_AudioSource.PlayOneShot(m_WinSound, 0.5F);
                 m_GrabManager.DisableInput();
                 m_WinCanvas.gameObject.SetActive(true);
                 EngGame(true);
             }
             else
             {
-                m_AudioSource.PlayOneShot(m_DockSound, 0.7F);
+                m_AudioSource.PlayOneShot(m_DockSound, 0.35F);
             }
         }else
         {
