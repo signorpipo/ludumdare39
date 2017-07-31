@@ -204,7 +204,7 @@ public class GameManager : Singleton<GameManager>
             {
                 ClearSelectedMinigames();
                 m_weekDaysCounter++;
-                if (m_weekDaysCounter >= m_weekDays.Count || m_currentPsychophysicsValue <= 0 || m_currentMoneyValue <= 0 || m_currentSocialValue <= 0)
+                if (m_weekDaysCounter >= m_weekDays.Count)
                 {
                     m_backgroundMusic.Stop();
                     m_sceneLoaderManager.LoadEndGame();
@@ -240,14 +240,6 @@ public class GameManager : Singleton<GameManager>
         }
 
         return Mathf.Clamp(initialValue + malus + bonus, 0.0f, 100.0f);
-    }
-
-    private void EndGameCondition()
-    {
-        if (m_weekDaysCounter >= m_weekDays.Count || m_currentPsychophysicsValue <= 0 || m_currentMoneyValue <= 0 || m_currentSocialValue <= 0)
-        {
-            SceneManager.LoadScene("EndScene");
-        }
     }
 
     public void ResetGame()

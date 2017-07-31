@@ -15,7 +15,9 @@ public class Ball : MonoBehaviour {
 
     public void Reset()
     {
-        GetComponent<Rigidbody2D>().velocity = new Vector3(0.0f, 0.0f, 0.0f);
+        GetComponent<Rigidbody2D>().angularVelocity = 0.0f;
+        GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        GetComponent<Rigidbody2D>().inertia = 0.0f;
         transform.position = m_initialPosition;
     }
 

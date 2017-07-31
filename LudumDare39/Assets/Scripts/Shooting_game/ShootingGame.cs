@@ -66,7 +66,7 @@ public class ShootingGame : AbstarcMinigameManager
         }
         FindObjectOfType<ColorizeBckManager>().SetUncoloredBckType(type);
 
-        float difficultySpeed = i_ItemVelocityValue;
+        float difficultySpeed = 1 - i_ItemVelocityValue;
 
         m_directionArrow = Instantiate(m_arrowPrefab);
         m_directionArrow.Initialize(difficultySpeed);
@@ -80,7 +80,7 @@ public class ShootingGame : AbstarcMinigameManager
         m_ball = Instantiate(m_ballPrefab);
         m_ball.Initialize();
 
-        m_adjustedTime = m_unmodifiedTimer + 10 * i_TimeValue;
+        m_adjustedTime = m_unmodifiedTimer + 10 * (1 - i_TimeValue);
         m_timeLeft = m_adjustedTime;
         m_gameState = GameState.DIRECTION;
     }
@@ -98,30 +98,30 @@ public class ShootingGame : AbstarcMinigameManager
         m_directionArrow.Reset();
     }
 
-    private void Start()
-    {
+    //private void Start()
+    //{
 
-        m_directionArrow = Instantiate(m_arrowPrefab);
-        m_directionArrow.Initialize(0.5f);
+    //    m_directionArrow = Instantiate(m_arrowPrefab);
+    //    m_directionArrow.Initialize(0.5f);
 
-        m_potencyBar = Instantiate(m_potencyBarPrefab);
-        m_potencyBar.Initialize(0.5f);
+    //    m_potencyBar = Instantiate(m_potencyBarPrefab);
+    //    m_potencyBar.Initialize(0.5f);
 
-        m_basket = Instantiate(m_basketPrefab);
-        m_basket.Initialize();
+    //    m_basket = Instantiate(m_basketPrefab);
+    //    m_basket.Initialize();
 
-        m_ball = Instantiate(m_ballPrefab);
-        m_ball.Initialize();
+    //    m_ball = Instantiate(m_ballPrefab);
+    //    m_ball.Initialize();
 
-        m_gameState = GameState.DIRECTION;
+    //    m_gameState = GameState.DIRECTION;
 
-        m_basket.onScoreEvent += onScoreEvent;
-        m_wall.onMissEvent += onMissEvent;
-        m_floor.onMissEvent += onMissEvent;
+    //    m_basket.onScoreEvent += onScoreEvent;
+    //    m_wall.onMissEvent += onMissEvent;
+    //    m_floor.onMissEvent += onMissEvent;
 
-        m_adjustedTime = m_unmodifiedTimer;
-        m_timeLeft = m_adjustedTime;
-    }
+    //    m_adjustedTime = m_unmodifiedTimer;
+    //    m_timeLeft = m_adjustedTime;
+    //}
 
     // Update is called once per frame
     void Update()
