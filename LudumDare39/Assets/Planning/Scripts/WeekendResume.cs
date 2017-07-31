@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Text))]
 public class WeekendResume : MonoBehaviour {
@@ -25,39 +26,48 @@ public class WeekendResume : MonoBehaviour {
 		float mon = gm.CurrentMoneyValue;
 		float soc = gm.CurrentSocialValue;
 
-		if(psy<=0||mon<=0||soc<=0)
-		{
-			result.text = m_loseText;
-		}
+        Debug.Log("PSY: " + psy);
+        Debug.Log("MON: " + mon);
+        Debug.Log("SOC: " + soc);
 
-		else
+        if (psy <= 0 || mon <= 0 || soc <= 0)
+        {
+            result.text = m_loseText;
+        }
 
-		{
-			if(psy > mon)
-			{
-				if(psy > soc)
-				{
-					result.text = m_highPsychophysicsText;
-				}
-				else
-				{
-					result.text = m_highMoneyText;
-				}
-			}
+        else
 
-			else
+        {
+            if (psy > mon)
+            {
+                if (psy > soc)
+                {
+                    result.text = m_highPsychophysicsText;
+                }
+                else
+                {
+                    result.text = m_highSocialText;
+                }
+            }
 
-			{
-				if(mon>soc)
-				{
-					result.text = m_highMoneyText;
-				}
-				else
-				{
-					result.text = m_highSocialText;
-				}
-			}
-		}
+            else
+
+            {
+                if (mon > soc)
+                {
+                    result.text = m_highMoneyText;
+                }
+                else
+                {
+                    result.text = m_highSocialText;
+                }
+            }
+        }
 	}
 
+
+	public void RestartWeek()
+	{
+		SceneManager.LoadScene(0);
+	}
 }

@@ -77,6 +77,7 @@ public class GameManager : Singleton<GameManager>
 
     private void SceneLoaded(Scene i_scene, LoadSceneMode i_mode)
     {
+        Debug.Log("hola");
         AbstarcMinigameManager CurrentGame = FindObjectOfType<AbstarcMinigameManager>();
         CurrentGame.StartMinigame(m_selectedMinigames[m_selectedGamesCounter].GetGameVersion(), m_currentPsychophysicsValue, m_currentMoneyValue, m_currentSocialValue);
         CurrentGame.onSceneEnded += LoadNextSceneAndUpdateStats;
@@ -99,8 +100,8 @@ public class GameManager : Singleton<GameManager>
         {
             if (m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue() >= 0)
             {
-                m_currentPsychophysicsValue = Mathf.Clamp(m_currentPsychophysicsValue + m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue() * resultMutator * 
-                    m_weekDays[m_weekDaysCounter].m_psychophysicsBonus, 
+                m_currentPsychophysicsValue = Mathf.Clamp(m_currentPsychophysicsValue + m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue() * resultMutator *
+                    m_weekDays[m_weekDaysCounter].m_psychophysicsBonus,
                     0.0f, 100.0f);
             }
             else
@@ -145,31 +146,51 @@ public class GameManager : Singleton<GameManager>
                 m_currentSocialValue = Mathf.Clamp(m_currentSocialValue + m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue(), 0.0f, 100.0f);
             }
         }
-        
+
         m_selectedGamesCounter++;
         if (m_selectedGamesCounter == 3)
         {
             ClearSelectedMinigames();
             m_weekDaysCounter++;
-            EndGameCondition();
+            if (m_weekDaysCounter >= m_weekDays.Count || m_currentPsychophysicsValue <= 0 || m_currentMoneyValue <= 0 || m_currentSocialValue <= 0)
+            {
+                SceneManager.LoadScene("EndScene");
+            }
+            else
+            {
+                m_sceneLoaderManager.LoadNextScene();
+            }
         }
         else
         {
-             SceneManager.sceneLoaded += SceneLoaded;
+            SceneManager.sceneLoaded += SceneLoaded;
+            m_sceneLoaderManager.LoadNextScene();
         }
 
-        m_sceneLoaderManager.LoadNextScene();
+        //m_sceneLoaderManager.LoadNextScene();
     }
 
     private void EndGameCondition()
     {
-        if (m_weekDaysCounter >= 5 || m_currentPsychophysicsValue <= 0 || m_currentMoneyValue <= 0 || m_currentSocialValue <= 0)
+        if (m_weekDaysCounter >= m_weekDays.Count || m_currentPsychophysicsValue <= 0 || m_currentMoneyValue <= 0 || m_currentSocialValue <= 0)
         {
             SceneManager.LoadScene("EndScene");
         }
     }
-}
 
+    public void ResetGame()
+    {
+        m_currentPsychophysicsValue = 20.0f;
+
+        m_currentMoneyValue = 20.0f;
+
+        m_currentSocialValue = 20.0f;
+
+        m_selectedGamesCounter = 0;
+
+        m_weekDaysCounter = 0;
+    }
+}
 
 /*public void StartGame()
 {
