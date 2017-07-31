@@ -22,6 +22,7 @@ public class StartMenuManager : MonoBehaviour {
 
     public void StartGame()
     {
+        GameManager.Instance.m_backgroundMusic.Play();
         SceneManager.LoadScene(1);
     }
 
