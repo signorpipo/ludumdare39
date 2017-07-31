@@ -77,12 +77,6 @@ public class TypingManager : AbstarcMinigameManager
         }
         go = true;
     }
-
-    //for testing alone
-    void Start()
-    {
-        StartMinigame(0,1.0f, 1.0f, 1.0f);
-    }
     
     public void Update()
     {
