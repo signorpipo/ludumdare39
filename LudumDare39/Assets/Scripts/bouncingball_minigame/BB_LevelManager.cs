@@ -20,7 +20,7 @@ public class BB_LevelManager : AbstarcMinigameManager
     [SerializeField]
     private Text m_LevelTimerText;
     [SerializeField]
-    private Text m_MiddleMessage;
+    private GameObject m_MiddleMessage;
     [SerializeField]
     private Text m_AttemptsOrLife;
 
@@ -62,7 +62,7 @@ public class BB_LevelManager : AbstarcMinigameManager
 
     private void DoStart()
     {
-        m_MiddleMessage.text = "Slam-dunk!";
+       // m_MiddleMessage.text = "Slam-dunk!";
         m_StartTimer.OnTimesUp += OnStartTimerEnd;
         m_StartTimer.StartTimer(2, "Slam-dunk!", "", null);
 
@@ -105,7 +105,7 @@ public class BB_LevelManager : AbstarcMinigameManager
 
     private void OnStartTimerEnd() 
     {
-        m_MiddleMessage.enabled = false;
+        m_MiddleMessage.SetActive(false);
         StartTheGame();
     }
 
@@ -117,7 +117,7 @@ public class BB_LevelManager : AbstarcMinigameManager
         m_PlayerObject.transform.rotation = m_BlockInitialRotation;
 
         m_RunningTimer.OnTimesUp += OnFailure;
-        m_RunningTimer.StartTimer(m_GameTimer, "TIME LEFT: ", "", m_LevelTimerText);
+        m_RunningTimer.StartTimer(m_GameTimer, "Time Left: ", "", m_LevelTimerText);
         m_PlayerObject.SetActive(true);
         m_Ball.SetActive(true);
     }
@@ -127,8 +127,8 @@ public class BB_LevelManager : AbstarcMinigameManager
     {
         m_GameCompleteSuccessfully = false;
         m_RunningTimer.StopTimer();
-        m_MiddleMessage.text = "Oh noooooooo";
-        m_MiddleMessage.enabled = true;
+        //m_MiddleMessage.text = "Oh noooooooo";
+        m_MiddleMessage.SetActive(true);
         m_Ball.SetActive(false);
 
         if(--m_AttemptsNumber > 0)
@@ -148,15 +148,16 @@ public class BB_LevelManager : AbstarcMinigameManager
     {
         m_GameCompleteSuccessfully = true;
         m_RunningTimer.StopTimer();
-        m_MiddleMessage.text = "Good Work!";
-        m_MiddleMessage.enabled = true;
+       // m_MiddleMessage.text = "Good Work!";
+      //  m_MiddleMessage.SetActive(true);
 
         SceneEnded(1.0f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(!m_GameCompleteSuccessfully)
+        m_PlayerObject.SetActive(false);
+        if (!m_GameCompleteSuccessfully)
             OnFailure();
     }
 
