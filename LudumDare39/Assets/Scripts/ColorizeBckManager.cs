@@ -2,22 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorizeBckManager : MonoBehaviour {
+public class ColorizeBckManager : MonoBehaviour
+{
+    public enum BckTypes
+    {
+        BCK_SOCIAL = 0,
+        BCK_PLANNING,
+        BCK_PHYSICS,
+        BCK_MONEY
+    }
 
     public List<ColorizeBck> ColorizingBck;
+
+    public Transform MainCharacter;
 
 	// Use this for initialization
 	void Start ()
     {
+        SetUncoloredBckType(BckTypes.BCK_PLANNING);
+    }
+
+    public void SetUncoloredBckType(BckTypes type)
+    {
         foreach (var itm in ColorizingBck)
             itm.gameObject.SetActive(false);
-        int bckIdx = (int)(Random.value * ColorizingBck.Count) % ColorizingBck.Count;
-        ColorizingBck[bckIdx].gameObject.SetActive(true);
-        ColorizingBck[bckIdx].SetColor(1);
+        ColorizingBck[(int)type].gameObject.SetActive(true);
+        ColorizingBck[(int)type].SetUncolor();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 }
