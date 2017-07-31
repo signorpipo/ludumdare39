@@ -28,9 +28,6 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
     private NamedPluggable[] m_PrefabSocialPluggables;
 
     [SerializeField]
-    private Sprite[] m_Backgrounds;
-
-    [SerializeField]
     private Canvas m_WinCanvas;
 
     [SerializeField]
@@ -102,6 +99,15 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
 
     public override void StartMinigame(int i_Kind, float i_PhysicsValue, float i_MoneyValue, float i_SocialValue)
     {
+        ColorizeBckManager.BckTypes type = ColorizeBckManager.BckTypes.BCK_PLANNING;
+        switch (i_Kind)
+        {
+            case 0: type = ColorizeBckManager.BckTypes.BCK_PHYSICS; break;
+            case 1: type = ColorizeBckManager.BckTypes.BCK_MONEY; break;
+            case 2: type = ColorizeBckManager.BckTypes.BCK_SOCIAL; break;
+        }
+        FindObjectOfType<ColorizeBckManager>().SetUncoloredBckType(type);
+
         m_Restart = false;
 
         m_PhysicsValue = i_PhysicsValue;
@@ -202,13 +208,6 @@ public class F_FillMiniGameManager : AbstarcMinigameManager {
 
     private void LoadLevel()
     {
-        GameObject background = new GameObject("Background");
-        background.transform.SetParent(m_LoadedLevel.transform);
-        SpriteRenderer spriteRenderer = background.AddComponent<SpriteRenderer>();
-        spriteRenderer.sprite = m_Backgrounds[m_Kind];
-        spriteRenderer.color = new Color(1, 1, 1, 170/255.0f);
-        background.transform.position = new Vector3(background.transform.position.x, background.transform.position.y, 5);
-
         GameObject grid = new GameObject("Grid");
         grid.transform.SetParent(m_LoadedLevel.transform);
         m_GridManager = grid.AddComponent<F_GridManager>();

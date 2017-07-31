@@ -29,6 +29,15 @@ public class FastButtonSmashingGameManager : MinigameManager
     // 1 facile, 0 difficile
     public override void StartMinigame(int i_Type, float i_TimeValue, float i_NumItemValue, float i_ItemVelocityValue) //i_type will be between 0 and 2
     {
+        ColorizeBckManager.BckTypes type = ColorizeBckManager.BckTypes.BCK_PLANNING;
+        switch (i_Type)
+        {
+            case 0: type = ColorizeBckManager.BckTypes.BCK_PHYSICS; break;
+            case 1: type = ColorizeBckManager.BckTypes.BCK_MONEY; break;
+            case 2: type = ColorizeBckManager.BckTypes.BCK_SOCIAL; break;
+        }
+        FindObjectOfType<ColorizeBckManager>().SetUncoloredBckType(type);
+
         successBarSlider.value = 0;
         mKeyTimer = 0;
         mScore = 0;

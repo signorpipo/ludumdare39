@@ -53,12 +53,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   letterFallPref: {fileID: 1029445902113534, guid: a07b27254905bd34fb4fb18144063f13,
     type: 2}
-  fallingVelocity: 5
-  timeSpawnLetter: 0.5
-  timeGame: 20
   letterTriggerPref: {fileID: 1479294205649178, guid: a5a3b79fc4b2a93468decee8bcf2e27b,
     type: 2}
-  numLet: 4
   canvas: {fileID: 223135163374442298, guid: 69a1b1f92e226bf47b80a70ac0915809, type: 2}
   typeCode: 710000007700000065000000720000007400000079000000
   letterTriggerList: []
+  typeItem:
+  - {fileID: 21300000, guid: 1632f75362981ff40b6422ee34206942, type: 3}
+  - {fileID: 21300000, guid: 57bb22c34446ea741bf3db1d381e2349, type: 3}
+  - {fileID: 21300000, guid: 98987080bb30d8141bd001828ba71765, type: 3}
