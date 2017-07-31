@@ -123,7 +123,7 @@ public class GameManager : Singleton<GameManager>
                 }
                 else
                 {
-                    m_currentPsychophysicsValue = CalculateLosingValue(m_currentPsychophysicsValue, m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue());
+                    m_currentPsychophysicsValue = CalculateLosingValue(m_currentPsychophysicsValue, m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue(), m_weekDays[m_weekDaysCounter].m_psychophysicsBonus / 3.0f);
                 }
 
                 if (m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue() > 0)
@@ -133,7 +133,7 @@ public class GameManager : Singleton<GameManager>
                 }
                 else
                 {
-                    m_currentMoneyValue = CalculateLosingValue(m_currentMoneyValue, m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue());
+                    m_currentMoneyValue = CalculateLosingValue(m_currentMoneyValue, m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue(), m_weekDays[m_weekDaysCounter].m_moneyBonus / 3.0f);
                 }
 
                 if (m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue() > 0)
@@ -143,28 +143,28 @@ public class GameManager : Singleton<GameManager>
                 }
                 else
                 {
-                    m_currentSocialValue = CalculateLosingValue(m_currentSocialValue, m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue());
+                    m_currentSocialValue = CalculateLosingValue(m_currentSocialValue, m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue(), m_weekDays[m_weekDaysCounter].m_socialBonus / 3.0f);
                 }
             }
             else
             {
                 if (m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue() < 0)
                 {
-                    m_currentPsychophysicsValue = CalculateLosingValue(m_currentPsychophysicsValue, m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue());
+                    m_currentPsychophysicsValue = CalculateLosingValue(m_currentPsychophysicsValue, m_selectedMinigames[m_selectedGamesCounter].GetPsychophysicsOutputValue(), m_weekDays[m_weekDaysCounter].m_psychophysicsBonus / 3.0f);
                 }
 
                 if (m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue() < 0)
                 {
-                    m_currentMoneyValue = CalculateLosingValue(m_currentMoneyValue, m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue());
+                    m_currentMoneyValue = CalculateLosingValue(m_currentMoneyValue, m_selectedMinigames[m_selectedGamesCounter].GetMoneyOutputValue(), m_weekDays[m_weekDaysCounter].m_moneyBonus / 3.0f);
                 }
 
                 if (m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue() < 0)
                 {
-                    m_currentSocialValue = CalculateLosingValue(m_currentSocialValue, m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue());
+                    m_currentSocialValue = CalculateLosingValue(m_currentSocialValue, m_selectedMinigames[m_selectedGamesCounter].GetSocialOutputvalue(), m_weekDays[m_weekDaysCounter].m_socialBonus / 3.0f);
                 }
             }
 
-            }
+        }
         else
         {
             m_selectedGamesCounter++;
@@ -192,7 +192,7 @@ public class GameManager : Singleton<GameManager>
 
     }
 
-    private float CalculateLosingValue(float initialValue, float malus)
+    private float CalculateLosingValue(float initialValue, float malus, float bonus)
     {
         if (malus < 35)
         {
@@ -207,7 +207,7 @@ public class GameManager : Singleton<GameManager>
             malus *= 1.5f;
         }
 
-        return Mathf.Clamp(m_currentPsychophysicsValue + malus, 0.0f, 100.0f);
+        return Mathf.Clamp(initialValue + malus + bonus, 0.0f, 100.0f);
     }
 
     private void EndGameCondition()
