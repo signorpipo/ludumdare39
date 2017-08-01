@@ -177,7 +177,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -858,7 +858,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: credits <3
+  m_Text: credits
 --- !u!114 &668403141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -970,7 +970,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: start :3
+  m_Text: start
 --- !u!114 &703756735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1718,7 +1718,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1578410047
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1733,10 +1733,10 @@ RectTransform:
   m_Father: {fileID: 943332583}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 269.7296, y: -361.04468}
+  m_SizeDelta: {x: 539.4592, y: 128.41788}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1578410048
 MonoBehaviour:
@@ -1871,7 +1871,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2, y: 0.0012274}
+  m_AnchoredPosition: {x: 2, y: 3}
   m_SizeDelta: {x: 834, y: 388.85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1734795277
@@ -1906,20 +1906,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Game logic Design & Programming
-
-    Alessio Bendoni, David Tessaro, Riccardo Rizzo
-
-
-    Mini-games Design & Programming
-
-    Diego Zamprogno, Elia Ducceschi, Fabio Maffioletti, Gianluca Goberti, Riccardo
-    Reffato
-
-
-    2D Assets
-
-    Alice Rossetto'
+  m_Text: "Game logic Design & Programming\nAlessio Bendoni, David Tessaro, Riccardo
+    Rizzo\n\nMini-games Design & Programming\nDiego Zamprogno, Elia Ducceschi, Fabio
+    Maffioletti, \nGianluca Goberti, Riccardo Reffato\n\n2D Assets\nAlice Rossetto"
 --- !u!222 &1734795278
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1959,8 +1948,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1350, y: 299}
-  m_SizeDelta: {x: 856, y: 411}
+  m_AnchoredPosition: {x: 1349.9999, y: 300}
+  m_SizeDelta: {x: 856, y: 454}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1770697883
 MonoBehaviour:
